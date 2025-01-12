@@ -60,7 +60,13 @@ async def test_supabase():
 @app.post("/test-supabase/add")
 async def add_test_data():
     try:
-        data = {"message": "Hello from Supabase!"}
+        data = {
+            "last_name": "Test",
+            "first_name": "User",
+            "username": "testuser",
+            "user_initials": "TU",
+            # user_id and created_at will be auto-generated
+        }
         result = supabase.table("test").insert(data).execute()
         return {
             "status": "success",
