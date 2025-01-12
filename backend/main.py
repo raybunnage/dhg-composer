@@ -16,7 +16,7 @@ app = FastAPI()
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -30,9 +30,6 @@ print(f"Loading .env from: {BASE_DIR / '.env'}")
 print(f"URL: {url}")
 print(f"Key: {key}")
 
-if not url or not key:
-    raise ValueError("SUPABASE_URL and SUPABASE_KEY must be set in .env file")
-
 # Initialize Supabase client
 supabase = create_client(url, key)
 
@@ -42,13 +39,42 @@ async def read_root():
     return {"message": "Hello World"}
 
 
-@app.get("/api/data")
-async def get_data():
+@app.get("/test-supabase")
+async def test_supabase():
     try:
-        response = supabase.table("your_table").select("*").execute()
-        return response.data
+        # Simple test query
+        result = supabase.from_("test").select("*").limit(1).execute()
+        return {
+            "status": "success",
+            "message": "Connected to Supabase successfully!",
+            "data": result.data,
+        }
     except Exception as e:
-        return {"error": str(e)}
+        return {
+            "status": "error",
+            "message": str(e),
+            "details": "Connection test failed",
+        }
+
+
+@app.post("/test-supabase/add")
+async def add_test_data():
+    try:
+        data = {
+            "message": "Hello from Supabase!"
+        }
+        result = supabase.table("test").insert(data).execute()
+        return {
+            "status": "success",
+            "message": "Test data added successfully!",
+            "data": result.data,
+        }
+    except Exception as e:
+        return {
+            "status": "error",
+            "message": str(e),
+            "details": "Failed to add test data",
+        }
 
 
 # if __name__ == "__main__":
