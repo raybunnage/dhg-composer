@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from supabase import create_client
+from supabase import create_client, AsyncClient
 from dotenv import load_dotenv
 import os
 from pathlib import Path
@@ -30,8 +30,11 @@ print(f"Loading .env from: {BASE_DIR / '.env'}")
 print(f"URL: {url}")
 print(f"Key: {key}")
 
-# Initialize Supabase client
-supabase = create_client(url, key)
+# Initialize Supabase client as async
+supabase = AsyncClient(
+    supabase_url=url,
+    supabase_key=key,
+)
 
 
 @app.get("/")
@@ -42,8 +45,8 @@ async def read_root():
 @app.get("/test-supabase")
 async def test_supabase():
     try:
-        # Simple test query
-        result = supabase.from_("test").select("*").limit(1).execute()
+        # Use await with async client
+        result = await supabase.from_("test").select("*").limit(1).execute()
         return {
             "status": "success",
             "message": "Connected to Supabase successfully!",
@@ -64,10 +67,10 @@ async def add_test_data():
             "last_name": "Test",
             "first_name": "User",
             "username": "testuser",
-            "user_initials": "TU",
-            # user_id and created_at will be auto-generated
+            "user_initials": "TY",
         }
-        result = supabase.table("test").insert(data).execute()
+        # Use await with async client
+        result = await supabase.table("test").insert(data).execute()
         return {
             "status": "success",
             "message": "Test data added successfully!",
