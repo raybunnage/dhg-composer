@@ -1,9 +1,11 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from supabase import create_client, AsyncClient
 from dotenv import load_dotenv
 import os
 from pathlib import Path
+from pydantic import BaseModel
+import logging
 
 # Get the directory where main.py is located
 BASE_DIR = Path(__file__).resolve().parent
@@ -35,6 +37,20 @@ supabase = AsyncClient(
     supabase_url=url,
     supabase_key=key,
 )
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+
+class SignUpRequest(BaseModel):
+    email: str
+    password: str
+
+
+class SignInRequest(BaseModel):
+    email: str
+    password: str
 
 
 @app.get("/")
@@ -82,6 +98,43 @@ async def add_test_data():
             "message": str(e),
             "details": "Failed to add test data",
         }
+
+
+@app.post("/auth/signup")
+async def sign_up(request: SignUpRequest):
+    logger.info(f"Signup attempt for email: {request.email}")
+    try:
+        result = await supabase.auth.sign_up(
+            {"email": request.email, "password": request.password}
+        )
+        logger.info(f"Signup successful for email: {request.email}")
+        return {
+            "status": "success",
+            "message": "Signup successful! Please check your email.",
+            "data": result.user,
+        }
+    except Exception as e:
+        logger.error(f"Signup failed for email {request.email}: {str(e)}")
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@app.post("/auth/signin")
+async def sign_in(request: SignInRequest):
+    logger.info(f"Login attempt for email: {request.email}")
+    try:
+        result = await supabase.auth.sign_in_with_password(
+            {"email": request.email, "password": request.password}
+        )
+        logger.info(f"Login successful for email: {request.email}")
+        return {
+            "status": "success",
+            "message": "Login successful!",
+            "data": result.user,
+            "session": result.session,
+        }
+    except Exception as e:
+        logger.error(f"Login failed for email {request.email}: {str(e)}")
+        raise HTTPException(status_code=400, detail=str(e))
 
 
 # if __name__ == "__main__":
