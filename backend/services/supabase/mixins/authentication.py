@@ -8,9 +8,10 @@ from .utility import log_method
 
 logger = logging.getLogger("supabase-service.auth")
 
+
 class AuthenticationMixin:
     """Authentication related methods."""
-    
+
     @log_method()
     async def login(self, email: str, password: str) -> Dict[str, Any]:
         """Login with email and password."""
@@ -25,10 +26,7 @@ class AuthenticationMixin:
             if not response.user:
                 raise SupabaseAuthenticationError("Login failed - no user returned")
 
-            return {
-                "user": response.user,
-                "session": response.session
-            }
+            return {"user": response.user, "session": response.session}
         except AuthApiError as e:
             raise self.map_auth_error(e)
         except Exception as e:
@@ -59,10 +57,7 @@ class AuthenticationMixin:
             if not response.user:
                 raise SupabaseAuthenticationError("Signup failed - no user created")
 
-            return {
-                "user": response.user,
-                "session": response.session
-            }
+            return {"user": response.user, "session": response.session}
         except AuthApiError as e:
             raise self.map_auth_error(e)
         except Exception as e:
@@ -71,12 +66,12 @@ class AuthenticationMixin:
     def map_auth_error(self, error: AuthApiError) -> SupabaseAuthenticationError:
         """Map Supabase auth errors to custom exceptions."""
         error_map = {
-            'auth/invalid-email': 'Invalid email format',
-            'auth/user-not-found': 'User not found',
-            'auth/wrong-password': 'Invalid password',
+            "auth/invalid-email": "Invalid email format",
+            "auth/user-not-found": "User not found",
+            "auth/wrong-password": "Invalid password",
             # Add more mappings as needed
         }
-        
+
         message = error_map.get(str(error.code), str(error))
         return SupabaseAuthenticationError(message, original_error=error)
 
@@ -86,11 +81,15 @@ class AuthenticationMixin:
         try:
             response = await self.supabase.auth.refresh_session()
             if not response.session:
-                raise SupabaseAuthenticationError("Session refresh failed - no session returned")
+                raise SupabaseAuthenticationError(
+                    "Session refresh failed - no session returned"
+                )
             return True
         except AuthApiError as e:
             raise self.map_auth_error(e)
         except Exception as e:
-            raise SupabaseAuthenticationError("Failed to refresh session", original_error=e)
+            raise SupabaseAuthenticationError(
+                "Failed to refresh session", original_error=e
+            )
 
-    # ... (rest of your authentication methods) 
+    # ... (rest of your authentication methods)

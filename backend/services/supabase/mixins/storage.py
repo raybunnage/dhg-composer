@@ -5,9 +5,10 @@ import logging
 
 logger = logging.getLogger("supabase-service.storage")
 
+
 class StorageMixin:
     """Storage related methods."""
-    
+
     @log_method()
     async def upload_file(self, bucket: str, path: str, file: BinaryIO) -> str:
         """Upload a file to Supabase storage."""
@@ -16,7 +17,7 @@ class StorageMixin:
             return result.get("Key")
         except Exception as e:
             raise SupabaseStorageError("Failed to upload file", original_error=e)
-            
+
     @log_method()
     async def get_public_url(self, bucket: str, path: str) -> str:
         """Get public URL for a file."""
@@ -39,6 +40,6 @@ class StorageMixin:
         """List files in a bucket/path."""
         try:
             result = await self.supabase.storage.from_(bucket).list(path)
-            return [item['name'] for item in result]
+            return [item["name"] for item in result]
         except Exception as e:
-            raise SupabaseStorageError("Failed to list files", original_error=e) 
+            raise SupabaseStorageError("Failed to list files", original_error=e)

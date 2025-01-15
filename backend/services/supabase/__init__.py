@@ -3,13 +3,13 @@ from .exceptions import (
     SupabaseError,
     SupabaseAuthenticationError,
     SupabaseQueryError,
-    SupabaseStorageError
+    SupabaseStorageError,
 )
 
 __all__ = [
-    'SupabaseService',
-    'SupabaseError',
-    'SupabaseAuthenticationError',
-    'SupabaseQueryError',
-    'SupabaseStorageError'
-] 
+    "SupabaseService",
+    "SupabaseError",
+    "SupabaseAuthenticationError",
+    "SupabaseQueryError",
+    "SupabaseStorageError",
+]
