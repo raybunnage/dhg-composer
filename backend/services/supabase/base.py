@@ -1,5 +1,6 @@
 from typing import Optional
-from supabase import AsyncClient
+from supabase import create_client
+from supabase.client import Client, ClientOptions
 from .mixins import AuthenticationMixin, QueryMixin, StorageMixin, UtilityMixin
 import logging
 
@@ -11,7 +12,7 @@ class SupabaseService(AuthenticationMixin, QueryMixin, StorageMixin, UtilityMixi
 
     def __init__(self, supabase_url: str, supabase_key: str):
         logger.info("Initializing SupabaseService")
-        self.supabase: Optional[AsyncClient] = None
+        self.supabase: Optional[Client] = None
         self.supabase_url = supabase_url
         self.supabase_key = supabase_key
 
@@ -19,8 +20,11 @@ class SupabaseService(AuthenticationMixin, QueryMixin, StorageMixin, UtilityMixi
         """Initialize the Supabase client."""
         if not self.supabase:
             logger.info("Creating new Supabase client")
-            self.supabase = AsyncClient(
-                supabase_url=self.supabase_url,
-                supabase_key=self.supabase_key,
+            options = ClientOptions(
+                auto_refresh_token=True,
+                persist_session=True,
+            )
+            self.supabase = create_client(
+                self.supabase_url, self.supabase_key, options=options
             )
             logger.info("Supabase client created successfully")

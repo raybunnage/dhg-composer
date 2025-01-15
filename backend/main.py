@@ -100,31 +100,3 @@ async def add_test_data():
             "message": str(e),
             "details": "Failed to add test data",
         }
-
-
-@app.post("/auth/signup")
-async def sign_up(request: SignUpRequest):
-    logger.info(f"Signup attempt for email: {request.email}")
-    try:
-        result = await supabase_service.signup(request.email, request.password)
-        logger.info(f"Signup successful for email: {request.email}")
-        return {
-            "status": "success",
-            "message": "Signup successful! Please check your email.",
-            "data": result,
-        }
-    except Exception as e:
-        logger.error(f"Signup failed for email {request.email}: {str(e)}")
-        raise HTTPException(status_code=400, detail=str(e))
-
-
-@app.post("/auth/signin")
-async def sign_in(request: SignInRequest):
-    logger.info(f"Login attempt for email: {request.email}")
-    try:
-        result = await supabase_service.login(request.email, request.password)
-        logger.info(f"Login successful for email: {request.email}")
-        return {"status": "success", "message": "Login successful!", "data": result}
-    except Exception as e:
-        logger.error(f"Login failed for email {request.email}: {str(e)}")
-        raise HTTPException(status_code=400, detail=str(e))

@@ -2,7 +2,7 @@ from typing import Optional, Dict, Any
 from datetime import datetime
 import jwt
 import logging
-from supabase.exceptions import AuthApiError
+from gotrue.errors import AuthApiError
 from ..exceptions import SupabaseAuthenticationError
 from .utility import log_method
 
@@ -15,22 +15,21 @@ class AuthenticationMixin:
     @log_method()
     async def login(self, email: str, password: str) -> Dict[str, Any]:
         """Login with email and password."""
+        logger.info(f"Login attempt for email: {email}")
         try:
-            if not email or not password:
-                raise SupabaseAuthenticationError("Email and password are required")
-
-            response = await self.supabase.auth.sign_in_with_password(
+            result = await self.supabase.auth.sign_in_with_password(
                 {"email": email, "password": password}
             )
-
-            if not response.user:
-                raise SupabaseAuthenticationError("Login failed - no user returned")
-
-            return {"user": response.user, "session": response.session}
-        except AuthApiError as e:
-            raise self.map_auth_error(e)
+            logger.info(f"Login successful for email: {email}")
+            return {
+                "status": "success",
+                "message": "Login successful!",
+                "data": result.user,
+                "session": result.session,
+            }
         except Exception as e:
-            raise SupabaseAuthenticationError("Login failed", original_error=e)
+            logger.error(f"Login failed for email {email}: {str(e)}")
+            raise SupabaseAuthenticationError(str(e))
 
     @log_method()
     async def logout(self) -> bool:
@@ -46,22 +45,20 @@ class AuthenticationMixin:
     @log_method()
     async def signup(self, email: str, password: str) -> Dict[str, Any]:
         """Sign up a new user."""
+        logger.info(f"Signup attempt for email: {email}")
         try:
-            if not email or not password:
-                raise SupabaseAuthenticationError("Email and password are required")
-
-            response = await self.supabase.auth.sign_up(
+            result = await self.supabase.auth.sign_up(
                 {"email": email, "password": password}
             )
-
-            if not response.user:
-                raise SupabaseAuthenticationError("Signup failed - no user created")
-
-            return {"user": response.user, "session": response.session}
-        except AuthApiError as e:
-            raise self.map_auth_error(e)
+            logger.info(f"Signup successful for email: {email}")
+            return {
+                "status": "success",
+                "message": "Signup successful! Please check your email.",
+                "data": result.user,
+            }
         except Exception as e:
-            raise SupabaseAuthenticationError("Signup failed", original_error=e)
+            logger.error(f"Signup failed for email {email}: {str(e)}")
+            raise SupabaseAuthenticationError(str(e))
 
     def map_auth_error(self, error: AuthApiError) -> SupabaseAuthenticationError:
         """Map Supabase auth errors to custom exceptions."""
