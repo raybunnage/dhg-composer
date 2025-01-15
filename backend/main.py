@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from supabase import create_client, AsyncClient
+from supabase import create_client
+from supabase.client import Client
 from dotenv import load_dotenv
 import os
 from pathlib import Path
@@ -32,11 +33,8 @@ print(f"Loading .env from: {BASE_DIR / '.env'}")
 print(f"URL: {url}")
 print(f"Key: {key}")
 
-# Initialize Supabase client as async
-supabase = AsyncClient(
-    supabase_url=url,
-    supabase_key=key,
-)
+# Initialize Supabase client
+supabase = create_client(url, key)
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
