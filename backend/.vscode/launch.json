@@ -9,7 +9,7 @@
             "args": [
                 "-v"
             ],
-            "cwd": "${workspaceFolder}/backend",
+            "cwd": "${workspaceFolder}",
             "justMyCode": true
         }
     ]

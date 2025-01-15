@@ -1,0 +1,13 @@
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+python_files = "test_*.py"
+addopts = "-v --cov=services --cov-report=term-missing"
+
+[tool.poetry]
+name = "backend"
+version = "0.1.0"
+description = "Backend service with Supabase"
+
+[tool.poetry.dependencies]
+python = "^3.8" 
