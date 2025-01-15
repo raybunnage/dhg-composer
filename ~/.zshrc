@@ -1,0 +1,1 @@
+export PATH="$PATH:/Applications/Cursor.app/Contents/MacOS" 
