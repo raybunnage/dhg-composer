@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from supabase import create_client, AsyncClient
+from supabase import create_client
 from dotenv import load_dotenv
 import os
 from pathlib import Path
@@ -33,7 +33,7 @@ print(f"URL: {url}")
 print(f"Key: {key}")
 
 # Initialize Supabase client as async
-supabase = AsyncClient(
+supabase = create_client(
     supabase_url=url,
     supabase_key=key,
 )
@@ -61,8 +61,7 @@ async def read_root():
 @app.get("/test-supabase")
 async def test_supabase():
     try:
-        # Use await with async client
-        result = await supabase.from_("test").select("*").limit(1).execute()
+        result = supabase.from_("test").select("*").limit(1).execute()
         return {
             "status": "success",
             "message": "Connected to Supabase successfully!",
@@ -85,8 +84,7 @@ async def add_test_data():
             "username": "testuser",
             "user_initials": "TY",
         }
-        # Use await with async client
-        result = await supabase.table("test").insert(data).execute()
+        result = supabase.table("test").insert(data).execute()
         return {
             "status": "success",
             "message": "Test data added successfully!",
@@ -104,7 +102,7 @@ async def add_test_data():
 async def sign_up(request: SignUpRequest):
     logger.info(f"Signup attempt for email: {request.email}")
     try:
-        result = await supabase.auth.sign_up(
+        result = supabase.auth.sign_up(
             {"email": request.email, "password": request.password}
         )
         logger.info(f"Signup successful for email: {request.email}")
@@ -122,7 +120,7 @@ async def sign_up(request: SignUpRequest):
 async def sign_in(request: SignInRequest):
     logger.info(f"Login attempt for email: {request.email}")
     try:
-        result = await supabase.auth.sign_in_with_password(
+        result = supabase.auth.sign_in_with_password(
             {"email": request.email, "password": request.password}
         )
         logger.info(f"Login successful for email: {request.email}")
