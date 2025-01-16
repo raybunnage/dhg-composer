@@ -72,3 +72,28 @@ git checkout main
 # Restore main branch configuration
 ./restore-config.sh
 ```
+
+## Git Sync Commands
+
+### Sync Main Branch
+```bash
+# First, make sure you're on main branch
+git checkout main
+
+# Pull any changes that might be on remote main
+git pull origin main
+
+# Push your merge changes to remote main
+git push origin main
+```
+
+### Optional: Set Up Branch Tracking
+```bash
+# Set up tracking for main branch (only need to do once)
+git branch --set-upstream-to=origin/main main
+
+# After setting up tracking, you can simply use:
+git pull
+git push
+```
+
