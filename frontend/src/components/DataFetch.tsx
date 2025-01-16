@@ -10,8 +10,8 @@ interface TestUser {
 }
 
 export function DataFetch() {
-  const [users, setUsers] = useState<TestUser[]>([])
-  const [error, setError] = useState('')
+  const [_users, _setUsers] = useState<TestUser[]>([])
+  const [_error, _setError] = useState('')
 
   useEffect(() => {
     console.log('DataFetch component mounted')
@@ -20,7 +20,7 @@ export function DataFetch() {
   return (
     <div>
       <h2>User Data</h2>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
+      {_error && <div style={{ color: 'red' }}>{_error}</div>}
       <pre>Component loaded</pre>
     </div>
   )
