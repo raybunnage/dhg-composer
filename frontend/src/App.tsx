@@ -5,6 +5,7 @@ import './App.css'
 
 function App() {
   const [session, setSession] = useState<any>(null)
+  const [_error, _setError] = useState<string>('')
 
   // Debug logging
   useEffect(() => {

@@ -73,148 +73,55 @@ git checkout main
 ./restore-config.sh
 ```
 
-## Git Sync Commands
+## Troubleshooting Vercel Deployments
 
-### Sync Main Branch
-```bash
-# First, make sure you're on main branch
-git checkout main
+### TypeScript Build Errors
+If you see errors like "variable is declared but never read", you need to either:
+1. Use the variables
+2. Remove unused variables
+3. Prefix with underscore to ignore
 
-# Pull any changes that might be on remote main
-git pull origin main
+Example fixes:
+```tsx
+// Before (causes error):
+const [error, setError] = useState<string>("");
+const [users, setUsers] = useState<User[]>([]);
 
-# Push your merge changes to remote main
-git push origin main
+// Fix 1: Remove if not needed:
+// Delete the unused lines
+
+// Fix 2: Prefix with underscore if required for future use:
+const [_error, _setError] = useState<string>("");
+const [_users, _setUsers] = useState<User[]>([]);
+
+// Fix 3: Use ESLint disable comment (not recommended but quick fix):
+// @ts-ignore
+const [error, setError] = useState<string>("");
 ```
 
-### Optional: Set Up Branch Tracking
-```bash
-# Set up tracking for main branch (only need to do once)
-git branch --set-upstream-to=origin/main main
+### Common Build Errors
+1. **"Command 'npm run build' exited with 2"**
+   - Usually means TypeScript errors need fixing
+   - Check the error log for specific file locations
+   - Fix all TypeScript warnings before deploying
 
-# After setting up tracking, you can simply use:
-git pull
-git push
-```
-
-## Git Merge Guide
-
-### Basic Merge Process
-```bash
-# 1. Save your current work
-./backup-config.sh
-git add .
-git commit -m "Save current changes"
-
-# 2. Switch to main and update it
-git checkout main
-git pull origin main
-./restore-config.sh
-
-# 3. Merge your feature branch
-git merge your-branch-name
-
-# 4. If there are conflicts:
-# Edit the conflicting files
-git add .
-git commit -m "Resolve merge conflicts"
-
-# 5. Push the merged changes
-git push origin main
-```
-
-### Types of Merges
-1. **Fast-forward Merge** (Automatic)
-   - Happens when main hasn't changed
-   - Clean, linear history
+2. **Quick Fixes for Development:**
    ```bash
-   git merge feature-branch
-   ```
-
-2. **Merge Commit** (Common)
-   - Creates a new commit combining changes
-   - Preserves branch history
-   ```bash
-   git merge feature-branch
-   ```
-
-3. **Squash Merge** (Clean History)
-   - Combines all branch commits into one
-   ```bash
-   git merge --squash feature-branch
-   git commit -m "Add feature-branch changes"
-   ```
-
-### Handling Merge Conflicts
-1. **When Conflicts Occur:**
-   ```bash
-   # 1. Check which files have conflicts
-   git status
-
-   # 2. Open each conflicting file and look for:
-   <<<<<<< HEAD
-   main branch version
-   =======
-   your branch version
-   >>>>>>> your-branch
-
-   # 3. Edit files to resolve conflicts
-   # 4. Remove conflict markers
-   # 5. Save files
-   ```
-
-2. **After Resolving:**
-   ```bash
-   # Stage resolved files
+   # In your frontend directory:
+   
+   # 1. Run TypeScript check locally first
+   npm run build
+   
+   # 2. Fix any errors it shows
+   
+   # 3. Commit and push changes
    git add .
-
-   # Create merge commit
-   git commit -m "Resolve merge conflicts"
+   git commit -m "Fix TypeScript errors"
+   git push
    ```
 
-3. **If Things Go Wrong:**
-   ```bash
-   # Abort the merge and start over
-   git merge --abort
-   ```
-
-### Best Practices
-1. **Before Merging:**
-   - Backup your config files
-   - Pull latest main changes
-   - Test your branch thoroughly
-   - Run build checks locally
-
-2. **During Merge:**
-   - Take time to resolve conflicts carefully
-   - Test after resolving conflicts
-   - Don't rush the process
-
-3. **After Merging:**
-   - Verify the merge worked
-   - Test the application
-   - Push changes promptly
-   - Delete merged branch if no longer needed
-
-### Common Issues
-1. **Merge Conflicts in Config Files:**
-   ```bash
-   # 1. Backup both versions
-   ./backup-config.sh
-   
-   # 2. Resolve conflict
-   
-   # 3. Test both configurations
-   ```
-
-2. **Multiple Conflicts:**
-   - Handle one file at a time
-   - Commit after resolving all conflicts
-   - Don't mix conflict resolution with new changes
-
-3. **Accidental Merge:**
-   ```bash
-   # Undo last merge (if not pushed)
-   git reset --hard HEAD~1
-   ```
-
+### Best Practices to Avoid Build Errors
+1. Always run `npm run build` locally before pushing
+2. Set up ESLint and TypeScript in your IDE
+3. Fix warnings before they become deployment errors
+4. Use proper TypeScript types for all variables
