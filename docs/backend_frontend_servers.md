@@ -58,3 +58,17 @@ chmod +x restore-config.sh
 ### Backup Location
 - Files are stored in `.backup/<branch-name>/`
 - Not tracked by git (in .gitignore)
+
+## Branch Management
+
+### Switch to Main Branch
+```bash
+# Backup current branch configuration
+./backup-config.sh
+
+# Switch to main branch
+git checkout main
+
+# Restore main branch configuration
+./restore-config.sh
+```
