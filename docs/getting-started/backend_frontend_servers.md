@@ -7,20 +7,26 @@ kill -9 $(lsof -t -i:8001)
 lsof -i :5173
 kill -9 $(lsof -t -i:5173)
 
-## to start
+## To Start backend
 
+```
 cd backend
 venv\Scripts\activate
+
 source venv/bin/activate
+
 python --version
 uvicorn main:app --reload --port 8001
+```
 
+## Start Frontend in a new terminal
 
-## in a new terminal
-
+```
 cd frontend
 npm install
 npm run dev
+```
+
 
 ## Verify Servers
 - Backend API: http://localhost:8001
@@ -222,4 +228,50 @@ feature/auth/
 feature/data-model/
 ├── frontend/    # Data model frontend implementation
 └── backend/     # Data model backend implementation
+```
+
+# Backend and Frontend Server Setup
+
+## Backend Setup
+
+1. Navigate to backend directory:
+```bash
+cd backend
+```
+
+2. Activate virtual environment:
+- Windows:
+```bash
+venv\Scripts\activate
+```
+- Mac/Linux:
+```bash
+source venv/bin/activate
+```
+
+3. Verify Python version:
+```bash
+python --version
+```
+
+4. Start the backend server:
+```bash
+uvicorn main:app --reload --port 8001
+```
+
+## Frontend Setup
+
+1. In a new terminal, navigate to frontend directory:
+```bash
+cd frontend
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Start the development server:
+```bash
+npm run dev
 ```
