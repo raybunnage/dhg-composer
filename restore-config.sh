@@ -16,4 +16,10 @@ cp "$BACKUP_DIR/frontend.env" frontend/.env
 # Restore .vercel directory
 cp -r "$BACKUP_DIR/vercel" .vercel
 
+# Add specific handling for dhg-baseline branch
+if [ "$BRANCH" = "dhg-baseline" ]; then
+    echo "Restoring baseline configuration..."
+    # Additional baseline-specific restoration steps here
+fi
+
 echo "Restored configuration for branch: $BRANCH" 
