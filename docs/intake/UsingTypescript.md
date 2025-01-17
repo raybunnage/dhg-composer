@@ -1,3 +1,5 @@
+[← Back to Documentation Home](../README.md)
+
 ## What is TypeScript?
 
 TypeScript is a strongly-typed programming language that builds on JavaScript. It's developed and maintained by Microsoft. Think of it as JavaScript with additional features, primarily:

@@ -1,3 +1,5 @@
+[← Back to Documentation Home](../README.md)
+
 # Using Cursor Composer: A Comprehensive Guide
 
 ## Getting Started with Composer

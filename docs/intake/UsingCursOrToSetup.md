@@ -1,3 +1,5 @@
+[← Back to Documentation Home](../README.md)
+
 # Leveraging Cursor AI for Professional Development
 
 ## Introduction

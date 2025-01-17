@@ -1,3 +1,5 @@
+[← Back to Documentation Home](../../../README.md)
+
 # Comprehensive Guide to Supabase Authentication
 
 ## Table of Contents

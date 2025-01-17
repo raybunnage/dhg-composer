@@ -1,3 +1,5 @@
+[text](../../../dhg-source-viewer/docs/models)
+
 # Project Structure
 
 [← Back to Main Documentation](./README.MD)

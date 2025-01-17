@@ -1,3 +1,5 @@
+[← Back to Documentation Home](../README.md)
+
 # Working with PDFs in Claude: A Developer's Guide
 
 ## Introduction
