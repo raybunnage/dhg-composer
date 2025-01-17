@@ -2,6 +2,14 @@
 
 # Getting Started with FastAPI, Supabase, and Vite React
 
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Backend Setup with FastAPI](#backend-setup)
+3. [Understanding Async Programming](#async-programming)
+4. [Supabase Integration](#supabase-integration)
+5. [Frontend Development with Vite React](#frontend-development)
+6. [Full Stack Integration](#full-stack-integration)
+
 ## Quick Start Commands
 
 ### Kill Existing Server Processes
@@ -49,15 +57,52 @@ npm run dev
 - Make sure `.env` file exists in backend directory
 - Verify virtual environment is activated for backend
 
-## Table of Contents
-1. [Introduction](#introduction)
-2. [Backend Setup with FastAPI](#backend-setup)
-3. [Understanding Async Programming](#async-programming)
-4. [Supabase Integration](#supabase-integration)
-5. [Frontend Development with Vite React](#frontend-development)
-6. [Full Stack Integration](#full-stack-integration)
 
-## Introduction
+## Backup and Restore Configuration
+
+### Backup Configuration
+```bash
+# Make scripts executable (first time only)
+chmod +x backup-config.sh
+chmod +x restore-config.sh
+
+# Run backup for current branch
+./backup-config.sh
+```
+
+### Restore Configuration
+```bash
+# Restore .env and .vercel files for current branch
+./restore-config.sh
+```
+
+### What Gets Backed Up
+- Backend `.env` file
+- Frontend `.env` file (if exists)
+- `.vercel` directory
+
+### Backup Location
+- Files are stored in `.backup/<branch-name>/`
+- Not tracked by git (in .gitignore)
+
+## Branch Management
+
+### Switch to Main Branch
+```bash
+# Backup current branch configuration
+./backup-config.sh
+
+# Switch to main branch
+git checkout main
+
+# Restore main branch configuration
+./restore-config.sh
+```
+
+
+
+
+## Getting Started Guide Overview
 
 This guide will help you set up a modern full-stack application using:
 - FastAPI for the backend
@@ -359,3 +404,51 @@ VITE_API_URL=http://localhost:8000
    - Optimize API responses
 
 This guide covers the basics of setting up a full-stack application with FastAPI, Supabase, and Vite React. As you build your application, you'll want to dive deeper into each technology's documentation for more advanced features and best practices.
+
+
+
+# Backend and Frontend Server Setup
+
+## Backend Setup
+
+1. Navigate to backend directory:
+```bash
+cd backend
+```
+
+2. Activate virtual environment:
+- Windows:
+```bash
+venv\Scripts\activate
+```
+- Mac/Linux:
+```bash
+source venv/bin/activate
+```
+
+3. Verify Python version:
+```bash
+python --version
+```
+
+4. Start the backend server:
+```bash
+uvicorn main:app --reload --port 8001
+```
+
+## Frontend Setup
+
+1. In a new terminal, navigate to frontend directory:
+```bash
+cd frontend
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Start the development server:
+```bash
+npm run dev
+```

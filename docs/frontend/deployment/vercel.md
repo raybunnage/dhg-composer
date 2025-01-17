@@ -201,3 +201,62 @@ const [error, setError] = useState<string>("");
 4. Use proper TypeScript types for all variables
 
 // ... rest of existing vercel.md content ...
+
+
+
+
+
+## Troubleshooting Vercel Deployments
+
+### TypeScript Build Errors
+If you see errors like "variable is declared but never read", you need to either:
+1. Use the variables
+2. Remove unused variables
+3. Prefix with underscore to ignore
+
+Example fixes:
+```tsx
+// Before (causes error):
+const [error, setError] = useState<string>("");
+const [users, setUsers] = useState<User[]>([]);
+
+// Fix 1: Remove if not needed:
+// Delete the unused lines
+
+// Fix 2: Prefix with underscore if required for future use:
+const [_error, _setError] = useState<string>("");
+const [_users, _setUsers] = useState<User[]>([]);
+
+// Fix 3: Use ESLint disable comment (not recommended but quick fix):
+// @ts-ignore
+const [error, setError] = useState<string>("");
+```
+
+### Common Build Errors
+1. **"Command 'npm run build' exited with 2"**
+   - Usually means TypeScript errors need fixing
+   - Check the error log for specific file locations
+   - Fix all TypeScript warnings before deploying
+
+2. **Quick Fixes for Development:**
+   ```bash
+   # In your frontend directory:
+   
+   # 1. Run TypeScript check locally first
+   npm run build
+   
+   # 2. Fix any errors it shows
+   
+   # 3. Commit and push changes
+   git add .
+   git commit -m "Fix TypeScript errors"
+   git push
+   ```
+
+### Best Practices to Avoid Build Errors
+1. Always run `npm run build` locally before pushing
+2. Set up ESLint and TypeScript in your IDE
+3. Fix warnings before they become deployment errors
+4. Use proper TypeScript types for all variables
+
+# Baseline Configuration
