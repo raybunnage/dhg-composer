@@ -147,42 +147,57 @@ If you're new to deploying with Vercel, here's a simplified workflow for regular
   3. Document them in your project's README
 - Monitor your deployment logs in the Vercel dashboard for any issues
 
-// ... existing code ...
+## Troubleshooting Vercel Deployments
 
+### TypeScript Build Errors
+If you see errors like "variable is declared but never read", you need to either:
+1. Use the variables
+2. Remove unused variables
+3. Prefix with underscore to ignore
 
-# Vercel Deployment Process
+Example fixes:
+```tsx
+// Before (causes error):
+const [error, setError] = useState<string>("");
+const [users, setUsers] = useState<User[]>([]);
 
-## Understanding Build Output
-When you run `npm run build`, you'll see output like this:
-```bash
-> frontend@0.0.0 build
-> tsc -b && vite build
+// Fix 1: Remove if not needed:
+// Delete the unused lines
 
-vite v6.0.7 building for production...
-✓ 31 modules transformed.
-dist/index.html                   0.46 kB │ gzip:  0.30 kB
-dist/assets/index-X8tvmyKQ.css    2.06 kB │ gzip:  0.92 kB
-dist/assets/index-CYAlU2D6.js   145.83 kB │ gzip: 47.01 kB
-✓ built in 268ms
+// Fix 2: Prefix with underscore if required for future use:
+const [_error, _setError] = useState<string>("");
+const [_users, _setUsers] = useState<User[]>([]);
+
+// Fix 3: Use ESLint disable comment (not recommended but quick fix):
+// @ts-ignore
+const [error, setError] = useState<string>("");
 ```
 
-This output tells you:
-1. **Build Process**:
-   - First runs TypeScript compilation (`tsc -b`)
-   - Then runs Vite's production build (`vite build`)
+### Common Build Errors
+1. **"Command 'npm run build' exited with 2"**
+   - Usually means TypeScript errors need fixing
+   - Check the error log for specific file locations
+   - Fix all TypeScript warnings before deploying
 
-2. **Build Results**:
-   - Successfully transformed 31 modules
-   - Created three main files in the `dist` directory:
-     - `index.html`: The entry point (0.46 KB)
-     - `index-X8tvmyKQ.css`: Bundled CSS (2.06 KB)
-     - `index-CYAlU2D6.js`: Bundled JavaScript (145.83 KB)
-   - Each file shows both original and gzipped sizes
-   - Build completed in 268ms
+2. **Quick Fixes for Development:**
+   ```bash
+   # In your frontend directory:
+   
+   # 1. Run TypeScript check locally first
+   npm run build
+   
+   # 2. Fix any errors it shows
+   
+   # 3. Commit and push changes
+   git add .
+   git commit -m "Fix TypeScript errors"
+   git push
+   ```
 
-3. **What This Means**:
-   - Your code has been minified and bundled for production
-   - Assets have unique hashes (e.g., X8tvmyKQ) for cache busting
-   - Files are ready to be served by Vercel's CDN
+### Best Practices to Avoid Build Errors
+1. Always run `npm run build` locally before pushing
+2. Set up ESLint and TypeScript in your IDE
+3. Fix warnings before they become deployment errors
+4. Use proper TypeScript types for all variables
 
-// ... rest of existing content ...
+// ... rest of existing vercel.md content ...

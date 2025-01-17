@@ -2,6 +2,53 @@
 
 # Getting Started with FastAPI, Supabase, and Vite React
 
+## Quick Start Commands
+
+### Kill Existing Server Processes
+If ports are already in use:
+```bash
+# For backend (port 8001)
+lsof -i :8001
+kill -9 $(lsof -t -i:8001)
+
+# For frontend (port 5173)
+lsof -i :5173
+kill -9 $(lsof -t -i:5173)
+```
+
+### Start Backend Server
+```bash
+cd backend
+
+# Windows
+venv\Scripts\activate
+
+# Mac/Linux
+source venv/bin/activate
+
+# Start server
+python --version  # Verify Python version
+uvicorn main:app --reload --port 8001
+```
+
+### Start Frontend Server
+In a new terminal:
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+### Verify Server Status
+- Backend API: http://localhost:8001
+- Frontend App: http://localhost:5173
+- Test endpoint: http://localhost:8001/test-supabase
+
+### Common Issues
+- If ports are already in use, use the kill commands above
+- Make sure `.env` file exists in backend directory
+- Verify virtual environment is activated for backend
+
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [Backend Setup with FastAPI](#backend-setup)

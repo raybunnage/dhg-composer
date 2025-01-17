@@ -2,6 +2,8 @@
 
 # DHG Composer Server Management
 
+> **Note**: The core server management commands from this document have been copied to the [Getting Started Guide](getting-started-guide.md) for easier reference. Both documents are maintained for completeness.
+
 ## to kill
 lsof -i :8001
 kill -9 $(lsof -t -i:8001)
