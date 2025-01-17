@@ -1,3 +1,5 @@
+[← Back to Documentation Home](../../../README.md)
+
 # TypeScript React (TSX) for Complete Beginners
 
 ## Table of Contents
