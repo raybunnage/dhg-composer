@@ -4,12 +4,20 @@
 
 ## Table of Contents
 1. [Introduction](#introduction)
-2. [Backend Setup with FastAPI](#backend-setup)
+2. [Backend Setup with FastAPI](#backend-setup-with-fastapi)
 3. [Understanding Async Programming](#understanding-async-programming)
 4. [Supabase Integration](#supabase-integration)
-5. [Frontend Development with Vite React](#frontend-development)
+5. [Frontend Development with Vite React](#frontend-development-with-vite-react)
 6. [Full Stack Integration](#full-stack-integration)
-7. [Day-to-Day Commands](#day-to-day-commands)
+7. [Using Scripts to Streamline Your Workflow](#using-scripts-to-streamline-your-workflow)
+8. [Day-to-Day Commands](#day-to-day-commands)
+    1. [Starting the Development Environment](#starting-the-development-environment)
+    2. [Version Control Commands](#version-control-commands)
+    3. [Deployment Commands](#deployment-commands)
+    4. [Testing Commands](#testing-commands)
+    5. [Merging to Production](#merging-to-production)
+    6. [Tree Command](#tree-command)
+9. [Tree Command](#tree-command)
 
 ## Quick Start Commands
 
@@ -195,65 +203,105 @@ These commands will help you manage your Vercel deployments effectively, ensurin
 
 ---
 
-### Using npm in the Frontend Directory
+### Using Scripts to Streamline Your Workflow
 
-Yes, you should run `npm` commands within the `frontend` directory of your project. This is because the `frontend` directory typically contains the `package.json` file, which defines the project's dependencies and scripts for the frontend part of your application.
+Our project includes several scripts located in the `scripts/` directory to help automate routine tasks and streamline your workflow. Here's an overview of each script and when to use them:
 
-Here's a quick guide on what you might typically do with `npm` in the `frontend` directory:
+#### 1. `start-dev.sh`
 
-1. **Install Dependencies:**
+**Purpose**: Starts both the backend and frontend development servers simultaneously.
 
-   To install all the dependencies listed in your `package.json` file, navigate to the `frontend` directory and run:
+**When to Use**:
+- When you want to start working on both the backend and frontend.
+- To ensure both servers are running with a single command.
 
-   ```bash
-   npm install
-   ```
+**Usage**:
+```bash
+./scripts/start-dev.sh
+```
 
-   This command will create a `node_modules` directory and install all the necessary packages.
+---
 
-2. **Run Development Server:**
+#### 2. `deploy.sh`
 
-   To start the development server, which allows you to see changes in real-time as you develop your React application, use:
+**Purpose**: Deploys the application to Vercel in production mode.
 
-   ```bash
-   npm run dev
-   ```
+**When to Use**:
+- When you're ready to deploy your latest changes to production.
+- To automate the deployment process.
 
-   This command typically starts a local server (often on `http://localhost:3000` or another port) where you can view your application.
+**Usage**:
+```bash
+./scripts/deploy.sh
+```
 
-3. **Build for Production:**
+---
 
-   When you're ready to deploy your application, you can build it for production:
+#### 3. `git-commit.sh`
 
-   ```bash
-   npm run build
-   ```
+**Purpose**: Automates adding, committing, and pushing changes to the repository with a commit message.
 
-   This command compiles your application into static files for production, usually placing them in a `dist` or `build` directory.
+**When to Use**:
+- When you've completed a set of changes you want to commit.
+- To streamline the git workflow by reducing the number of commands needed.
 
-4. **Run Tests:**
+**Usage**:
+```bash
+./scripts/git-commit.sh "Your commit message"
+```
 
-   If you have tests set up, you can run them using:
+---
 
-   ```bash
-   npm test
-   ```
+#### 4. `run-tests.sh`
 
-5. **Add or Update Packages:**
+**Purpose**: Runs tests for both the frontend and backend.
 
-   To add a new package, use:
+**When to Use**:
+- Before deploying to ensure your code passes all tests.
+- To verify that recent changes haven't broken existing functionality.
 
-   ```bash
-   npm install <package-name>
-   ```
+**Usage**:
+```bash
+./scripts/run-tests.sh
+```
 
-   To update an existing package, you can use:
+---
 
-   ```bash
-   npm update <package-name>
-   ```
+#### 5. `backup-config.sh` and `restore-config.sh`
 
-By running these commands in the `frontend` directory, you ensure that all operations are performed in the context of your frontend project, using the correct configuration and dependencies. If you have any specific questions about using `npm` in your project, feel free to ask!
+**Purpose**:
+- `backup-config.sh`: Backs up essential configuration files for the current branch.
+- `restore-config.sh`: Restores configuration files for the current branch from a backup.
+
+**When to Use**:
+- Before switching branches to prevent configuration conflicts.
+- To maintain consistent environment settings across different development branches.
+
+**Usage**:
+```bash
+./scripts/backup-config.sh
+./scripts/restore-config.sh
+```
+
+## Deploying to Vercel with logs
+
+```bash
+./scripts/deploy.sh &> deploy.log
+```
+
+---
+
+### Summary
+
+By utilizing these scripts, you can automate and simplify your daily development tasks, ensuring consistency and efficiency in your workflow. Here's a quick recap of when to use each script:
+
+- **Start Development Environment**: Use `start-dev.sh` to launch both backend and frontend servers.
+- **Deploy Application**: Use `deploy.sh` to deploy your application to Vercel.
+- **Commit Changes**: Use `git-commit.sh` to add, commit, and push changes with a single command.
+- **Run Tests**: Use `run-tests.sh` to execute tests for both frontend and backend.
+- **Backup/Restore Configuration**: Use `backup-config.sh` and `restore-config.sh` to manage configuration files when switching branches.
+
+These scripts are designed to help you maintain a smooth and efficient development process. If you have any specific questions about using these scripts or need further customization, feel free to ask!
 
 ## Day-to-Day Commands
 
