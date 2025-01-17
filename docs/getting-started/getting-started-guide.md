@@ -99,6 +99,163 @@ git checkout main
 ./restore-config.sh
 ```
 
+### Vercel CLI Commands
+
+#### Installation and Login
+
+To install the Vercel CLI globally and log in to your account, use:
+
+```bash
+# Install Vercel CLI
+npm install -g vercel
+
+# Log in to your Vercel account
+vercel login
+```
+
+#### Primary Vercel Commands
+
+1. **Deploying Your Application**
+
+   Deploy your application to Vercel:
+
+   ```bash
+   vercel
+   ```
+
+   Deploy to production:
+
+   ```bash
+   vercel --prod
+   ```
+
+2. **Managing Environment Variables**
+
+   Add or update environment variables:
+
+   ```bash
+   vercel env add VARIABLE_NAME
+   ```
+
+   List all environment variables:
+
+   ```bash
+   vercel env ls
+   ```
+
+3. **Linking Your Project**
+
+   Link your local project directory to a Vercel project:
+
+   ```bash
+   vercel link
+   ```
+
+4. **Checking Deployment Status**
+
+   View the status of your deployments:
+
+   ```bash
+   vercel status
+   ```
+
+5. **Rolling Back Deployments**
+
+   Roll back to a previous deployment:
+
+   ```bash
+   vercel rollback
+   ```
+
+6. **Viewing Deployment Logs**
+
+   View logs for a specific deployment:
+
+   ```bash
+   vercel logs <deployment-url>
+   ```
+
+7. **Removing a Deployment**
+
+   Remove a specific deployment:
+
+   ```bash
+   vercel remove <deployment-url>
+   ```
+
+8. **Switching Teams**
+
+   If you are part of multiple teams, switch between them:
+
+   ```bash
+   vercel switch
+   ```
+
+These commands will help you manage your Vercel deployments effectively, ensuring that you can deploy, manage environment variables, and monitor your application with ease. For more detailed information, refer to the [Vercel CLI documentation](https://vercel.com/docs/cli).
+
+---
+
+### Using npm in the Frontend Directory
+
+Yes, you should run `npm` commands within the `frontend` directory of your project. This is because the `frontend` directory typically contains the `package.json` file, which defines the project's dependencies and scripts for the frontend part of your application.
+
+Here's a quick guide on what you might typically do with `npm` in the `frontend` directory:
+
+1. **Install Dependencies:**
+
+   To install all the dependencies listed in your `package.json` file, navigate to the `frontend` directory and run:
+
+   ```bash
+   npm install
+   ```
+
+   This command will create a `node_modules` directory and install all the necessary packages.
+
+2. **Run Development Server:**
+
+   To start the development server, which allows you to see changes in real-time as you develop your React application, use:
+
+   ```bash
+   npm run dev
+   ```
+
+   This command typically starts a local server (often on `http://localhost:3000` or another port) where you can view your application.
+
+3. **Build for Production:**
+
+   When you're ready to deploy your application, you can build it for production:
+
+   ```bash
+   npm run build
+   ```
+
+   This command compiles your application into static files for production, usually placing them in a `dist` or `build` directory.
+
+4. **Run Tests:**
+
+   If you have tests set up, you can run them using:
+
+   ```bash
+   npm test
+   ```
+
+5. **Add or Update Packages:**
+
+   To add a new package, use:
+
+   ```bash
+   npm install <package-name>
+   ```
+
+   To update an existing package, you can use:
+
+   ```bash
+   npm update <package-name>
+   ```
+
+By running these commands in the `frontend` directory, you ensure that all operations are performed in the context of your frontend project, using the correct configuration and dependencies. If you have any specific questions about using `npm` in your project, feel free to ask!
+
+
 
 
 
