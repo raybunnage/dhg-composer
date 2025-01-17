@@ -253,17 +253,18 @@ export default ItemsList
 ```
 your-project/
 ├── backend/
+│   ├── app/
+│   │   ├── main.py
+│   │   ├── database.py
+│   │   └── ...
+│   ├── tests/
+│   │   └── ...
 │   ├── venv/
-│   ├── main.py
-│   ├── database.py
-│   └── requirements.txt
+│   ├── requirements.txt
+│   └── ...
 ├── frontend/
 │   ├── src/
-│   │   ├── components/
-│   │   ├── lib/
-│   │   └── App.jsx
-│   ├── package.json
-│   └── vite.config.js
+│   └── ...
 └── README.md
 ```
 

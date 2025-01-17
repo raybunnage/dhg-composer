@@ -23,6 +23,10 @@
     {
       "type": "PostgreSQL",
       "instructions": "Optimize database interactions using connection pooling and prepared statements for query execution."
+    },
+    {
+      "type": "Documentation",
+      "instructions": "• All docs in markdown (.md) within the docs folder, which may contain nested folders by topic.\n• Focus on beginner-friendly writing, step-by-step guides, and examples.\n• Use consistent formatting, headings, bullet points, and code blocks.\n• Refer to best practices for each programming topic.\n• Consider including a table of contents and illustrative images or diagrams.\n• Update documentation regularly and encourage feedback from peers."
     }
   ]
 }

@@ -19,7 +19,10 @@ Welcome to the **Cursor Rules Mastery Guide**! Whether you're a seasoned develop
 8. [Resources and Further Reading](#resources-and-further-reading)
 9. [Conclusion](#conclusion)
 
----
+## Web site for creating rules
+```bash
+https://cursorrules.agnt.one/chat
+```
 
 ## Introduction
 
