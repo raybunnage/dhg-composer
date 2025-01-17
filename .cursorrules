@@ -1,0 +1,28 @@
+{
+  "rules": [
+    {
+      "type": "React",
+      "instructions": "Use functional components with hooks (useState, useEffect, etc.). Prefer modular components with single responsibility and leverage TypeScript for type safety. Implement responsive design using Tailwind CSS. Optimize images using lazy loading techniques and WebP format. Use suspense for lazy-loaded components and handle global state with Context API or React Query for caching."
+    },
+    {
+      "type": "Vite",
+      "instructions": "Leverage Vite's fast bundling and hot module replacement. Use dynamic importing for lazy-loaded routes and components. Configure Vite for efficient build performance using code splitting."
+    },
+    {
+      "type": "FastAPI",
+      "instructions": "Use async functions to handle I/O-bound tasks efficiently. Utilize Pydantic models for data validation and serialization. Optimize routes using FastAPI's dependency injection system. Ensure proper exception handling using custom exceptions or HTTPException. Employ middleware for logging and error monitoring."
+    },
+    {
+      "type": "Python",
+      "instructions": "Follow conventions using type hints and descriptive variable names. Implement RESTful APIs with clear separation of concern."
+    },
+    {
+      "type": "Supabase",
+      "instructions": "Use Supabase for authentication and real-time capabilities. Securely handle JWTs for session management. Leverage Supabase's functions for complex queries when needed."
+    },
+    {
+      "type": "PostgreSQL",
+      "instructions": "Optimize database interactions using connection pooling and prepared statements for query execution."
+    }
+  ]
+}
