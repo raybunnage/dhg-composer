@@ -1,3 +1,5 @@
+[← Back to Documentation Home](../README.md)
+
 # Project Dependencies Documentation
 
 ## Backend Dependencies

@@ -1,21 +1,35 @@
 # DHG Composer Documentation
 
 ## Getting Started
-- [Getting Started Guide](getting-started/getting-started-guide.md)
-- [Server Setup Guide](getting-started/backend-frontend-servers.md)
-
-## Frontend Development
-- [TypeScript/React Guide](frontend/typescript/tsx-guide.md)
-- [TypeScript Examples](frontend/typescript/examples.md)
-- [Vercel Deployment](frontend/deployment/vercel.md)
+- [Quick Start Guide](getting-started/getting-started-guide.md)
+- [Server Setup and Management](getting-started/backend_frontend_servers.md)
 
 ## Backend Development
-- [Supabase Authentication](backend/authentication/supabase-auth-guide.md)
-- [API Documentation](backend/api/README.md)
+- [Authentication with Supabase](backend/authentication/supabase-auth-guide.md)
+- [System Requirements](architecture/requirements.md)
+
+## Frontend Development
+### TypeScript & React
+- [TypeScript React Guide](frontend/typescript/tsx-guide.md)
+- [Code Examples](frontend/typescript/examples.md)
+
+### Deployment
+- [Vercel Deployment Guide](frontend/deployment/vercel.md)
 
 ## Architecture
-- [System Requirements](architecture/requirements.md)
+- [Project Dependencies](architecture/requirements.md)
+
+## Legacy Documentation
+These guides are being reorganized:
+- [TypeScript Guide (v1)](tsx-guidever1.md)
+- [TypeScript Guide (v2)](tsx-guidevver2.md)
 
 ## Additional Resources
 - [GitHub Repository](https://github.com/yourusername/your-repo)
-- [Live Demo](https://your-demo-url.com) 
+- [Live Demo](https://your-demo-url.com)
+
+## Contributing
+Please see our [contribution guidelines](CONTRIBUTING.md) for information on how to contribute to this project.
+
+## Support
+For support, please [open an issue](https://github.com/yourusername/your-repo/issues) on our GitHub repository. 
