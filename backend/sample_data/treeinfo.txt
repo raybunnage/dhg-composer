@@ -1,0 +1,1018 @@
+    │           │   │   │   ├── prompt.py
+    │           │   │   │   ├── protocol.py
+    │           │   │   │   ├── py.typed
+    │           │   │   │   ├── region.py
+    │           │   │   │   ├── repr.py
+    │           │   │   │   ├── rule.py
+    │           │   │   │   ├── scope.py
+    │           │   │   │   ├── screen.py
+    │           │   │   │   ├── segment.py
+    │           │   │   │   ├── spinner.py
+    │           │   │   │   ├── status.py
+    │           │   │   │   ├── style.py
+    │           │   │   │   ├── styled.py
+    │           │   │   │   ├── syntax.py
+    │           │   │   │   ├── table.py
+    │           │   │   │   ├── terminal_theme.py
+    │           │   │   │   ├── text.py
+    │           │   │   │   ├── theme.py
+    │           │   │   │   ├── themes.py
+    │           │   │   │   ├── traceback.py
+    │           │   │   │   └── tree.py
+    │           │   │   ├── six.py
+    │           │   │   ├── tenacity
+    │           │   │   │   ├── __init__.py
+    │           │   │   │   ├── _asyncio.py
+    │           │   │   │   ├── _utils.py
+    │           │   │   │   ├── after.py
+    │           │   │   │   ├── before.py
+    │           │   │   │   ├── before_sleep.py
+    │           │   │   │   ├── nap.py
+    │           │   │   │   ├── py.typed
+    │           │   │   │   ├── retry.py
+    │           │   │   │   ├── stop.py
+    │           │   │   │   ├── tornadoweb.py
+    │           │   │   │   └── wait.py
+    │           │   │   ├── tomli
+    │           │   │   │   ├── __init__.py
+    │           │   │   │   ├── _parser.py
+    │           │   │   │   ├── _re.py
+    │           │   │   │   ├── _types.py
+    │           │   │   │   └── py.typed
+    │           │   │   ├── truststore
+    │           │   │   │   ├── __init__.py
+    │           │   │   │   ├── _api.py
+    │           │   │   │   ├── _macos.py
+    │           │   │   │   ├── _openssl.py
+    │           │   │   │   ├── _ssl_constants.py
+    │           │   │   │   ├── _windows.py
+    │           │   │   │   └── py.typed
+    │           │   │   ├── typing_extensions.py
+    │           │   │   ├── urllib3
+    │           │   │   │   ├── __init__.py
+    │           │   │   │   ├── _collections.py
+    │           │   │   │   ├── _version.py
+    │           │   │   │   ├── connection.py
+    │           │   │   │   ├── connectionpool.py
+    │           │   │   │   ├── contrib
+    │           │   │   │   │   ├── __init__.py
+    │           │   │   │   │   ├── _appengine_environ.py
+    │           │   │   │   │   ├── _securetransport
+    │           │   │   │   │   │   ├── __init__.py
+    │           │   │   │   │   │   ├── bindings.py
+    │           │   │   │   │   │   └── low_level.py
+    │           │   │   │   │   ├── appengine.py
+    │           │   │   │   │   ├── ntlmpool.py
+    │           │   │   │   │   ├── pyopenssl.py
+    │           │   │   │   │   ├── securetransport.py
+    │           │   │   │   │   └── socks.py
+    │           │   │   │   ├── exceptions.py
+    │           │   │   │   ├── fields.py
+    │           │   │   │   ├── filepost.py
+    │           │   │   │   ├── packages
+    │           │   │   │   │   ├── __init__.py
+    │           │   │   │   │   ├── backports
+    │           │   │   │   │   │   ├── __init__.py
+    │           │   │   │   │   │   ├── makefile.py
+    │           │   │   │   │   │   └── weakref_finalize.py
+    │           │   │   │   │   └── six.py
+    │           │   │   │   ├── poolmanager.py
+    │           │   │   │   ├── request.py
+    │           │   │   │   ├── response.py
+    │           │   │   │   └── util
+    │           │   │   │       ├── __init__.py
+    │           │   │   │       ├── connection.py
+    │           │   │   │       ├── proxy.py
+    │           │   │   │       ├── queue.py
+    │           │   │   │       ├── request.py
+    │           │   │   │       ├── response.py
+    │           │   │   │       ├── retry.py
+    │           │   │   │       ├── ssl_.py
+    │           │   │   │       ├── ssl_match_hostname.py
+    │           │   │   │       ├── ssltransport.py
+    │           │   │   │       ├── timeout.py
+    │           │   │   │       ├── url.py
+    │           │   │   │       └── wait.py
+    │           │   │   ├── vendor.txt
+    │           │   │   └── webencodings
+    │           │   │       ├── __init__.py
+    │           │   │       ├── labels.py
+    │           │   │       ├── mklabels.py
+    │           │   │       ├── tests.py
+    │           │   │       └── x_user_defined.py
+    │           │   └── py.typed
+    │           ├── pip-24.0.dist-info
+    │           │   ├── AUTHORS.txt
+    │           │   ├── INSTALLER
+    │           │   ├── LICENSE.txt
+    │           │   ├── METADATA
+    │           │   ├── RECORD
+    │           │   ├── REQUESTED
+    │           │   ├── WHEEL
+    │           │   ├── entry_points.txt
+    │           │   └── top_level.txt
+    │           ├── pkg_resources
+    │           │   ├── __init__.py
+    │           │   ├── _vendor
+    │           │   │   ├── __init__.py
+    │           │   │   ├── appdirs.py
+    │           │   │   ├── importlib_resources
+    │           │   │   │   ├── __init__.py
+    │           │   │   │   ├── _adapters.py
+    │           │   │   │   ├── _common.py
+    │           │   │   │   ├── _compat.py
+    │           │   │   │   ├── _itertools.py
+    │           │   │   │   ├── _legacy.py
+    │           │   │   │   ├── abc.py
+    │           │   │   │   ├── readers.py
+    │           │   │   │   └── simple.py
+    │           │   │   ├── jaraco
+    │           │   │   │   ├── __init__.py
+    │           │   │   │   ├── context.py
+    │           │   │   │   ├── functools.py
+    │           │   │   │   └── text
+    │           │   │   │       └── __init__.py
+    │           │   │   ├── more_itertools
+    │           │   │   │   ├── __init__.py
+    │           │   │   │   ├── more.py
+    │           │   │   │   └── recipes.py
+    │           │   │   ├── packaging
+    │           │   │   │   ├── __about__.py
+    │           │   │   │   ├── __init__.py
+    │           │   │   │   ├── _manylinux.py
+    │           │   │   │   ├── _musllinux.py
+    │           │   │   │   ├── _structures.py
+    │           │   │   │   ├── markers.py
+    │           │   │   │   ├── requirements.py
+    │           │   │   │   ├── specifiers.py
+    │           │   │   │   ├── tags.py
+    │           │   │   │   ├── utils.py
+    │           │   │   │   └── version.py
+    │           │   │   ├── pyparsing
+    │           │   │   │   ├── __init__.py
+    │           │   │   │   ├── actions.py
+    │           │   │   │   ├── common.py
+    │           │   │   │   ├── core.py
+    │           │   │   │   ├── diagram
+    │           │   │   │   │   └── __init__.py
+    │           │   │   │   ├── exceptions.py
+    │           │   │   │   ├── helpers.py
+    │           │   │   │   ├── results.py
+    │           │   │   │   ├── testing.py
+    │           │   │   │   ├── unicode.py
+    │           │   │   │   └── util.py
+    │           │   │   └── zipp.py
+    │           │   └── extern
+    │           │       └── __init__.py
+    │           ├── postgrest
+    │           │   ├── __init__.py
+    │           │   ├── __pycache__
+    │           │   │   ├── __init__.cpython-311.pyc
+    │           │   │   ├── base_client.cpython-311.pyc
+    │           │   │   ├── base_request_builder.cpython-311.pyc
+    │           │   │   ├── constants.cpython-311.pyc
+    │           │   │   ├── deprecated_client.cpython-311.pyc
+    │           │   │   ├── deprecated_get_request_builder.cpython-311.pyc
+    │           │   │   ├── exceptions.cpython-311.pyc
+    │           │   │   ├── types.cpython-311.pyc
+    │           │   │   └── utils.cpython-311.pyc
+    │           │   ├── _async
+    │           │   │   ├── __init__.py
+    │           │   │   ├── __pycache__
+    │           │   │   │   ├── __init__.cpython-311.pyc
+    │           │   │   │   ├── client.cpython-311.pyc
+    │           │   │   │   └── request_builder.cpython-311.pyc
+    │           │   │   ├── client.py
+    │           │   │   └── request_builder.py
+    │           │   ├── _sync
+    │           │   │   ├── __init__.py
+    │           │   │   ├── __pycache__
+    │           │   │   │   ├── __init__.cpython-311.pyc
+    │           │   │   │   ├── client.cpython-311.pyc
+    │           │   │   │   └── request_builder.cpython-311.pyc
+    │           │   │   ├── client.py
+    │           │   │   └── request_builder.py
+    │           │   ├── base_client.py
+    │           │   ├── base_request_builder.py
+    │           │   ├── constants.py
+    │           │   ├── deprecated_client.py
+    │           │   ├── deprecated_get_request_builder.py
+    │           │   ├── exceptions.py
+    │           │   ├── py.typed
+    │           │   ├── types.py
+    │           │   └── utils.py
+    │           ├── postgrest-0.11.0.dist-info
+    │           │   ├── INSTALLER
+    │           │   ├── LICENSE
+    │           │   ├── METADATA
+    │           │   ├── RECORD
+    │           │   ├── REQUESTED
+    │           │   └── WHEEL
+    │           ├── pydantic
+    │           │   ├── __init__.py
+    │           │   ├── __pycache__
+    │           │   │   ├── __init__.cpython-311.pyc
+    │           │   │   ├── _migration.cpython-311.pyc
+    │           │   │   ├── aliases.cpython-311.pyc
+    │           │   │   ├── annotated_handlers.cpython-311.pyc
+    │           │   │   ├── color.cpython-311.pyc
+    │           │   │   ├── config.cpython-311.pyc
+    │           │   │   ├── errors.cpython-311.pyc
+    │           │   │   ├── fields.cpython-311.pyc
+    │           │   │   ├── functional_validators.cpython-311.pyc
+    │           │   │   ├── json_schema.cpython-311.pyc
+    │           │   │   ├── main.cpython-311.pyc
+    │           │   │   ├── networks.cpython-311.pyc
+    │           │   │   ├── type_adapter.cpython-311.pyc
+    │           │   │   ├── types.cpython-311.pyc
+    │           │   │   ├── version.cpython-311.pyc
+    │           │   │   └── warnings.cpython-311.pyc
+    │           │   ├── _internal
+    │           │   │   ├── __init__.py
+    │           │   │   ├── __pycache__
+    │           │   │   │   ├── __init__.cpython-311.pyc
+    │           │   │   │   ├── _config.cpython-311.pyc
+    │           │   │   │   ├── _core_metadata.cpython-311.pyc
+    │           │   │   │   ├── _core_utils.cpython-311.pyc
+    │           │   │   │   ├── _decorators.cpython-311.pyc
+    │           │   │   │   ├── _discriminated_union.cpython-311.pyc
+    │           │   │   │   ├── _fields.cpython-311.pyc
+    │           │   │   │   ├── _forward_ref.cpython-311.pyc
+    │           │   │   │   ├── _generate_schema.cpython-311.pyc
+    │           │   │   │   ├── _generics.cpython-311.pyc
+    │           │   │   │   ├── _internal_dataclass.cpython-311.pyc
+    │           │   │   │   ├── _known_annotated_metadata.cpython-311.pyc
+    │           │   │   │   ├── _mock_val_ser.cpython-311.pyc
+    │           │   │   │   ├── _model_construction.cpython-311.pyc
+    │           │   │   │   ├── _repr.cpython-311.pyc
+    │           │   │   │   ├── _schema_generation_shared.cpython-311.pyc
+    │           │   │   │   ├── _signature.cpython-311.pyc
+    │           │   │   │   ├── _std_types_schema.cpython-311.pyc
+    │           │   │   │   ├── _typing_extra.cpython-311.pyc
+    │           │   │   │   ├── _utils.cpython-311.pyc
+    │           │   │   │   ├── _validate_call.cpython-311.pyc
+    │           │   │   │   └── _validators.cpython-311.pyc
+    │           │   │   ├── _config.py
+    │           │   │   ├── _core_metadata.py
+    │           │   │   ├── _core_utils.py
+    │           │   │   ├── _dataclasses.py
+    │           │   │   ├── _decorators.py
+    │           │   │   ├── _decorators_v1.py
+    │           │   │   ├── _discriminated_union.py
+    │           │   │   ├── _fields.py
+    │           │   │   ├── _forward_ref.py
+    │           │   │   ├── _generate_schema.py
+    │           │   │   ├── _generics.py
+    │           │   │   ├── _git.py
+    │           │   │   ├── _internal_dataclass.py
+    │           │   │   ├── _known_annotated_metadata.py
+    │           │   │   ├── _mock_val_ser.py
+    │           │   │   ├── _model_construction.py
+    │           │   │   ├── _repr.py
+    │           │   │   ├── _schema_generation_shared.py
+    │           │   │   ├── _signature.py
+    │           │   │   ├── _std_types_schema.py
+    │           │   │   ├── _typing_extra.py
+    │           │   │   ├── _utils.py
+    │           │   │   ├── _validate_call.py
+    │           │   │   └── _validators.py
+    │           │   ├── _migration.py
+    │           │   ├── alias_generators.py
+    │           │   ├── aliases.py
+    │           │   ├── annotated_handlers.py
+    │           │   ├── class_validators.py
+    │           │   ├── color.py
+    │           │   ├── config.py
+    │           │   ├── dataclasses.py
+    │           │   ├── datetime_parse.py
+    │           │   ├── decorator.py
+    │           │   ├── deprecated
+    │           │   │   ├── __init__.py
+    │           │   │   ├── class_validators.py
+    │           │   │   ├── config.py
+    │           │   │   ├── copy_internals.py
+    │           │   │   ├── decorator.py
+    │           │   │   ├── json.py
+    │           │   │   ├── parse.py
+    │           │   │   └── tools.py
+    │           │   ├── env_settings.py
+    │           │   ├── error_wrappers.py
+    │           │   ├── errors.py
+    │           │   ├── fields.py
+    │           │   ├── functional_serializers.py
+    │           │   ├── functional_validators.py
+    │           │   ├── generics.py
+    │           │   ├── json.py
+    │           │   ├── json_schema.py
+    │           │   ├── main.py
+    │           │   ├── mypy.py
+    │           │   ├── networks.py
+    │           │   ├── parse.py
+    │           │   ├── plugin
+    │           │   │   ├── __init__.py
+    │           │   │   ├── __pycache__
+    │           │   │   │   ├── __init__.cpython-311.pyc
+    │           │   │   │   ├── _loader.cpython-311.pyc
+    │           │   │   │   └── _schema_validator.cpython-311.pyc
+    │           │   │   ├── _loader.py
+    │           │   │   └── _schema_validator.py
+    │           │   ├── py.typed
+    │           │   ├── root_model.py
+    │           │   ├── schema.py
+    │           │   ├── tools.py
+    │           │   ├── type_adapter.py
+    │           │   ├── types.py
+    │           │   ├── typing.py
+    │           │   ├── utils.py
+    │           │   ├── v1
+    │           │   │   ├── __init__.py
+    │           │   │   ├── _hypothesis_plugin.py
+    │           │   │   ├── annotated_types.py
+    │           │   │   ├── class_validators.py
+    │           │   │   ├── color.py
+    │           │   │   ├── config.py
+    │           │   │   ├── dataclasses.py
+    │           │   │   ├── datetime_parse.py
+    │           │   │   ├── decorator.py
+    │           │   │   ├── env_settings.py
+    │           │   │   ├── error_wrappers.py
+    │           │   │   ├── errors.py
+    │           │   │   ├── fields.py
+    │           │   │   ├── generics.py
+    │           │   │   ├── json.py
+    │           │   │   ├── main.py
+    │           │   │   ├── mypy.py
+    │           │   │   ├── networks.py
+    │           │   │   ├── parse.py
+    │           │   │   ├── py.typed
+    │           │   │   ├── schema.py
+    │           │   │   ├── tools.py
+    │           │   │   ├── types.py
+    │           │   │   ├── typing.py
+    │           │   │   ├── utils.py
+    │           │   │   ├── validators.py
+    │           │   │   └── version.py
+    │           │   ├── validate_call_decorator.py
+    │           │   ├── validators.py
+    │           │   ├── version.py
+    │           │   └── warnings.py
+    │           ├── pydantic-2.6.1.dist-info
+    │           │   ├── INSTALLER
+    │           │   ├── METADATA
+    │           │   ├── RECORD
+    │           │   ├── REQUESTED
+    │           │   ├── WHEEL
+    │           │   └── licenses
+    │           │       └── LICENSE
+    │           ├── pydantic_core
+    │           │   ├── __init__.py
+    │           │   ├── __pycache__
+    │           │   │   ├── __init__.cpython-311.pyc
+    │           │   │   └── core_schema.cpython-311.pyc
+    │           │   ├── _pydantic_core.cpython-311-darwin.so
+    │           │   ├── _pydantic_core.pyi
+    │           │   ├── core_schema.py
+    │           │   └── py.typed
+    │           ├── pydantic_core-2.16.2.dist-info
+    │           │   ├── INSTALLER
+    │           │   ├── METADATA
+    │           │   ├── RECORD
+    │           │   ├── REQUESTED
+    │           │   ├── WHEEL
+    │           │   └── license_files
+    │           │       └── LICENSE
+    │           ├── python_dateutil-2.9.0.post0.dist-info
+    │           │   ├── INSTALLER
+    │           │   ├── LICENSE
+    │           │   ├── METADATA
+    │           │   ├── RECORD
+    │           │   ├── REQUESTED
+    │           │   ├── WHEEL
+    │           │   ├── top_level.txt
+    │           │   └── zip-safe
+    │           ├── python_dotenv-1.0.0.dist-info
+    │           │   ├── INSTALLER
+    │           │   ├── LICENSE
+    │           │   ├── METADATA
+    │           │   ├── RECORD
+    │           │   ├── REQUESTED
+    │           │   ├── WHEEL
+    │           │   ├── entry_points.txt
+    │           │   └── top_level.txt
+    │           ├── realtime
+    │           │   ├── __init__.py
+    │           │   ├── __pycache__
+    │           │   │   ├── __init__.cpython-311.pyc
+    │           │   │   ├── channel.cpython-311.pyc
+    │           │   │   ├── connection.cpython-311.pyc
+    │           │   │   ├── exceptions.cpython-311.pyc
+    │           │   │   ├── message.cpython-311.pyc
+    │           │   │   ├── transformers.cpython-311.pyc
+    │           │   │   └── types.cpython-311.pyc
+    │           │   ├── channel.py
+    │           │   ├── connection.py
+    │           │   ├── exceptions.py
+    │           │   ├── message.py
+    │           │   ├── transformers.py
+    │           │   └── types.py
+    │           ├── realtime-1.0.6.dist-info
+    │           │   ├── INSTALLER
+    │           │   ├── LICENSE
+    │           │   ├── METADATA
+    │           │   ├── RECORD
+    │           │   ├── REQUESTED
+    │           │   └── WHEEL
+    │           ├── setuptools
+    │           │   ├── __init__.py
+    │           │   ├── _deprecation_warning.py
+    │           │   ├── _distutils
+    │           │   │   ├── __init__.py
+    │           │   │   ├── _collections.py
+    │           │   │   ├── _functools.py
+    │           │   │   ├── _macos_compat.py
+    │           │   │   ├── _msvccompiler.py
+    │           │   │   ├── archive_util.py
+    │           │   │   ├── bcppcompiler.py
+    │           │   │   ├── ccompiler.py
+    │           │   │   ├── cmd.py
+    │           │   │   ├── command
+    │           │   │   │   ├── __init__.py
+    │           │   │   │   ├── _framework_compat.py
+    │           │   │   │   ├── bdist.py
+    │           │   │   │   ├── bdist_dumb.py
+    │           │   │   │   ├── bdist_rpm.py
+    │           │   │   │   ├── build.py
+    │           │   │   │   ├── build_clib.py
+    │           │   │   │   ├── build_ext.py
+    │           │   │   │   ├── build_py.py
+    │           │   │   │   ├── build_scripts.py
+    │           │   │   │   ├── check.py
+    │           │   │   │   ├── clean.py
+    │           │   │   │   ├── config.py
+    │           │   │   │   ├── install.py
+    │           │   │   │   ├── install_data.py
+    │           │   │   │   ├── install_egg_info.py
+    │           │   │   │   ├── install_headers.py
+    │           │   │   │   ├── install_lib.py
+    │           │   │   │   ├── install_scripts.py
+    │           │   │   │   ├── py37compat.py
+    │           │   │   │   ├── register.py
+    │           │   │   │   ├── sdist.py
+    │           │   │   │   └── upload.py
+    │           │   │   ├── config.py
+    │           │   │   ├── core.py
+    │           │   │   ├── cygwinccompiler.py
+    │           │   │   ├── debug.py
+    │           │   │   ├── dep_util.py
+    │           │   │   ├── dir_util.py
+    │           │   │   ├── dist.py
+    │           │   │   ├── errors.py
+    │           │   │   ├── extension.py
+    │           │   │   ├── fancy_getopt.py
+    │           │   │   ├── file_util.py
+    │           │   │   ├── filelist.py
+    │           │   │   ├── log.py
+    │           │   │   ├── msvc9compiler.py
+    │           │   │   ├── msvccompiler.py
+    │           │   │   ├── py38compat.py
+    │           │   │   ├── py39compat.py
+    │           │   │   ├── spawn.py
+    │           │   │   ├── sysconfig.py
+    │           │   │   ├── text_file.py
+    │           │   │   ├── unixccompiler.py
+    │           │   │   ├── util.py
+    │           │   │   ├── version.py
+    │           │   │   └── versionpredicate.py
+    │           │   ├── _entry_points.py
+    │           │   ├── _imp.py
+    │           │   ├── _importlib.py
+    │           │   ├── _itertools.py
+    │           │   ├── _path.py
+    │           │   ├── _reqs.py
+    │           │   ├── _vendor
+    │           │   │   ├── __init__.py
+    │           │   │   ├── importlib_metadata
+    │           │   │   │   ├── __init__.py
+    │           │   │   │   ├── _adapters.py
+    │           │   │   │   ├── _collections.py
+    │           │   │   │   ├── _compat.py
+    │           │   │   │   ├── _functools.py
+    │           │   │   │   ├── _itertools.py
+    │           │   │   │   ├── _meta.py
+    │           │   │   │   └── _text.py
+    │           │   │   ├── importlib_resources
+    │           │   │   │   ├── __init__.py
+    │           │   │   │   ├── _adapters.py
+    │           │   │   │   ├── _common.py
+    │           │   │   │   ├── _compat.py
+    │           │   │   │   ├── _itertools.py
+    │           │   │   │   ├── _legacy.py
+    │           │   │   │   ├── abc.py
+    │           │   │   │   ├── readers.py
+    │           │   │   │   └── simple.py
+    │           │   │   ├── jaraco
+    │           │   │   │   ├── __init__.py
+    │           │   │   │   ├── context.py
+    │           │   │   │   ├── functools.py
+    │           │   │   │   └── text
+    │           │   │   │       └── __init__.py
+    │           │   │   ├── more_itertools
+    │           │   │   │   ├── __init__.py
+    │           │   │   │   ├── more.py
+    │           │   │   │   └── recipes.py
+    │           │   │   ├── ordered_set.py
+    │           │   │   ├── packaging
+    │           │   │   │   ├── __about__.py
+    │           │   │   │   ├── __init__.py
+    │           │   │   │   ├── _manylinux.py
+    │           │   │   │   ├── _musllinux.py
+    │           │   │   │   ├── _structures.py
+    │           │   │   │   ├── markers.py
+    │           │   │   │   ├── requirements.py
+    │           │   │   │   ├── specifiers.py
+    │           │   │   │   ├── tags.py
+    │           │   │   │   ├── utils.py
+    │           │   │   │   └── version.py
+    │           │   │   ├── pyparsing
+    │           │   │   │   ├── __init__.py
+    │           │   │   │   ├── actions.py
+    │           │   │   │   ├── common.py
+    │           │   │   │   ├── core.py
+    │           │   │   │   ├── diagram
+    │           │   │   │   │   └── __init__.py
+    │           │   │   │   ├── exceptions.py
+    │           │   │   │   ├── helpers.py
+    │           │   │   │   ├── results.py
+    │           │   │   │   ├── testing.py
+    │           │   │   │   ├── unicode.py
+    │           │   │   │   └── util.py
+    │           │   │   ├── tomli
+    │           │   │   │   ├── __init__.py
+    │           │   │   │   ├── _parser.py
+    │           │   │   │   ├── _re.py
+    │           │   │   │   └── _types.py
+    │           │   │   ├── typing_extensions.py
+    │           │   │   └── zipp.py
+    │           │   ├── archive_util.py
+    │           │   ├── build_meta.py
+    │           │   ├── cli-32.exe
+    │           │   ├── cli-64.exe
+    │           │   ├── cli-arm64.exe
+    │           │   ├── cli.exe
+    │           │   ├── command
+    │           │   │   ├── __init__.py
+    │           │   │   ├── alias.py
+    │           │   │   ├── bdist_egg.py
+    │           │   │   ├── bdist_rpm.py
+    │           │   │   ├── build.py
+    │           │   │   ├── build_clib.py
+    │           │   │   ├── build_ext.py
+    │           │   │   ├── build_py.py
+    │           │   │   ├── develop.py
+    │           │   │   ├── dist_info.py
+    │           │   │   ├── easy_install.py
+    │           │   │   ├── editable_wheel.py
+    │           │   │   ├── egg_info.py
+    │           │   │   ├── install.py
+    │           │   │   ├── install_egg_info.py
+    │           │   │   ├── install_lib.py
+    │           │   │   ├── install_scripts.py
+    │           │   │   ├── launcher manifest.xml
+    │           │   │   ├── py36compat.py
+    │           │   │   ├── register.py
+    │           │   │   ├── rotate.py
+    │           │   │   ├── saveopts.py
+    │           │   │   ├── sdist.py
+    │           │   │   ├── setopt.py
+    │           │   │   ├── test.py
+    │           │   │   ├── upload.py
+    │           │   │   └── upload_docs.py
+    │           │   ├── config
+    │           │   │   ├── __init__.py
+    │           │   │   ├── _apply_pyprojecttoml.py
+    │           │   │   ├── _validate_pyproject
+    │           │   │   │   ├── __init__.py
+    │           │   │   │   ├── error_reporting.py
+    │           │   │   │   ├── extra_validations.py
+    │           │   │   │   ├── fastjsonschema_exceptions.py
+    │           │   │   │   ├── fastjsonschema_validations.py
+    │           │   │   │   └── formats.py
+    │           │   │   ├── expand.py
+    │           │   │   ├── pyprojecttoml.py
+    │           │   │   └── setupcfg.py
+    │           │   ├── dep_util.py
+    │           │   ├── depends.py
+    │           │   ├── discovery.py
+    │           │   ├── dist.py
+    │           │   ├── errors.py
+    │           │   ├── extension.py
+    │           │   ├── extern
+    │           │   │   └── __init__.py
+    │           │   ├── glob.py
+    │           │   ├── gui-32.exe
+    │           │   ├── gui-64.exe
+    │           │   ├── gui-arm64.exe
+    │           │   ├── gui.exe
+    │           │   ├── installer.py
+    │           │   ├── launch.py
+    │           │   ├── logging.py
+    │           │   ├── monkey.py
+    │           │   ├── msvc.py
+    │           │   ├── namespaces.py
+    │           │   ├── package_index.py
+    │           │   ├── py34compat.py
+    │           │   ├── sandbox.py
+    │           │   ├── script (dev).tmpl
+    │           │   ├── script.tmpl
+    │           │   ├── unicode_utils.py
+    │           │   ├── version.py
+    │           │   ├── wheel.py
+    │           │   └── windows_support.py
+    │           ├── setuptools-65.5.0.dist-info
+    │           │   ├── INSTALLER
+    │           │   ├── LICENSE
+    │           │   ├── METADATA
+    │           │   ├── RECORD
+    │           │   ├── REQUESTED
+    │           │   ├── WHEEL
+    │           │   ├── entry_points.txt
+    │           │   └── top_level.txt
+    │           ├── six-1.17.0.dist-info
+    │           │   ├── INSTALLER
+    │           │   ├── LICENSE
+    │           │   ├── METADATA
+    │           │   ├── RECORD
+    │           │   ├── REQUESTED
+    │           │   ├── WHEEL
+    │           │   └── top_level.txt
+    │           ├── six.py
+    │           ├── sniffio
+    │           │   ├── __init__.py
+    │           │   ├── __pycache__
+    │           │   │   ├── __init__.cpython-311.pyc
+    │           │   │   ├── _impl.cpython-311.pyc
+    │           │   │   └── _version.cpython-311.pyc
+    │           │   ├── _impl.py
+    │           │   ├── _tests
+    │           │   │   ├── __init__.py
+    │           │   │   └── test_sniffio.py
+    │           │   ├── _version.py
+    │           │   └── py.typed
+    │           ├── sniffio-1.3.1.dist-info
+    │           │   ├── INSTALLER
+    │           │   ├── LICENSE
+    │           │   ├── LICENSE.APACHE2
+    │           │   ├── LICENSE.MIT
+    │           │   ├── METADATA
+    │           │   ├── RECORD
+    │           │   ├── REQUESTED
+    │           │   ├── WHEEL
+    │           │   └── top_level.txt
+    │           ├── starlette
+    │           │   ├── __init__.py
+    │           │   ├── __pycache__
+    │           │   │   ├── __init__.cpython-311.pyc
+    │           │   │   ├── _compat.cpython-311.pyc
+    │           │   │   ├── _exception_handler.cpython-311.pyc
+    │           │   │   ├── _utils.cpython-311.pyc
+    │           │   │   ├── applications.cpython-311.pyc
+    │           │   │   ├── background.cpython-311.pyc
+    │           │   │   ├── concurrency.cpython-311.pyc
+    │           │   │   ├── convertors.cpython-311.pyc
+    │           │   │   ├── datastructures.cpython-311.pyc
+    │           │   │   ├── exceptions.cpython-311.pyc
+    │           │   │   ├── formparsers.cpython-311.pyc
+    │           │   │   ├── requests.cpython-311.pyc
+    │           │   │   ├── responses.cpython-311.pyc
+    │           │   │   ├── routing.cpython-311.pyc
+    │           │   │   ├── status.cpython-311.pyc
+    │           │   │   ├── types.cpython-311.pyc
+    │           │   │   └── websockets.cpython-311.pyc
+    │           │   ├── _compat.py
+    │           │   ├── _exception_handler.py
+    │           │   ├── _utils.py
+    │           │   ├── applications.py
+    │           │   ├── authentication.py
+    │           │   ├── background.py
+    │           │   ├── concurrency.py
+    │           │   ├── config.py
+    │           │   ├── convertors.py
+    │           │   ├── datastructures.py
+    │           │   ├── endpoints.py
+    │           │   ├── exceptions.py
+    │           │   ├── formparsers.py
+    │           │   ├── middleware
+    │           │   │   ├── __init__.py
+    │           │   │   ├── __pycache__
+    │           │   │   │   ├── __init__.cpython-311.pyc
+    │           │   │   │   ├── base.cpython-311.pyc
+    │           │   │   │   ├── cors.cpython-311.pyc
+    │           │   │   │   ├── errors.cpython-311.pyc
+    │           │   │   │   └── exceptions.cpython-311.pyc
+    │           │   │   ├── authentication.py
+    │           │   │   ├── base.py
+    │           │   │   ├── cors.py
+    │           │   │   ├── errors.py
+    │           │   │   ├── exceptions.py
+    │           │   │   ├── gzip.py
+    │           │   │   ├── httpsredirect.py
+    │           │   │   ├── sessions.py
+    │           │   │   ├── trustedhost.py
+    │           │   │   └── wsgi.py
+    │           │   ├── py.typed
+    │           │   ├── requests.py
+    │           │   ├── responses.py
+    │           │   ├── routing.py
+    │           │   ├── schemas.py
+    │           │   ├── staticfiles.py
+    │           │   ├── status.py
+    │           │   ├── templating.py
+    │           │   ├── testclient.py
+    │           │   ├── types.py
+    │           │   └── websockets.py
+    │           ├── starlette-0.35.1.dist-info
+    │           │   ├── INSTALLER
+    │           │   ├── METADATA
+    │           │   ├── RECORD
+    │           │   ├── REQUESTED
+    │           │   ├── WHEEL
+    │           │   └── licenses
+    │           │       └── LICENSE.md
+    │           ├── storage3
+    │           │   ├── __init__.py
+    │           │   ├── __pycache__
+    │           │   │   ├── __init__.cpython-311.pyc
+    │           │   │   ├── constants.cpython-311.pyc
+    │           │   │   ├── types.cpython-311.pyc
+    │           │   │   └── utils.cpython-311.pyc
+    │           │   ├── _async
+    │           │   │   ├── __init__.py
+    │           │   │   ├── __pycache__
+    │           │   │   │   ├── __init__.cpython-311.pyc
+    │           │   │   │   ├── bucket.cpython-311.pyc
+    │           │   │   │   ├── client.cpython-311.pyc
+    │           │   │   │   └── file_api.cpython-311.pyc
+    │           │   │   ├── bucket.py
+    │           │   │   ├── client.py
+    │           │   │   └── file_api.py
+    │           │   ├── _sync
+    │           │   │   ├── __init__.py
+    │           │   │   ├── __pycache__
+    │           │   │   │   ├── __init__.cpython-311.pyc
+    │           │   │   │   ├── bucket.cpython-311.pyc
+    │           │   │   │   ├── client.cpython-311.pyc
+    │           │   │   │   └── file_api.cpython-311.pyc
+    │           │   │   ├── bucket.py
+    │           │   │   ├── client.py
+    │           │   │   └── file_api.py
+    │           │   ├── constants.py
+    │           │   ├── types.py
+    │           │   └── utils.py
+    │           ├── storage3-0.6.1.dist-info
+    │           │   ├── INSTALLER
+    │           │   ├── LICENSE
+    │           │   ├── METADATA
+    │           │   ├── RECORD
+    │           │   ├── REQUESTED
+    │           │   └── WHEEL
+    │           ├── strenum
+    │           │   ├── __init__.py
+    │           │   ├── __init__.pyi
+    │           │   ├── _name_mangler.py
+    │           │   ├── _name_mangler.pyi
+    │           │   ├── _version.py
+    │           │   ├── mixins.py
+    │           │   ├── mixins.pyi
+    │           │   └── py.typed
+    │           ├── supabase
+    │           │   ├── __init__.py
+    │           │   ├── __pycache__
+    │           │   │   ├── __init__.cpython-311.pyc
+    │           │   │   ├── __version__.cpython-311.pyc
+    │           │   │   └── client.cpython-311.pyc
+    │           │   ├── __version__.py
+    │           │   ├── client.py
+    │           │   ├── lib
+    │           │   │   ├── __init__.py
+    │           │   │   ├── __pycache__
+    │           │   │   │   ├── __init__.cpython-311.pyc
+    │           │   │   │   ├── auth_client.cpython-311.pyc
+    │           │   │   │   ├── client_options.cpython-311.pyc
+    │           │   │   │   ├── realtime_client.cpython-311.pyc
+    │           │   │   │   └── storage_client.cpython-311.pyc
+    │           │   │   ├── auth_client.py
+    │           │   │   ├── client_options.py
+    │           │   │   ├── realtime_client.py
+    │           │   │   └── storage_client.py
+    │           │   └── py.typed
+    │           ├── supabase-1.2.0.dist-info
+    │           │   ├── INSTALLER
+    │           │   ├── LICENSE
+    │           │   ├── METADATA
+    │           │   ├── RECORD
+    │           │   ├── REQUESTED
+    │           │   ├── WHEEL
+    │           │   └── entry_points.txt
+    │           ├── supafunc
+    │           │   ├── __init__.py
+    │           │   ├── __pycache__
+    │           │   │   ├── __init__.cpython-311.pyc
+    │           │   │   └── functions_client.cpython-311.pyc
+    │           │   └── functions_client.py
+    │           ├── supafunc-0.2.3.dist-info
+    │           │   ├── INSTALLER
+    │           │   ├── LICENSE
+    │           │   ├── METADATA
+    │           │   ├── RECORD
+    │           │   ├── REQUESTED
+    │           │   └── WHEEL
+    │           ├── typing_extensions-4.12.2.dist-info
+    │           │   ├── INSTALLER
+    │           │   ├── LICENSE
+    │           │   ├── METADATA
+    │           │   ├── RECORD
+    │           │   ├── REQUESTED
+    │           │   └── WHEEL
+    │           ├── typing_extensions.py
+    │           ├── uvicorn
+    │           │   ├── __init__.py
+    │           │   ├── __main__.py
+    │           │   ├── __pycache__
+    │           │   │   ├── __init__.cpython-311.pyc
+    │           │   │   ├── _subprocess.cpython-311.pyc
+    │           │   │   ├── _types.cpython-311.pyc
+    │           │   │   ├── config.cpython-311.pyc
+    │           │   │   ├── importer.cpython-311.pyc
+    │           │   │   ├── logging.cpython-311.pyc
+    │           │   │   ├── main.cpython-311.pyc
+    │           │   │   └── server.cpython-311.pyc
+    │           │   ├── _subprocess.py
+    │           │   ├── _types.py
+    │           │   ├── config.py
+    │           │   ├── importer.py
+    │           │   ├── lifespan
+    │           │   │   ├── __init__.py
+    │           │   │   ├── __pycache__
+    │           │   │   │   ├── __init__.cpython-311.pyc
+    │           │   │   │   └── on.cpython-311.pyc
+    │           │   │   ├── off.py
+    │           │   │   └── on.py
+    │           │   ├── logging.py
+    │           │   ├── loops
+    │           │   │   ├── __init__.py
+    │           │   │   ├── __pycache__
+    │           │   │   │   ├── __init__.cpython-311.pyc
+    │           │   │   │   ├── asyncio.cpython-311.pyc
+    │           │   │   │   └── auto.cpython-311.pyc
+    │           │   │   ├── asyncio.py
+    │           │   │   ├── auto.py
+    │           │   │   └── uvloop.py
+    │           │   ├── main.py
+    │           │   ├── middleware
+    │           │   │   ├── __init__.py
+    │           │   │   ├── __pycache__
+    │           │   │   │   ├── __init__.cpython-311.pyc
+    │           │   │   │   ├── asgi2.cpython-311.pyc
+    │           │   │   │   ├── message_logger.cpython-311.pyc
+    │           │   │   │   ├── proxy_headers.cpython-311.pyc
+    │           │   │   │   └── wsgi.cpython-311.pyc
+    │           │   │   ├── asgi2.py
+    │           │   │   ├── message_logger.py
+    │           │   │   ├── proxy_headers.py
+    │           │   │   └── wsgi.py
+    │           │   ├── protocols
+    │           │   │   ├── __init__.py
+    │           │   │   ├── __pycache__
+    │           │   │   │   ├── __init__.cpython-311.pyc
+    │           │   │   │   └── utils.cpython-311.pyc
+    │           │   │   ├── http
+    │           │   │   │   ├── __init__.py
+    │           │   │   │   ├── __pycache__
+    │           │   │   │   │   ├── __init__.cpython-311.pyc
+    │           │   │   │   │   ├── auto.cpython-311.pyc
+    │           │   │   │   │   ├── flow_control.cpython-311.pyc
+    │           │   │   │   │   └── h11_impl.cpython-311.pyc
+    │           │   │   │   ├── auto.py
+    │           │   │   │   ├── flow_control.py
+    │           │   │   │   ├── h11_impl.py
+    │           │   │   │   └── httptools_impl.py
+    │           │   │   ├── utils.py
+    │           │   │   └── websockets
+    │           │   │       ├── __init__.py
+    │           │   │       ├── __pycache__
+    │           │   │       │   ├── __init__.cpython-311.pyc
+    │           │   │       │   ├── auto.cpython-311.pyc
+    │           │   │       │   └── websockets_impl.cpython-311.pyc
+    │           │   │       ├── auto.py
+    │           │   │       ├── websockets_impl.py
+    │           │   │       └── wsproto_impl.py
+    │           │   ├── py.typed
+    │           │   ├── server.py
+    │           │   ├── supervisors
+    │           │   │   ├── __init__.py
+    │           │   │   ├── __pycache__
+    │           │   │   │   ├── __init__.cpython-311.pyc
+    │           │   │   │   ├── basereload.cpython-311.pyc
+    │           │   │   │   ├── multiprocess.cpython-311.pyc
+    │           │   │   │   ├── statreload.cpython-311.pyc
+    │           │   │   │   ├── watchfilesreload.cpython-311.pyc
+    │           │   │   │   └── watchgodreload.cpython-311.pyc
+    │           │   │   ├── basereload.py
+    │           │   │   ├── multiprocess.py
+    │           │   │   ├── statreload.py
+    │           │   │   ├── watchfilesreload.py
+    │           │   │   └── watchgodreload.py
+    │           │   └── workers.py
+    │           ├── uvicorn-0.27.0.dist-info
+    │           │   ├── INSTALLER
+    │           │   ├── METADATA
+    │           │   ├── RECORD
+    │           │   ├── REQUESTED
+    │           │   ├── WHEEL
+    │           │   ├── entry_points.txt
+    │           │   └── licenses
+    │           │       └── LICENSE.md
+    │           ├── websockets
+    │           │   ├── __init__.py
+    │           │   ├── __main__.py
+    │           │   ├── __pycache__
+    │           │   │   ├── __init__.cpython-311.pyc
+    │           │   │   ├── datastructures.cpython-311.pyc
+    │           │   │   ├── exceptions.cpython-311.pyc
+    │           │   │   ├── frames.cpython-311.pyc
+    │           │   │   ├── headers.cpython-311.pyc
+    │           │   │   ├── http.cpython-311.pyc
+    │           │   │   ├── http11.cpython-311.pyc
+    │           │   │   ├── imports.cpython-311.pyc
+    │           │   │   ├── protocol.cpython-311.pyc
+    │           │   │   ├── server.cpython-311.pyc
+    │           │   │   ├── streams.cpython-311.pyc
+    │           │   │   ├── typing.cpython-311.pyc
+    │           │   │   ├── utils.cpython-311.pyc
+    │           │   │   └── version.cpython-311.pyc
+    │           │   ├── auth.py
+    │           │   ├── client.py
+    │           │   ├── connection.py
+    │           │   ├── datastructures.py
+    │           │   ├── exceptions.py
+    │           │   ├── extensions
+    │           │   │   ├── __init__.py
+    │           │   │   ├── __pycache__
+    │           │   │   │   ├── __init__.cpython-311.pyc
+    │           │   │   │   ├── base.cpython-311.pyc
+    │           │   │   │   └── permessage_deflate.cpython-311.pyc
+    │           │   │   ├── base.py
+    │           │   │   └── permessage_deflate.py
+    │           │   ├── frames.py
+    │           │   ├── headers.py
+    │           │   ├── http.py
+    │           │   ├── http11.py
+    │           │   ├── imports.py
+    │           │   ├── legacy
+    │           │   │   ├── __init__.py
+    │           │   │   ├── __pycache__
+    │           │   │   │   ├── __init__.cpython-311.pyc
+    │           │   │   │   ├── compatibility.cpython-311.pyc
+    │           │   │   │   ├── framing.cpython-311.pyc
+    │           │   │   │   ├── handshake.cpython-311.pyc
+    │           │   │   │   ├── http.cpython-311.pyc
+    │           │   │   │   ├── protocol.cpython-311.pyc
+    │           │   │   │   └── server.cpython-311.pyc
+    │           │   │   ├── async_timeout.py
+    │           │   │   ├── auth.py
+    │           │   │   ├── client.py
+    │           │   │   ├── compatibility.py
+    │           │   │   ├── framing.py
+    │           │   │   ├── handshake.py
+    │           │   │   ├── http.py
+    │           │   │   ├── protocol.py
+    │           │   │   └── server.py
+    │           │   ├── protocol.py
+    │           │   ├── py.typed
+    │           │   ├── server.py
+    │           │   ├── speedups.c
+    │           │   ├── speedups.cpython-311-darwin.so
+    │           │   ├── streams.py
+    │           │   ├── sync
+    │           │   │   ├── __init__.py
+    │           │   │   ├── client.py
+    │           │   │   ├── connection.py
+    │           │   │   ├── messages.py
+    │           │   │   ├── server.py
+    │           │   │   └── utils.py
+    │           │   ├── typing.py
+    │           │   ├── uri.py
+    │           │   ├── utils.py
+    │           │   └── version.py
+    │           └── websockets-12.0.dist-info
+    │               ├── INSTALLER
+    │               ├── LICENSE
+    │               ├── METADATA
+    │               ├── RECORD
+    │               ├── REQUESTED
+    │               ├── WHEEL
+    │               └── top_level.txt
+    └── pyvenv.cfg
+
+282 directories, 1966 files
+raybunnage@Rays-Laptop backend % 

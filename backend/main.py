@@ -1,10 +1,14 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from src.services.supabase.client import SupabaseClient
 from src.services.anthropic.client import AnthropicClient
 from src.config.settings import get_settings
 from pydantic import BaseModel
 import logging
+import io
+from src.mixins.pdf_processor import PDFProcessorMixin
+from fastapi.responses import JSONResponse
+from fastapi.exceptions import RequestValidationError
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -22,7 +26,13 @@ class SignInRequest(BaseModel):
     password: str
 
 
-app = FastAPI()
+# Add PDFProcessorMixin to your FastAPI class
+class CustomFastAPI(FastAPI, PDFProcessorMixin):
+    pass
+
+
+# Update app initialization
+app = CustomFastAPI()
 
 # Configure CORS
 app.add_middleware(
@@ -71,3 +81,49 @@ async def test_supabase():
 @app.get("/test-services")
 async def test_services():
     return {"status": "Services initialized", "environment": settings.ENVIRONMENT}
+
+
+# Add these new endpoints
+@app.post("/process-pdf")
+async def process_pdf(file: UploadFile = File(...)):
+    """Process uploaded PDF file"""
+    try:
+        # Read the uploaded file
+        contents = await file.read()
+        pdf_file = io.BytesIO(contents)
+
+        # Extract text
+        text = await app.extract_text(pdf_file)
+
+        # Analyze content
+        analysis = await app.analyze_content(text)
+
+        # Get AI insights if needed
+        ai_analysis = await app.state.anthropic.analyze_text(
+            text[:1000]
+        )  # First 1000 chars for demo
+
+        return {"status": "success", "analysis": analysis, "ai_insights": ai_analysis}
+    except Exception as e:
+        logger.error(f"PDF processing failed: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request, exc):
+    return JSONResponse(
+        status_code=422,
+        content={"status": "error", "message": "Validation error", "details": str(exc)},
+    )
+
+
+@app.exception_handler(Exception)
+async def general_exception_handler(request, exc):
+    return JSONResponse(
+        status_code=500,
+        content={
+            "status": "error",
+            "message": "Internal server error",
+            "details": str(exc),
+        },
+    )
