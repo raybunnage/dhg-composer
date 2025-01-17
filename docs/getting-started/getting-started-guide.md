@@ -1,3 +1,5 @@
+[← Back to Documentation Home](../README.md)
+
 # Getting Started with FastAPI, Supabase, and Vite React
 
 ## Useful commands for MCP

@@ -12,6 +12,8 @@
 ### TypeScript & React
 - [TypeScript React Guide](frontend/typescript/tsx-guide.md)
 - [Code Examples](frontend/typescript/examples.md)
+- [TypeScript Guide (v1)](frontend/typescript/tsx-guidever1.md)
+- [TypeScript Guide (v2)](frontend/typescript/tsx-guidevver2.md)
 
 ### Deployment
 - [Vercel Deployment Guide](frontend/deployment/vercel.md)
@@ -19,10 +21,15 @@
 ## Architecture
 - [Project Dependencies](architecture/requirements.md)
 
-## Legacy Documentation
-These guides are being reorganized:
-- [TypeScript Guide (v1)](tsx-guidever1.md)
-- [TypeScript Guide (v2)](tsx-guidevver2.md)
+## Development Workflow
+- [Development Process](getting-started/backend_frontend_servers.md#development-workflow)
+- [Branch Management](getting-started/backend_frontend_servers.md#branch-management)
+- [Deployment Process](frontend/deployment/vercel.md#deployment)
+
+## Troubleshooting
+- [Common Issues](getting-started/backend_frontend_servers.md#common-issues)
+- [Build Errors](frontend/deployment/vercel.md#troubleshooting-vercel-deployments)
+- [TypeScript Errors](frontend/typescript/tsx-guide.md#common-beginner-questions)
 
 ## Additional Resources
 - [GitHub Repository](https://github.com/yourusername/your-repo)

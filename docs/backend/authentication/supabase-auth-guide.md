@@ -512,3 +512,6 @@ const validatePassword = (password: string): boolean => {
   const hasLowerCase = /[a-z]/.test(password)
   const hasNumbers = /\d/.test(password)
   const hasSpecialChar =
+```
+
+[← Back to Documentation Home](../../../README.md)
