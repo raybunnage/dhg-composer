@@ -1,5 +1,14 @@
 # Best Practices for Full-Stack Development
 
+## Composer Shortcuts and @ Symbols
+In Cursor, you can reference previously created code or commands with “@” symbols. For example, 
+@myFunction points to a function you generated or discussed earlier in the conversation. 
+You can also use Composer slash commands like:
+ - /create  (Generate new files, components, or code)
+ - /modify  (Update existing code snippets or files)
+ - /explain (Request descriptions or explanations of code)
+These shortcuts and references can help you build and refine code more interactively.
+
 ## Project Structure
 - Organize your project into clear directories for frontend, backend, and documentation.
 - Use a `scripts` directory for utility scripts.

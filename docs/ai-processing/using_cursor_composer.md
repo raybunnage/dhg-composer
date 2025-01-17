@@ -1,5 +1,39 @@
 [← Back to Documentation Home](../README.md)
 
+# @ Sympbol operations
+ # Best Practices for Full-Stack Development
+
++## Composer Shortcuts and @ Symbols
++In Cursor, you can reference previously created code or commands with “@” symbols. For example,
+One example is @folder
+this allows you to reference a folder in the project.
+Another example is @file
+this allows you to reference a file in the project.
+Another example is @function
+this allows you to reference a function in the project.
+Another example is @variable
+this allows you to reference a variable in the project.
+Another example is @class
+this allows you to reference a class in the project.
+Another example is @interface
+this allows you to reference an interface in the project.
+Another example is @enum
+this allows you to reference an enum in the project.
+Another example is @type
+this allows you to reference a type in the project.
+
+
++@myFunction points to a function you generated or discussed earlier in the conversation. 
++You can also use Composer slash commands like:
++ - /create  (Generate new files, components, or code)
++ - /modify  (Update existing code snippets or files)
++ - /explain (Request descriptions or explanations of code)
++These shortcuts and references can help you build and refine code more interactively.
+
+ ## Project Structure
+ - Organize your project into clear directories for frontend, backend, and documentation.
+ - Use a `scripts` directory for utility scripts.
+
 # Using Cursor Composer: A Comprehensive Guide
 
 ## Getting Started with Composer
