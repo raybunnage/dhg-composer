@@ -177,3 +177,8 @@ cython_debug/
 .backup
 .vercel
 
+# Add to your existing .gitignore
+.env.baseline
+.env.development
+.env.production
+
