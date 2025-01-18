@@ -13,6 +13,66 @@ graph TD
     B --> F[hotfix branches]
 ```
 
+## Branch Strategy Overview
+
+This branching strategy represents a hierarchical flow of code changes through different environments, ensuring code quality and stability at each level.
+
+### Branch Hierarchy Explanation
+
+#### 1. Main/Production Branch
+- The topmost branch in the hierarchy
+- Contains production-ready code
+- Should always be stable and deployable
+- Tagged with version numbers for releases
+
+#### 2. Staging Branch
+- Second level in the hierarchy
+- Used for pre-production testing
+- Integration point before production deployment
+- Quality assurance (QA) testing happens here
+
+#### 3. Development Branch
+- Third level in the hierarchy
+- Main integration branch for ongoing development
+- All feature and migration branches merge here first
+- Should be relatively stable but may contain work in progress
+
+#### 4. Working Branches
+These are the branches where actual development occurs:
+
+- **Feature Branches**
+  - Created for new features
+  - Branch from: Development
+  - Merge back to: Development
+  - Naming convention: `feature/feature-name`
+
+- **Migration Branches**
+  - Specific to database or infrastructure migrations
+  - Branch from: Development
+  - Merge back to: Development
+  - Naming convention: `migration/migration-name`
+
+- **Hotfix Branches**
+  - For urgent production fixes
+  - Branch from: Staging
+  - Merge to: Staging AND Main/Production
+  - Naming convention: `hotfix/issue-description`
+
+### Flow of Changes
+
+1. Developers create feature/migration branches from Development
+2. Changes are merged back to Development after code review
+3. Development changes are promoted to Staging for testing
+4. After QA approval, Staging changes are merged to Production
+5. Hotfixes follow an expedited path through Staging to Production
+
+This structure ensures:
+- Stable production environment
+- Proper testing in staging
+- Isolation of new development
+- Quick path for critical fixes
+- Clear promotion path for code changes
+
 ## Core Branches
 
 ### 1. Main Branch (`main`)
