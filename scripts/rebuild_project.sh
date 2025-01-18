@@ -2,7 +2,7 @@
 
 echo "Starting project rebuild..."
 
-# Kill any existing processes on ports
+# Kill any existing processes
 echo "Killing existing processes..."
 kill -9 $(lsof -t -i:8001) 2>/dev/null || true
 kill -9 $(lsof -t -i:5173) 2>/dev/null || true
@@ -11,18 +11,24 @@ kill -9 $(lsof -t -i:5173) 2>/dev/null || true
 echo "Setting up backend..."
 cd backend
 
+# Remove existing venv if it exists
+if [ -d "venv" ]; then
+    echo "Removing existing virtual environment..."
+    rm -rf venv
+fi
+
 # Create and activate virtual environment
 echo "Creating virtual environment..."
 python -m venv venv
 source venv/bin/activate
 
-# Install uv
-echo "Installing uv..."
-pip install uv
+# Upgrade pip first
+echo "Upgrading pip..."
+pip install --upgrade pip
 
-# Install requirements using uv
-echo "Installing requirements with uv..."
-uv pip install -r requirements.txt
+# Install requirements using pip first
+echo "Installing requirements with pip..."
+pip install -r requirements.txt
 
 cd ..
 

@@ -1,5 +1,6 @@
 #!/bin/bash
-# Restore script for .vercel and .env files
+# Restore script for environment files and configurations
+
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 BACKUP_DIR=".backup/${BRANCH}"
 
@@ -9,17 +10,32 @@ if [ ! -d "$BACKUP_DIR" ]; then
     exit 1
 fi
 
-# Restore .env files
-cp "$BACKUP_DIR/backend.env" backend/.env
-cp "$BACKUP_DIR/frontend.env" frontend/.env
+# Restore backend environment files
+if [ -f "$BACKUP_DIR/backend.env.dev" ]; then
+    cp "$BACKUP_DIR/backend.env.dev" backend/.env.dev
+    echo "Restored backend/.env.dev"
+fi
+
+if [ -f "$BACKUP_DIR/backend.env.staging" ]; then
+    cp "$BACKUP_DIR/backend.env.staging" backend/.env.staging
+    echo "Restored backend/.env.staging"
+fi
+
+if [ -f "$BACKUP_DIR/backend.env.prod" ]; then
+    cp "$BACKUP_DIR/backend.env.prod" backend/.env.prod
+    echo "Restored backend/.env.prod"
+fi
+
+# Restore frontend environment file
+if [ -f "$BACKUP_DIR/frontend.env" ]; then
+    cp "$BACKUP_DIR/frontend.env" frontend/.env
+    echo "Restored frontend/.env"
+fi
 
 # Restore .vercel directory
-cp -r "$BACKUP_DIR/vercel" .vercel
-
-# Add specific handling for dhg-baseline branch
-if [ "$BRANCH" = "dhg-baseline" ]; then
-    echo "Restoring baseline configuration..."
-    # Additional baseline-specific restoration steps here
+if [ -d "$BACKUP_DIR/vercel" ]; then
+    cp -r "$BACKUP_DIR/vercel" .vercel
+    echo "Restored .vercel directory"
 fi
 
 echo "Restored configuration for branch: $BRANCH" 
