@@ -5,17 +5,28 @@
 ENVIRONMENT=${1:-dev}
 ENV_FILE="backend/.env.${ENVIRONMENT}"
 
-# Verify environment file exists
+# Create environment file from example if it doesn't exist
 if [ ! -f "$ENV_FILE" ]; then
-    echo "Error: Environment file $ENV_FILE not found"
-    echo "Please create it from .env.example:"
-    echo "cp backend/.env.example $ENV_FILE"
-    exit 1
+    if [ -f "backend/.env.example" ]; then
+        echo "Creating $ENV_FILE from example..."
+        cp backend/.env.example "$ENV_FILE"
+        echo "Created $ENV_FILE. Please update it with your values."
+        echo "Edit $ENV_FILE now? [y/N]"
+        read -r response
+        if [[ "$response" =~ ^[Yy]$ ]]; then
+            ${EDITOR:-vim} "$ENV_FILE"
+        fi
+    else
+        echo "Error: No .env.example file found in backend directory"
+        exit 1
+    fi
 fi
 
 # Load appropriate environment variables
 echo "Loading environment from $ENV_FILE"
-export $(cat $ENV_FILE | xargs)
+set -a  # automatically export all variables
+source "$ENV_FILE"
+set +a
 
 # Kill existing processes
 kill -9 $(lsof -t -i:8001) 2>/dev/null || true
@@ -24,7 +35,7 @@ kill -9 $(lsof -t -i:5173) 2>/dev/null || true
 # Start backend with specific env file
 cd backend
 source venv/bin/activate
-uvicorn main:app --reload --port 8001 --env-file $ENV_FILE &
+uvicorn main:app --reload --port 8001 &
 
 # Start frontend
 cd ../frontend
