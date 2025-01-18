@@ -16,6 +16,7 @@ Welcome to the **Cursor Rules Mastery Guide**! Whether you're a seasoned develop
     - [Avoid Overly Restrictive Rules](#avoid-overly-restrictive-rules)
 6. [Examples of Effective Cursor Rules](#examples-of-effective-cursor-rules)
 7. [Testing and Refining Your Rules](#testing-and-refining-your-rules)
+    - [Verifying Rule Application](#verifying-rule-application)
 8. [Resources and Further Reading](#resources-and-further-reading)
 9. [Conclusion](#conclusion)
 
@@ -326,6 +327,87 @@ Create a user service following the python_backend_structure rule with:
 This will prompt Cursor AI to generate well-structured, type-safe code following the established patterns.
 
 ## Testing and Refining Your Rules
+
+### Verifying Rule Application
+
+To verify that your Cursor rules are taking effect, follow these steps:
+
+1. **Create a Test File**
+```python
+# backend/src/services/test_service.py
+# Ask Cursor: "Create a basic service class for user management"
+```
+
+2. **Expected Output**
+The generated code should demonstrate these patterns:
+```python
+from typing import Optional, List
+from abc import ABC, abstractmethod
+from pydantic import BaseModel
+from fastapi import HTTPException
+
+class UserDTO(BaseModel):
+    """Data Transfer Object for User data."""
+    id: str
+    email: str
+    is_active: bool = True
+
+class UserRepository(ABC):
+    """Abstract base class defining user data access."""
+    @abstractmethod
+    async def get_by_id(self, user_id: str) -> Optional[UserDTO]:
+        """Retrieve user by ID."""
+        pass
+
+class UserService:
+    """Service class for handling user operations."""
+    def __init__(self, repository: UserRepository):
+        self.repository = repository
+
+    async def get_user(self, user_id: str) -> Optional[UserDTO]:
+        """Retrieve a user by their ID."""
+        try:
+            return await self.repository.get_by_id(user_id)
+        except Exception as e:
+            raise HTTPException(status_code=400, detail=str(e))
+```
+
+3. **Rule Verification Checklist**
+- [ ] Uses type hints throughout
+- [ ] Implements abstract base classes
+- [ ] Uses dependency injection
+- [ ] Includes proper documentation
+- [ ] Handles errors appropriately
+- [ ] Follows PEP 8 guidelines
+- [ ] Uses Pydantic models
+- [ ] Implements async/await
+- [ ] Follows repository pattern
+- [ ] Follows service layer pattern
+
+4. **Troubleshooting**
+If the rules aren't being applied:
+- Verify `.cursorrules` is in project root
+- Check JSON syntax is valid
+- Restart Cursor IDE
+- Enable rules in Cursor settings
+- Check Cursor logs for errors
+
+5. **File Structure**
+Your backend structure should look like:
+```
+backend/
+├── src/
+│   ├── api/
+│   ├── models/
+│   ├── services/
+│   │   └── test_service.py
+│   └── utils/
+├── tests/
+│   ├── unit/
+│   ├── integration/
+│   └── fixtures/
+└── main.py
+```
 
 After setting up your Cursor Rules, it's crucial to test and refine them to ensure they produce the desired outcomes:
 
