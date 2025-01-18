@@ -17,6 +17,27 @@
       "instructions": "Follow conventions using type hints and descriptive variable names. Implement RESTful APIs with clear separation of concern."
     },
     {
+      "type": "PythonBackendDevelopment",
+      "description": "Instructions for handling Python backend development using well-organized classes and modern type hints",
+      "instructions": [
+        "Prioritize the use of classes to maintain a well-structured codebase",
+        "Apply SOLID principles to ensure each class has a single responsibility",
+        "Use type hints extensively to improve code readability and maintainability",
+        "Prefer composition over inheritance to maximize flexibility",
+        "Ensure that each class encapsulates its data and behavior effectively",
+        "Implement comprehensive testing for each class to ensure functionality and robustness",
+        "Follow PEP 8 guidelines for naming conventions and code organization",
+        "Optimize for readability and future extensibility when designing class hierarchies",
+        "Use dependency injection to decouple components and improve testability",
+        "Implement abstract base classes (ABC) for defining interfaces",
+        "Use dataclasses or Pydantic models for data structures",
+        "Leverage async/await for I/O operations",
+        "Implement proper error handling with custom exceptions",
+        "Use repository pattern for data access",
+        "Follow service layer pattern for business logic"
+      ]
+    },
+    {
       "type": "Supabase",
       "instructions": "Use Supabase for authentication and real-time capabilities. Securely handle JWTs for session management. Leverage Supabase's functions for complex queries when needed."
     },
