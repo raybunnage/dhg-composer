@@ -27,6 +27,101 @@ git checkout -b feature/new-feature
 git branch -a
 ```
 
+### Understanding Git Status
+- **Definition**: Shows the current state of your working directory and staging area
+- **Think of it like**: A health check of your repository
+
+#### Reading Status Output
+```bash
+# Run git status
+$ git status
+On branch main                     # Shows which branch you're on
+Your branch is up to date...       # Relationship to remote branch
+
+Changes to be committed:           # Files staged (green)
+  (use "git restore --staged..." to unstage)
+        modified:   file1.txt      # Will be in next commit
+        new file:   file2.txt      # New file added to git
+
+Changes not staged for commit:     # Modified but not staged (red)
+  (use "git add..." to stage)
+        modified:   file3.txt      # Changed but not staged
+        deleted:    file4.txt      # Deleted but not staged
+
+Untracked files:                   # Files git doesn't track (red)
+  (use "git add..." to track)
+        file5.txt                  # New file, not added to git
+```
+
+#### Common Status Messages Explained
+
+1. **Branch Status**
+   ```bash
+   On branch feature/login         # You are here
+   Your branch is ahead by 2       # You have 2 commits to push
+   Your branch is behind by 3      # You need to pull 3 commits
+   ```
+
+2. **File States**
+   ```bash
+   modified:   file.txt           # File changed from last commit
+   new file:   file.txt          # New file added to git
+   deleted:    file.txt          # File removed
+   renamed:    old.txt → new.txt # File renamed
+   ```
+
+3. **Common Scenarios**
+   ```bash
+   # Nothing to commit
+   nothing to commit, working tree clean  # All changes committed
+
+   # Unmerged paths (during merge conflict)
+   both modified:   file.txt      # Same file changed in both branches
+   ```
+
+#### Status Best Practices
+
+1. **Check Status Frequently**
+   ```bash
+   # Before making changes
+   git status  # Is working directory clean?
+
+   # Before committing
+   git status  # Are the right files staged?
+
+   # After operations
+   git status  # Did the command do what you expected?
+   ```
+
+2. **Using Short Status**
+   ```bash
+   git status -s  # Compact view
+   M  file.txt    # Modified and staged
+   M file.txt    # Modified but not staged
+   ?? file.txt   # Untracked file
+   A  file.txt   # New file staged
+   D  file.txt   # Deleted
+   ```
+
+3. **Status Checks Before Operations**
+   ```bash
+   # Before switching branches
+   git status  # Ensure changes are committed/stashed
+
+   # Before pulling
+   git status  # Check for local changes
+
+   # Before pushing
+   git status  # Verify all changes are committed
+   ```
+
+Remember:
+- Green means staged (will be in next commit)
+- Red means changes not staged yet
+- ?? means git doesn't know about the file
+- Always check status before and after operations
+- Use status to avoid losing work
+
 ## Core Commands
 
 ### Fetch
@@ -112,21 +207,126 @@ git cherry-pick -n commit-hash
 ```
 
 ### Stash
-- **Definition**: Temporarily store uncommitted changes
-- **Usage**: Save work-in-progress without committing
+- **Definition**: Temporarily saves your changes without committing them
+- **Think of it like**: Putting your changes in a drawer to work on later
+- **When to use**: 
+  - Need to switch branches but aren't ready to commit
+  - Want to save work-in-progress quickly
+  - Need to pull changes but have uncommitted work
+
+#### Basic Stash Usage
 ```bash
-# Stash changes
-git stash
+# Save your changes to stash
+git stash     # Stashes tracked files
+git stash -u  # Also stashes untracked files
 
-# List stashes
-git stash list
+# Get your changes back
+git stash pop   # Apply and remove from stash
+git stash apply # Apply but keep in stash
 
-# Apply and remove latest stash
-git stash pop
-
-# Apply but keep stash
-git stash apply
+# View your stashed changes
+git stash list  # Shows all stashes
+git stash show  # Shows files in latest stash
 ```
+
+#### Common Stash Scenarios
+
+1. **Quick Branch Switch**
+   ```bash
+   # Scenario: Need to fix bug but have WIP changes
+   git stash                  # Save current changes
+   git checkout bugfix       # Switch to bug fix branch
+   # Fix bug...
+   git checkout previous-branch
+   git stash pop            # Get changes back
+   ```
+
+2. **Pull Without Committing**
+   ```bash
+   # Scenario: Need to pull but have local changes
+   git stash         # Save changes
+   git pull         # Get remote updates
+   git stash pop    # Restore changes
+   ```
+
+3. **Multiple Stashes**
+   ```bash
+   # Save with description
+   git stash push -m "feature half done"
+   
+   # List all stashes
+   git stash list
+   # stash@{0}: On feature: feature half done
+   # stash@{1}: WIP on main: abc123
+   
+   # Apply specific stash
+   git stash apply stash@{1}
+   ```
+
+#### Stash Best Practices
+
+1. **Add Messages**
+   ```bash
+   # Good: Descriptive stash
+   git stash push -m "halfway through login feature"
+   
+   # Bad: Default message
+   git stash  # Creates generic "WIP on branch" message
+   ```
+
+2. **Check Status**
+   ```bash
+   # Before stashing
+   git status  # See what will be stashed
+   
+   # After applying
+   git status  # Verify changes restored
+   ```
+
+3. **Clean Up**
+   ```bash
+   # Remove single stash
+   git stash drop stash@{0}
+   
+   # Remove all stashes
+   git stash clear
+   ```
+
+#### Stash Safety Tips
+
+1. **Before Stashing**
+   ```bash
+   # Review changes first
+   git diff  # See what you're about to stash
+   
+   # Stash with untracked files
+   git stash -u  # Include untracked files
+   ```
+
+2. **Applying Stashes**
+   ```bash
+   # Safer apply (won't delete stash)
+   git stash apply  # Keep stash for backup
+   
+   # Check for conflicts
+   git status      # After applying stash
+   ```
+
+3. **Recovery Options**
+   ```bash
+   # If stash pop fails
+   git stash show -p stash@{0} > changes.patch  # Backup to patch
+   
+   # List all stashes with dates
+   git stash list --date=local
+   ```
+
+Remember:
+- Stash is temporary storage
+- Always use descriptive messages
+- Clean up old stashes regularly
+- Be careful with pop vs apply
+- Check status before and after
 
 ## Common Workflows
 
@@ -405,7 +605,10 @@ git rebase -r --root --exec "git commit --amend --no-edit --author='New Author <
 
 ```bash
 # Show all remotes and their URLs
-git remote -v
+git remote -v          # View remote repositories
+                      # If stuck in pager view:
+                      # - Press 'q' to exit
+                      # - Or press Ctrl + C
 
 # Common origin operations
 git fetch origin          # Get updates from origin
@@ -929,3 +1132,183 @@ git add -p          # Review and stage by hunks
 # Verify staged changes
 git diff --staged   # Review what will be committed
 ``` 
+
+### CI/CD (Continuous Integration/Continuous Deployment)
+- **Definition**: 
+  - **CI (Continuous Integration)**: Automatically testing code changes when they're pushed
+  - **CD (Continuous Deployment)**: Automatically deploying tested code to production
+  - Think of it like a robot assistant that checks and ships your code
+
+#### Understanding CI/CD for Beginners
+```bash
+# Typical CI/CD Flow:
+1. Push code → GitHub
+2. Automated tests run
+3. If tests pass → Deploy
+4. If tests fail → Get notified
+
+# Example with GitHub Actions
+git push origin feature  # Triggers CI/CD pipeline
+# GitHub Actions runs:
+# - Linting
+# - Tests
+# - Build
+# - Deploy (if all above pass)
+```
+
+#### Common CI/CD Components
+
+1. **Automated Testing**
+   ```bash
+   # Tests that typically run:
+   npm run lint         # Code style checks
+   npm run test        # Unit tests
+   npm run e2e        # End-to-end tests
+   npm run build      # Build verification
+   ```
+
+2. **Environment Deployments**
+   ```bash
+   # Common deployment flow:
+   Feature Branch → Development → Staging → Production
+   
+   # Each environment might run:
+   - Different test suites
+   - Security scans
+   - Performance checks
+   ```
+
+3. **Quality Gates**
+   ```bash
+   # Examples of quality checks:
+   - Test coverage must be > 80%
+   - No security vulnerabilities
+   - Performance benchmarks met
+   - Code review approved
+   ```
+
+#### CI/CD Best Practices
+
+1. **Fast Feedback**
+   ```bash
+   # Local testing before push
+   npm run test        # Run tests locally first
+   npm run lint        # Check code style
+   
+   # Watch CI/CD status
+   git push origin feature
+   # Check GitHub Actions tab for results
+   ```
+
+2. **Branch Protection**
+   ```bash
+   # Common branch rules:
+   main branch:
+   - Require passing CI checks
+   - Require code review
+   - No direct pushes
+   ```
+
+3. **Environment Management**
+   ```bash
+   # Environment variables per stage
+   development:
+   - Use development API keys
+   - Debug mode enabled
+   
+   production:
+   - Use production API keys
+   - Debug mode disabled
+   ```
+
+#### When to Use CI/CD
+
+1. **Every Code Push**
+   ```bash
+   # Good habits:
+   - Push small, frequent changes
+   - Watch CI results
+   - Fix failures immediately
+   ```
+
+2. **Before Merging**
+   ```bash
+   # Merge checklist:
+   1. CI checks pass
+   2. Code reviewed
+   3. Tests added
+   4. Documentation updated
+   ```
+
+3. **Production Deployments**
+   ```bash
+   # Deployment safety:
+   1. All tests pass
+   2. Staging environment verified
+   3. Deployment window appropriate
+   4. Rollback plan ready
+   ```
+
+#### Common CI/CD Tools
+
+1. **GitHub Actions**
+   ```yaml
+   # Example workflow file
+   name: CI
+   on: [push]
+   jobs:
+     test:
+       runs-on: ubuntu-latest
+       steps:
+         - uses: actions/checkout@v2
+         - run: npm test
+   ```
+
+2. **Environment Variables**
+   ```bash
+   # Secure secrets management
+   - Store in GitHub Secrets
+   - Never commit to repo
+   - Use different values per environment
+   ```
+
+3. **Deployment Platforms**
+   ```bash
+   # Common platforms:
+   - Vercel (automatic deployments)
+   - Heroku (git-based deploys)
+   - AWS (infrastructure as code)
+   ```
+
+#### CI/CD Safety Tips
+
+1. **Always Test Locally**
+   ```bash
+   # Before pushing:
+   npm run test
+   npm run build
+   ```
+
+2. **Monitor Deployments**
+   ```bash
+   # Watch for:
+   - Build failures
+   - Test failures
+   - Deployment status
+   - Application logs
+   ```
+
+3. **Have a Rollback Plan**
+   ```bash
+   # If deployment fails:
+   - Know how to revert
+   - Have backup deployment ready
+   - Monitor error rates
+   ```
+
+Remember:
+- CI/CD is your safety net
+- Don't bypass CI checks
+- Keep pipelines fast
+- Monitor and maintain regularly
+- Start simple and expand gradually 
