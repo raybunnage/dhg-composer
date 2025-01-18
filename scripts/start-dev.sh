@@ -1,26 +1,26 @@
 #!/bin/bash
-# start-dev.sh
-# Start the development environment
+# start-dev.sh - Start the development environment
 
-# Check if port 8001 is in use and kill the process if found
-PORT_PID=$(lsof -ti:8001)
-if [ ! -z "$PORT_PID" ]; then
-    echo "Port 8001 is in use. Killing process..."
-    kill -9 $PORT_PID
+# Accept environment parameter (dev, staging, prod), default to dev
+ENVIRONMENT=${1:-dev}
+ENV_FILE="backend/.env.${ENVIRONMENT}"
+
+# Load appropriate environment variables
+if [ -f "$ENV_FILE" ]; then
+    echo "Loading environment from $ENV_FILE"
+    export $(cat $ENV_FILE | xargs)
+else
+    echo "Warning: $ENV_FILE not found, using default .env"
 fi
 
-# Check if any Vite dev servers are running (default port 5173)
-VITE_PID=$(lsof -ti:5173)
-if [ ! -z "$VITE_PID" ]; then
-    echo "Vite dev server is running. Killing process..."
-    kill -9 $VITE_PID
-fi
+# Kill existing processes
+kill -9 $(lsof -t -i:8001) 2>/dev/null || true
+kill -9 $(lsof -t -i:5173) 2>/dev/null || true
 
-
-# Start backend
+# Start backend with specific env file
 cd backend
 source venv/bin/activate
-uvicorn main:app --reload --port 8001 &
+uvicorn main:app --reload --port 8001 --env-file $ENV_FILE &
 
 # Start frontend
 cd ../frontend
