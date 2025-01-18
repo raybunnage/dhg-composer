@@ -59,6 +59,42 @@ This guide will help you set up a modern full-stack application using:
 - Basic understanding of Python and JavaScript/React
 - A Supabase account
 
+# Understanding Mixins in Python
+
+Mixins are a form of multiple inheritance in Python that allow you to add functionality to classes. Think of them as "plugins" that add functionality to your classes without requiring traditional parent-child inheritance relationships.
+
+## What are Mixins?
+
+A mixin is a class that contains methods for use by other classes without having to be the parent class of those other classes. They act as "plugins" that add functionality.
+
+### Simple Example
+
+```python
+# A mixin that adds logging capability
+class LoggerMixin:
+    def log(self, message):
+        print(f"[LOG] {message}")
+
+# A mixin that adds string formatting capability
+class FormatterMixin:
+    def format_string(self, string):
+        return string.strip().lower()
+
+# A class that uses both mixins
+class UserService(LoggerMixin, FormatterMixin):
+    def create_user(self, username):
+        # Uses methods from both mixins
+        formatted_name = self.format_string(username)
+        self.log(f"Creating user: {formatted_name}")
+        # ... rest of the implementation
+```
+
+In this example:
+- `LoggerMixin` provides logging functionality
+- `FormatterMixin` provides string formatting
+- `UserService` inherits from both mixins to gain their functionality
+
+
 ## Backend Setup
 
 ### Setting up FastAPI

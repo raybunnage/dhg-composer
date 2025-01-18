@@ -374,6 +374,18 @@ git push origin main
 vercel --prod
 ```
 
+
+## Rebuilding the project
+
+```bash
+# Rebuild the project
+./scripts/rebuild.sh
+```
+
+pip install <package-name> --upgrade
+pip freeze > requirements.txt
+uv pip install -r requirements.txt
+
 ## Tree Command 
 
 ```bash
