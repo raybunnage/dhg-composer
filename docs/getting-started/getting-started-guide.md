@@ -386,10 +386,10 @@ vercel --prod
 
 ```bash
 # Update a package
-pip install <package-name> --upgrade
+uv pip install <package-name> --upgrade
 
 # Freeze the current environment
-pip freeze > requirements.txt
+uv pip freeze > requirements.txt
 
 # Install the requirements
 uv pip install -r requirements.txt
