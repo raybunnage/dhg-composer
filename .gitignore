@@ -54,3 +54,12 @@ tmp/
 # Keep these files
 !.env.example
 !.env.template
+
+# Environment Files
+.env
+backend/.env
+backend/.env.*
+!backend/.env.example
+frontend/.env
+frontend/.env.*
+!frontend/.env.example

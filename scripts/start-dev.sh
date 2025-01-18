@@ -5,13 +5,17 @@
 ENVIRONMENT=${1:-dev}
 ENV_FILE="backend/.env.${ENVIRONMENT}"
 
-# Load appropriate environment variables
-if [ -f "$ENV_FILE" ]; then
-    echo "Loading environment from $ENV_FILE"
-    export $(cat $ENV_FILE | xargs)
-else
-    echo "Warning: $ENV_FILE not found, using default .env"
+# Verify environment file exists
+if [ ! -f "$ENV_FILE" ]; then
+    echo "Error: Environment file $ENV_FILE not found"
+    echo "Please create it from .env.example:"
+    echo "cp backend/.env.example $ENV_FILE"
+    exit 1
 fi
+
+# Load appropriate environment variables
+echo "Loading environment from $ENV_FILE"
+export $(cat $ENV_FILE | xargs)
 
 # Kill existing processes
 kill -9 $(lsof -t -i:8001) 2>/dev/null || true
