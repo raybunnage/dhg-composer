@@ -32,6 +32,8 @@ git branch -a
 ### Fetch
 - **Definition**: Downloads changes from remote repository without merging
 - **Usage**: Updates your remote-tracking branches
+- **Think of it like**: Checking what's new in the remote repository without actually applying changes
+- **Why use fetch**: Safer than pull because it lets you review changes before merging
 ```bash
 # Basic fetch from origin
 git fetch origin
@@ -45,6 +47,7 @@ git fetch --prune
 
 ### Reset
 - **Definition**: Moves HEAD and branch pointer to a different commit
+- **Warning**: `--hard` can permanently delete work - use with caution
 - **Types**:
   1. **Soft Reset** (`--soft`): Keeps changes staged
   2. **Mixed Reset** (default): Keeps changes unstaged
@@ -53,25 +56,35 @@ git fetch --prune
 # Soft reset - keep changes staged
 git reset --soft HEAD~1
 
-# Mixed reset - keep changes unstaged (default)
+# Mixed reset (default) - keep changes unstaged
 git reset HEAD~1
 
-# Hard reset - discard all changes (dangerous!)
+# Hard reset - DANGER: discards all changes
 git reset --hard HEAD~1
+
+# Reset to specific commit
+git reset --hard abc123
+
+# Reset single file
+git reset HEAD file.txt
 ```
 
 ### Revert
 - **Definition**: Creates a new commit that undoes previous changes
 - **Usage**: Safer than reset for shared branches
+- **Best for**: Undoing changes in public branches
 ```bash
 # Revert last commit
 git revert HEAD
 
 # Revert specific commit
-git revert commit-hash
+git revert abc123
 
 # Revert multiple commits
 git revert HEAD~3..HEAD
+
+# Revert merge commit
+git revert -m 1 merge-commit-hash
 ```
 
 ## Advanced Concepts
@@ -211,14 +224,15 @@ git merge --abort
 ### Rebase
 - **Definition**: Reapplies commits on top of another base commit
 - **Usage**: Create a cleaner, linear project history
+- **Think of it like**: Moving your work to start from a different point
 ```bash
 # Rebase current branch onto main
 git rebase main
 
-# Interactive rebase for editing commits
+# Interactive rebase for cleaning up commits
 git rebase -i HEAD~3
 
-# Abort a rebase
+# Abort a problematic rebase
 git rebase --abort
 ```
 
@@ -610,7 +624,6 @@ git push origin production --tags
 # 4. Sync with development branch
 git checkout development
 git merge --no-ff hotfix/critical-bug-fix
-git push origin development
 ```
 
 #### Hotfix Best Practices
@@ -720,3 +733,199 @@ Remember:
 - Test thoroughly despite time pressure
 - Keep team informed of changes
 - Document the fix and its deployment 
+
+### Fetch
+- **Definition**: Downloads changes from remote repository without merging
+- **Usage**: Updates your remote-tracking branches
+- **Think of it like**: Checking what's new in the remote repository without actually applying changes
+- **Why use fetch**: Safer than pull because it lets you review changes before merging
+```bash
+# Basic fetch from origin
+git fetch origin
+
+# Fetch all branches
+git fetch --all
+
+# Fetch and prune deleted remote branches
+git fetch --prune
+```
+
+### Understanding Fetch
+```bash
+# Imagine your friend has a document you're both working on.
+# 'fetch' is like getting a copy of their changes to look at,
+# without changing your version yet.
+
+# Basic fetch - see what's new
+git fetch origin
+
+# After fetch, you can:
+git log origin/main    # See what changed
+git diff main origin/main  # Compare your version with remote
+```
+
+### Common Fetch Scenarios
+
+1. **Daily Update Check**
+```bash
+# Start of your workday
+git fetch origin  # Download updates
+git status       # See how far behind/ahead you are
+
+# If you want the changes:
+git merge origin/main  # Apply downloaded changes
+# Or
+git pull  # Same as: git fetch + git merge
+```
+
+2. **Check Before Push**
+```bash
+# Before pushing your changes
+git fetch origin  # Get latest updates
+git status       # Check if you need to update first
+```
+
+3. **Safe Update Process**
+```bash
+# Step 1: Get updates without changing your code
+git fetch origin
+
+# Step 2: Look at the changes
+git log --oneline main..origin/main
+
+# Step 3: Only if changes look good
+git merge origin/main
+```
+
+### Fetch vs Pull Explained
+```bash
+# Fetch (Safe: Two-Step Process)
+git fetch origin     # 1. Download changes
+git merge origin/main # 2. Apply changes when ready
+
+# Pull (Direct: One-Step)
+git pull origin main # Downloads AND applies changes immediately
+```
+
+### Best Practices for Beginners
+```bash
+# 1. Start with fetch
+git fetch origin
+
+# 2. Check what's new
+git log --oneline HEAD..origin/main
+
+# 3. If changes look good
+git merge origin/main
+
+# If anything goes wrong
+git merge --abort  # Cancel the merge
+```
+
+Remember:
+- Fetch is like looking before you leap
+- It's safer than pull because you can review first
+- No changes happen to your work until you merge
+- When in doubt, fetch before pull 
+
+### Prune
+- **Definition**: Removes references to remote branches that no longer exist on the remote repository
+- **Think of it like**: Cleaning up your local repository of outdated branch information
+
+```bash
+# Basic prune
+git remote prune origin  # Remove references to deleted remote branches
+
+# Fetch and prune in one command
+git fetch --prune  # or git fetch -p
+
+# Show what would be pruned without doing it
+git remote prune origin --dry-run
+```
+
+#### When to Use Prune
+```bash
+# Common scenarios:
+
+# 1. After branches are deleted on remote
+git fetch --prune  # Update your local references
+
+# 2. Cleaning up old references
+git remote prune origin  # Remove stale remote-tracking branches
+
+# 3. During regular maintenance
+git fetch --all --prune  # Update all remotes and clean up
+```
+
+#### Understanding Prune Output
+```bash
+# Example output:
+Pruning origin
+URL: git@github.com:user/repo.git
+ * [pruned] origin/feature/old-feature
+ * [pruned] origin/feature/removed-branch
+```
+
+#### Best Practices
+```bash
+# 1. Regular cleanup
+# Add to your daily/weekly routine:
+git fetch --prune
+
+# 2. Before important operations
+git fetch --all --prune  # Clean state before merging/rebasing
+
+# 3. After branch cleanup
+# After deleting remote branches:
+git remote prune origin
+```
+
+Remember:
+- Prune only removes remote-tracking references
+- Does not delete local branches
+- Safe to run regularly
+- Use `--dry-run` to preview changes 
+
+### Index (Staging Area)
+- **Definition**: The intermediate area between your working directory and repository
+- **Think of it like**: A preparation area where you organize changes before committing
+
+```bash
+# View current staged changes
+git diff --cached
+
+# Add files to index
+git add file.txt          # Add specific file
+git add .                 # Add all changes
+git add -p               # Add changes interactively
+
+# Remove from index (but keep in working directory)
+git reset HEAD file.txt
+
+# Check index status
+git status
+```
+
+#### Understanding the Index
+```bash
+# Three areas in Git:
+1. Working Directory (your files)
+2. Index/Staging (preparation area)
+3. Repository (committed history)
+
+# Common workflow:
+git add file.txt     # Working Directory → Index
+git commit          # Index → Repository
+```
+
+#### Index Best Practices
+```bash
+# Review changes before staging
+git diff            # See unstaged changes
+
+# Stage changes in logical chunks
+git add -p          # Review and stage by hunks
+
+# Verify staged changes
+git diff --staged   # Review what will be committed
+``` 

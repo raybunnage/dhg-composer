@@ -1,106 +1,104 @@
 #!/bin/bash
-# verify-branch.sh - Verify branch readiness for merge/deployment
 
-BRANCH=$1
-LEVEL=${2:-basic}  # basic, thorough, or strict
+# verify-branch.sh
+# Validates branch structure and configuration
 
-# Show usage if no branch specified
-if [ -z "$BRANCH" ]; then
-    echo "Usage: ./scripts/verify-branch.sh <branch-name> [basic|thorough|strict]"
-    echo "Example: ./scripts/verify-branch.sh feature/login thorough"
-    exit 1
-fi
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
 
-# Verify branch exists
-if ! git rev-parse --verify "$BRANCH" >/dev/null 2>&1; then
-    echo "Error: Branch '$BRANCH' does not exist"
-    exit 1
-fi
+BRANCH_NAME=${1:-$(git branch --show-current)}
 
-echo "Verifying branch: $BRANCH (Level: $LEVEL)"
+# Function to log with timestamp
+log() {
+    echo -e "[$(date '+%Y-%m-%d %H:%M:%S')] $1"
+}
 
-# Basic checks (all levels)
-echo "Running basic checks..."
-
-# Check if branch is up to date
-git fetch origin
-if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/$BRANCH 2>/dev/null || git rev-parse HEAD)" ]; then
-    echo "⚠️  Warning: Branch is not up to date with remote"
-fi
-
-# Check for uncommitted changes
-if ! git diff-index --quiet HEAD --; then
-    echo "⚠️  Warning: You have uncommitted changes"
-fi
-
-# Run tests
-echo "Running tests..."
-if ! ./scripts/run-tests.sh; then
-    echo "❌ Tests failed"
-    exit 1
-fi
-
-# Environment checks
-echo "Checking environment configuration..."
-if [ -f "backend/.env.$BRANCH" ]; then
-    ./scripts/manage-env.sh verify "$BRANCH"
-fi
-
-# Thorough checks
-if [ "$LEVEL" = "thorough" ] || [ "$LEVEL" = "strict" ]; then
-    echo "Running thorough checks..."
+# Function to check branch naming convention
+verify_branch_name() {
+    local branch=$1
+    local valid_prefixes=("feature/" "hotfix/" "release/" "main" "development" "staging")
+    local valid=false
     
-    # Check for merge conflicts
-    if git merge-base --is-ancestor origin/development "$BRANCH" 2>/dev/null; then
-        echo "✓ No merge conflicts with development"
-    else
-        echo "⚠️  Warning: Branch may have conflicts with development"
-    fi
-    
-    # Check for sensitive data
-    echo "Checking for sensitive data..."
-    git diff --name-only "$BRANCH" | while read -r file; do
-        if grep -i "password\|secret\|key\|token" "$file" >/dev/null 2>&1; then
-            echo "⚠️  Warning: Possible sensitive data in $file"
+    for prefix in "${valid_prefixes[@]}"; do
+        if [[ $branch == $prefix* ]] || [[ $branch == "$prefix" ]]; then
+            valid=true
+            break
         fi
     done
-fi
-
-# Strict checks (production-ready)
-if [ "$LEVEL" = "strict" ]; then
-    echo "Running strict checks..."
     
-    # Ensure all commits are signed
-    if ! git log --pretty=format:%G? -n 1 | grep -q '[YESU]'; then
-        echo "❌ Not all commits are signed"
-        exit 1
+    if ! $valid; then
+        log "${RED}Error: Invalid branch name format${NC}"
+        log "Valid formats: feature/*, hotfix/*, release/*, main, development, staging"
+        return 1
     fi
     
-    # Check documentation
-    if [ -f "docs/README.md" ]; then
-        if git diff --name-only "$BRANCH" | grep -q "^docs/"; then
-            echo "✓ Documentation updated"
-        else
-            echo "⚠️  Warning: No documentation changes detected"
+    log "${GREEN}Branch name format is valid${NC}"
+    return 0
+}
+
+# Function to verify environment configuration
+verify_environment() {
+    local branch=$1
+    local env_file=".env"
+    
+    # Check if environment file exists
+    if [[ ! -f $env_file ]]; then
+        log "${RED}Error: Environment file not found${NC}"
+        return 1
+    }
+    
+    # Verify required variables
+    local required_vars=("DATABASE_URL" "API_KEY" "NODE_ENV")
+    local missing_vars=()
+    
+    for var in "${required_vars[@]}"; do
+        if ! grep -q "^${var}=" "$env_file"; then
+            missing_vars+=("$var")
         fi
+    done
+    
+    if [[ ${#missing_vars[@]} -gt 0 ]]; then
+        log "${RED}Error: Missing required environment variables: ${missing_vars[*]}${NC}"
+        return 1
     fi
     
-    # Verify dependencies are up to date
-    if [ -f "backend/requirements.txt" ]; then
-        echo "Checking Python dependencies..."
-        pip list --outdated
-    fi
-    if [ -f "frontend/package.json" ]; then
-        echo "Checking npm dependencies..."
-        npm outdated
-    fi
-fi
+    log "${GREEN}Environment configuration is valid${NC}"
+    return 0
+}
 
-# Final status
-echo "Verification complete for $BRANCH"
-if [ $? -eq 0 ]; then
-    echo "✅ All checks passed"
-else
-    echo "❌ Some checks failed"
-    exit 1
-fi 
+# Function to run appropriate tests
+run_branch_tests() {
+    local branch=$1
+    
+    # Determine test type based on branch
+    if [[ $branch == "main" ]] || [[ $branch == "staging" ]]; then
+        log "Running full test suite..."
+        ./scripts/run-tests.sh full
+    elif [[ $branch == feature/* ]]; then
+        log "Running feature tests..."
+        ./scripts/run-tests.sh feature
+    elif [[ $branch == hotfix/* ]]; then
+        log "Running critical tests..."
+        ./scripts/run-tests.sh critical
+    else
+        log "Running standard tests..."
+        ./scripts/run-tests.sh
+    fi
+}
+
+# Main verification process
+log "Starting branch verification for: $BRANCH_NAME"
+
+# Step 1: Verify branch name
+verify_branch_name "$BRANCH_NAME" || exit 1
+
+# Step 2: Verify environment
+verify_environment "$BRANCH_NAME" || exit 1
+
+# Step 3: Run tests
+run_branch_tests "$BRANCH_NAME" || exit 1
+
+log "${GREEN}All verifications passed successfully${NC}" 

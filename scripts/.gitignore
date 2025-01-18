@@ -1,0 +1,16 @@
+# Track all shell scripts
+!*.sh
+
+# But ignore temporary files
+*.log
+temp/
+__pycache__/
+
+# Ignore backup files
+*.bak
+*.backup
+*.tmp
+
+# Keep script documentation
+!README.md
+!docs/ 
