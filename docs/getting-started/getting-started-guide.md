@@ -382,9 +382,18 @@ vercel --prod
 ./scripts/rebuild.sh
 ```
 
+## Updating requirements.txt
+
+```bash
+# Update a package
 pip install <package-name> --upgrade
+
+# Freeze the current environment
 pip freeze > requirements.txt
+
+# Install the requirements
 uv pip install -r requirements.txt
+```
 
 ## Tree Command 
 
