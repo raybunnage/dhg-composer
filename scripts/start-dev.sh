@@ -28,15 +28,19 @@ set -a  # automatically export all variables
 source "$ENV_FILE"
 set +a
 
-# Kill existing processes
+# Kill any existing processes on the ports
 kill -9 $(lsof -t -i:8001) 2>/dev/null || true
 kill -9 $(lsof -t -i:5173) 2>/dev/null || true
 
-# Start backend with specific env file
+# Start backend
 cd backend
 source venv/bin/activate
 uvicorn main:app --reload --port 8001 &
 
 # Start frontend
 cd ../frontend
-npm run dev
+npm run dev &
+
+echo "Development servers started!"
+echo "Backend running on http://localhost:8001"
+echo "Frontend running on http://localhost:5173"

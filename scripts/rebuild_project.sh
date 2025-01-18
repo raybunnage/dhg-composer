@@ -10,25 +10,16 @@ kill -9 $(lsof -t -i:5173) 2>/dev/null || true
 # Backend setup
 echo "Setting up backend..."
 cd backend
-
-# Remove existing venv if it exists
-if [ -d "venv" ]; then
-    echo "Removing existing virtual environment..."
-    rm -rf venv
-fi
-
-# Create and activate virtual environment
+echo "Removing existing virtual environment..."
+rm -rf venv
 echo "Creating virtual environment..."
 python -m venv venv
 source venv/bin/activate
-
-# Upgrade pip first
 echo "Upgrading pip..."
-pip install --upgrade pip
-
-# Install requirements using pip first
-echo "Installing requirements with pip..."
-pip install -r requirements.txt
+uv pip install --upgrade pip
+echo "Installing requirements with uv..."
+uv pip install "fastapi[all]" "uvicorn[standard]" "python-dotenv" "supabase>=2.2.1" --deps
+uv pip freeze > requirements.txt
 
 cd ..
 
