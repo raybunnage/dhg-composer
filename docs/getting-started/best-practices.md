@@ -45,6 +45,14 @@ These shortcuts and references can help you build and refine code more interacti
 - Provide clear instructions for deploying the application.
 - Consider using CI/CD pipelines for automated deployment.
 
+## Git Best Practices
+
+### Handling System Files
+- Configure your `.gitignore` to exclude system-specific files:
+  - For macOS: `.DS_Store` files
+  - For Windows: `Thumbs.db` files
+  - For IDEs: `.idea/`, `.vscode/`
+- Run `git rm --cached` to remove accidentally tracked system files
 
 ## Getting Started Guide Overview
 
