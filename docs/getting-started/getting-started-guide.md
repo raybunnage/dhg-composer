@@ -340,6 +340,23 @@ git merge branch-name
 git push origin branch-name
 ```
 
+### Managing Branches
+
+```bash
+# Create a new branch
+git checkout -b manage-branches
+
+# Push the new branch to the remote repository
+git push -u origin manage-branches
+
+git branch 
+
+git status 
+
+# Switch to a branch
+git checkout branch-name
+```
+
 ### Deployment Commands
 
 ```bash
