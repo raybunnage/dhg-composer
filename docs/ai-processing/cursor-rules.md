@@ -137,8 +137,193 @@ While it's important to guide the AI, avoid setting rules that are too restricti
 
 Here are some examples of well-crafted Cursor Rules:
 
+# Python Backend Development Rules
 
+## Rule Name: `python_backend_structure`
 
+This rule guides Cursor AI in generating Python backend code that follows modern best practices and maintains a clean, scalable architecture.
+
+### Core Principles
+
+1. **Class Organization**
+```python
+from typing import Optional, List, Dict, TypeVar, Generic
+from pydantic import BaseModel
+from abc import ABC, abstractmethod
+
+T = TypeVar('T')
+
+class BaseService(ABC, Generic[T]):
+    """Base class for services with type safety."""
+    
+    @abstractmethod
+    async def get(self, id: str) -> Optional[T]:
+        """Get single item by ID."""
+        pass
+
+    @abstractmethod
+    async def list(self, limit: int = 10, offset: int = 0) -> List[T]:
+        """List items with pagination."""
+        pass
+```
+
+2. **Type Hints and Models**
+```python
+class UserModel(BaseModel):
+    """Example of proper model structure."""
+    id: str
+    email: str
+    is_active: bool
+    settings: Optional[Dict[str, any]] = None
+
+    class Config:
+        frozen = True
+```
+
+### Implementation Guidelines
+
+1. **Service Layer Pattern**
+   - Use dedicated service classes for business logic
+   - Implement interface segregation
+   - Keep services focused and single-responsibility
+   - Use dependency injection
+
+2. **Type Safety**
+   - Always use type hints
+   - Leverage Pydantic for data validation
+   - Use Generic types for reusable components
+   - Define clear interfaces using ABC
+
+3. **Async Patterns**
+   - Use async/await for I/O operations
+   - Implement proper error handling
+   - Use FastAPI dependency injection
+   - Handle connection pooling
+
+4. **Code Organization**
+   - Follow repository pattern for data access
+   - Use factories for complex object creation
+   - Implement strategy pattern for varying behaviors
+   - Use mixins for shared functionality
+
+### Example Structure
+
+```python
+from typing import Optional, List
+from pydantic import BaseModel
+from abc import ABC, abstractmethod
+
+# Models
+class UserCreate(BaseModel):
+    email: str
+    password: str
+
+class User(UserCreate):
+    id: str
+    is_active: bool = True
+
+# Repository Interface
+class UserRepository(ABC):
+    @abstractmethod
+    async def create(self, user: UserCreate) -> User:
+        pass
+
+    @abstractmethod
+    async def get_by_id(self, user_id: str) -> Optional[User]:
+        pass
+
+# Service Implementation
+class UserService:
+    def __init__(self, repository: UserRepository):
+        self.repository = repository
+
+    async def create_user(self, user_data: UserCreate) -> User:
+        return await self.repository.create(user_data)
+
+    async def get_user(self, user_id: str) -> Optional[User]:
+        return await self.repository.get_by_id(user_id)
+```
+
+### Instructions for Cursor AI
+
+When writing Python backend code:
+
+1. **Always Start with Types**
+   ```python
+   # Define types first
+   class RequestModel(BaseModel):
+       field: str
+   
+   class ResponseModel(BaseModel):
+       result: str
+   ```
+
+2. **Use Service Classes**
+   ```python
+   class ServiceName:
+       def __init__(self, dependency: Dependency):
+           self.dependency = dependency
+   
+       async def method(self, param: Type) -> ResultType:
+           # Implementation
+   ```
+
+3. **Implement Error Handling**
+   ```python
+   from fastapi import HTTPException
+   
+   async def handle_operation() -> Result:
+       try:
+           result = await operation()
+           return result
+       except OperationError as e:
+           raise HTTPException(status_code=400, detail=str(e))
+   ```
+
+4. **Use Repository Pattern**
+   ```python
+   class Repository(ABC):
+       @abstractmethod
+       async def get(self, id: str) -> Optional[Model]:
+           pass
+   ```
+
+### Best Practices
+
+1. **Dependency Injection**
+   - Use FastAPI's dependency injection
+   - Avoid global state
+   - Make dependencies explicit
+
+2. **Error Handling**
+   - Create custom exception classes
+   - Use proper HTTP status codes
+   - Provide meaningful error messages
+
+3. **Testing**
+   - Write unit tests for services
+   - Use pytest fixtures
+   - Mock external dependencies
+
+4. **Documentation**
+   - Use docstrings for all classes and methods
+   - Include type hints in documentation
+   - Provide usage examples
+
+### Example Usage
+
+When asking Cursor AI to create a new service:
+
+```
+Create a user service following the python_backend_structure rule with:
+- User creation
+- User retrieval
+- Email validation
+- Password hashing
+- Error handling
+```
+
+This will prompt Cursor AI to generate well-structured, type-safe code following the established patterns.
 
 ## Testing and Refining Your Rules
 
