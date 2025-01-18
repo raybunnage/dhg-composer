@@ -1,218 +1,108 @@
-# Project Scripts Documentation
+# Project Scripts Guide
 
-This guide explains how to use the project's utility scripts for managing environments, deployments, and development workflows.
+## Overview
+Our project uses shell scripts to automate common tasks and ensure consistency across environments.
 
-## Core Environment Scripts
+## Core Scripts
 
-### 1. start-dev.sh
-**Purpose**: Starts the development environment with both frontend and backend servers.
+### Development Setup
+- `setup-env.sh`: Initial development environment setup
+  ```bash
+  ./scripts/setup-env.sh
+  ```
 
-**Usage**:
-```bash
-./scripts/start-dev.sh [dev|staging|prod]  # defaults to dev
+### Environment Management
+- `manage-env.sh`: Manage environment configurations
+  ```bash
+  ./scripts/manage-env.sh create development
+  ./scripts/manage-env.sh verify production
+  ```
+
+### Testing
+- `run-tests.sh`: Run project tests
+  ```bash
+  ./scripts/run-tests.sh
+  ./scripts/run-tests.sh backend
+  ```
+
+### Project Management
+- `rebuild_project.sh`: Rebuild project
+  ```bash
+  ./scripts/rebuild_project.sh
+  ```
+
+### Configuration
+- `backup-config.sh`: Backup configurations
+  ```bash
+  ./scripts/backup-config.sh
+  ```
+- `restore-config.sh`: Restore configurations
+  ```bash
+  ./scripts/restore-config.sh
+  ```
+
+## Script Locations
+
+All scripts are located in the `scripts/` directory at the project root:
+
+```
+project/
+├── scripts/
+│   ├── setup-env.sh
+│   ├── manage-env.sh
+│   ├── run-tests.sh
+│   ├── backup-config.sh
+│   └── restore-config.sh
 ```
 
-**What it does**:
-- Creates environment file if missing
-- Kills any existing processes on ports 8001 and 5173
-- Starts the FastAPI backend server
-- Starts the Vite frontend development server
-- Sets up environment variables
+## Making Scripts Executable
 
-**When to use**: 
-- When starting local development
-- After pulling new changes
-- When switching between environments
+Before using any script, make it executable:
 
-### 2. manage-env.sh
-**Purpose**: Manages environment configuration files.
-
-**Usage**:
 ```bash
-./scripts/manage-env.sh [create|update|verify] [dev|staging|prod]
-```
+# Make single script executable
+chmod +x scripts/script-name.sh
 
-**Common workflows**:
-```bash
-# First time setup
-./scripts/manage-env.sh create dev    # Create dev environment
-./scripts/manage-env.sh update dev    # Edit variables
-
-# Before deployment
-./scripts/manage-env.sh verify prod   # Check production config
-```
-
-### 3. backup-config.sh & restore-config.sh
-**Purpose**: Backup and restore environment configurations.
-
-**Usage**:
-```bash
-# Create backup
-./scripts/backup-config.sh
-
-# Restore from backup
-./scripts/restore-config.sh
-```
-
-**What they backup**:
-- Backend environment files (.env.*)
-- Frontend environment files
-- Vercel configuration
-- Branch-specific configurations
-
-## Deployment Scripts
-
-### 1. deploy-branch.sh
-**Purpose**: Deploys current branch to Vercel preview environment.
-
-**Usage**:
-```bash
-./scripts/deploy-branch.sh
-```
-
-### 2. deploy-prod.sh
-**Purpose**: Deploys to production environment.
-
-**Usage**:
-```bash
-./scripts/deploy-prod.sh
-```
-
-**Important**: Only run this from the main branch after thorough testing!
-
-## Git Workflow Scripts
-
-### 1. git-commit.sh
-**Purpose**: Streamlines git commit process.
-
-**Usage**:
-```bash
-./scripts/git-commit.sh "Your commit message"
-```
-
-### 2. merge-branch.sh
-**Purpose**: Safely merges a branch into main.
-
-**Usage**:
-```bash
-./scripts/merge-branch.sh feature-branch-name
-```
-
-### 3. new-feature.sh
-**Purpose**: Creates a new feature branch (when implemented).
-
-**Usage**:
-```bash
-./scripts/new-feature.sh feature-name
-```
-
-## Maintenance Scripts
-
-### 1. rebuild_project.sh
-**Purpose**: Complete project rebuild from scratch.
-
-**Usage**:
-```bash
-./scripts/rebuild_project.sh
-```
-
-**What it does**:
-- Kills existing processes
-- Removes and recreates virtual environment
-- Reinstalls backend dependencies
-- Reinstalls frontend dependencies
-- Updates requirements.txt
-
-**When to use**:
-- After major dependency changes
-- When environment is corrupted
-- Fresh project setup
-
-### 2. run-tests.sh
-**Purpose**: Runs all project tests.
-
-**Usage**:
-```bash
-./scripts/run-tests.sh
-```
-
-### 3. tree-backend.sh
-**Purpose**: Displays backend directory structure.
-
-**Usage**:
-```bash
-./scripts/tree-backend.sh
-```
-
-## Common Workflows
-
-### Initial Project Setup
-```bash
-# 1. Set up environment
-./scripts/manage-env.sh create dev
-./scripts/manage-env.sh update dev
-
-# 2. Rebuild project
-./scripts/rebuild_project.sh
-
-# 3. Start development servers
-./scripts/start-dev.sh
-```
-
-### Daily Development
-```bash
-# 1. Start development environment
-./scripts/start-dev.sh
-
-# 2. Make changes and commit
-./scripts/git-commit.sh "Your changes"
-
-# 3. Run tests before push
-./scripts/run-tests.sh
-```
-
-### Deployment Process
-```bash
-# 1. Verify environment
-./scripts/manage-env.sh verify prod
-
-# 2. Backup configuration
-./scripts/backup-config.sh
-
-# 3. Deploy
-./scripts/deploy-prod.sh
-```
-
-## Script Dependencies
-- Bash shell
-- Python 3.x and venv
-- Node.js and npm
-- Git
-- Vercel CLI (for deployments)
-
-## Troubleshooting
-
-### Common Issues
-
-1. **Permission Denied**
-   ```bash
-   chmod +x scripts/*.sh  # Make scripts executable
-   ```
-
-2. **Environment Not Found**
-   ```bash
-   # Create missing environment file
-   ./scripts/manage-env.sh create dev
-   ```
-
-3. **Port Already in Use**
-   ```bash
-   # Manually kill processes
-   kill -9 $(lsof -t -i:8001)
-   kill -9 $(lsof -t -i:5173)
-   ```
-
-Remember to make all scripts executable before first use:
-```bash
+# Make all scripts executable
 chmod +x scripts/*.sh
-``` 
+```
+
+## Script Standards
+
+All scripts follow these standards:
+1. Include documentation header
+2. Handle errors appropriately
+3. Use consistent color coding
+4. Provide usage instructions
+5. Follow shell scripting best practices
+
+## Common Issues
+
+### Permission Denied
+```bash
+# If you see "Permission denied", make script executable:
+chmod +x scripts/script-name.sh
+```
+
+### Script Not Found
+```bash
+# Ensure you're in project root:
+cd /path/to/project
+./scripts/script-name.sh
+```
+
+## Adding New Scripts
+
+1. Create script in scripts directory
+2. Make executable
+3. Add to documentation
+4. Update scripts/README.md
+5. Commit changes
+
+## Best Practices
+
+1. Always run scripts from project root
+2. Keep scripts updated with project changes
+3. Test scripts in development first
+4. Document script changes
+5. Follow naming conventions 
