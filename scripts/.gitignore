@@ -1,6 +1,10 @@
 # Track all shell scripts
 !*.sh
 
+# Track Python files
+!*.py
+!__init__.py
+
 # But ignore temporary files
 *.log
 temp/
