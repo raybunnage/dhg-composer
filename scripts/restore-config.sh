@@ -1,0 +1,25 @@
+#!/bin/bash
+# Restore script for .vercel and .env files
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+BACKUP_DIR=".backup/${BRANCH}"
+
+# Check if backup exists
+if [ ! -d "$BACKUP_DIR" ]; then
+    echo "No backup found for branch: $BRANCH"
+    exit 1
+fi
+
+# Restore .env files
+cp "$BACKUP_DIR/backend.env" backend/.env
+cp "$BACKUP_DIR/frontend.env" frontend/.env
+
+# Restore .vercel directory
+cp -r "$BACKUP_DIR/vercel" .vercel
+
+# Add specific handling for dhg-baseline branch
+if [ "$BRANCH" = "dhg-baseline" ]; then
+    echo "Restoring baseline configuration..."
+    # Additional baseline-specific restoration steps here
+fi
+
+echo "Restored configuration for branch: $BRANCH" 
