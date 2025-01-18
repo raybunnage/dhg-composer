@@ -105,6 +105,7 @@ Thumbs.db
 .env
 .env.local
 .env.*
+!.env.*.template    # Don't ignore templates
 
 # Dependencies
 node_modules/
@@ -143,6 +144,24 @@ EOL
 
 chmod +x .git/hooks/pre-commit
 echo -e "${GREEN}✓ Git hooks configured${NC}"
+
+# After git hooks setup and before final instructions
+print_section "Setting up Environment Templates"
+
+# Create environment templates
+./scripts/manage-env.sh create development
+./scripts/manage-env.sh create staging
+./scripts/manage-env.sh create production
+
+echo -e "${GREEN}✓ Environment templates created${NC}"
+
+# After environment templates setup
+print_section "Setting up Python Requirements"
+
+# Create requirements files
+./scripts/manage-requirements.sh
+
+echo -e "${GREEN}✓ Requirements files created${NC}"
 
 # Final instructions
 print_section "Setup Complete!"

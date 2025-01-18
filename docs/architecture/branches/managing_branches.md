@@ -2,6 +2,25 @@
 
 # Branch Management Best Practices
 
+## Quick Reference
+```bash
+# Create new feature branch
+git checkout development
+git checkout -b feature/my-feature
+
+# Keep feature branch updated
+git fetch origin
+git rebase origin/development
+
+# Create hotfix
+git checkout staging
+git checkout -b hotfix/critical-fix
+
+# Promote changes
+./scripts/promote.sh development staging
+./scripts/promote.sh staging main
+```
+
 ## Branch Hierarchy
 
 ```mermaid
@@ -11,6 +30,16 @@ graph TD
     C --> D[feature branches]
     C --> E[migration branches]
     B --> F[hotfix branches]
+```
+
+## Branch Naming Conventions
+
+```bash
+feature/   # New features: feature/user-auth
+bugfix/    # Non-critical fixes: bugfix/header-alignment
+hotfix/    # Critical fixes: hotfix/login-failure
+migration/ # Database changes: migration/20240315-user-table
+release/   # Release branches: release/v1.2.0
 ```
 
 ## Branch Strategy Overview
@@ -24,18 +53,24 @@ This branching strategy represents a hierarchical flow of code changes through d
 - Contains production-ready code
 - Should always be stable and deployable
 - Tagged with version numbers for releases
+- Protected with strict rules
+- Requires signed commits
 
 #### 2. Staging Branch
 - Second level in the hierarchy
 - Used for pre-production testing
 - Integration point before production deployment
 - Quality assurance (QA) testing happens here
+- All production deployments must pass through here
+- Automated testing environment
 
 #### 3. Development Branch
 - Third level in the hierarchy
 - Main integration branch for ongoing development
 - All feature and migration branches merge here first
 - Should be relatively stable but may contain work in progress
+- Continuous integration runs here
+- Automated tests must pass
 
 #### 4. Working Branches
 These are the branches where actual development occurs:
@@ -45,18 +80,32 @@ These are the branches where actual development occurs:
   - Branch from: Development
   - Merge back to: Development
   - Naming convention: `feature/feature-name`
+  - Should be short-lived (1-2 weeks max)
+  - One feature per branch
 
 - **Migration Branches**
   - Specific to database or infrastructure migrations
   - Branch from: Development
   - Merge back to: Development
   - Naming convention: `migration/migration-name`
+  - Must include rollback procedures
+  - Requires database admin review
 
 - **Hotfix Branches**
   - For urgent production fixes
   - Branch from: Staging
   - Merge to: Staging AND Main/Production
   - Naming convention: `hotfix/issue-description`
+  - Requires expedited review process
+  - Must include regression tests
+
+- **Release Branches**
+  - For release preparation
+  - Branch from: Development
+  - Merge to: Staging
+  - Naming convention: `release/vX.Y.Z`
+  - Only bugfixes allowed
+  - Tagged when merged to main
 
 ### Flow of Changes
 
@@ -66,114 +115,27 @@ These are the branches where actual development occurs:
 4. After QA approval, Staging changes are merged to Production
 5. Hotfixes follow an expedited path through Staging to Production
 
-This structure ensures:
-- Stable production environment
-- Proper testing in staging
-- Isolation of new development
-- Quick path for critical fixes
-- Clear promotion path for code changes
+### Automated Checks
 
-## Core Branches
+Each branch level has specific automated checks:
 
-### 1. Main Branch (`main`)
-- **Purpose**: Production-ready code
-- **Protected**: Yes, requires PR and approvals
-- **Deployments**: Auto-deploys to production
-- **Rules**:
-  - No direct commits
-  - Must pass all tests
-  - Requires code review
-  - Must be up-to-date with staging
-
-### 2. Staging Branch (`staging`)
-- **Purpose**: Pre-production testing
-- **Protected**: Yes, requires PR
-- **Deployments**: Auto-deploys to staging environment
-- **Rules**:
-  - No direct commits
-  - All features must be tested here
-  - Integration testing happens here
-  - Performance testing required
-
-### 3. Development Branch (`development`)
-- **Purpose**: Integration of features
-- **Protected**: Partially
-- **Deployments**: Auto-deploys to development environment
-- **Rules**:
-  - Feature branches merge here first
-  - Must maintain working state
-  - Continuous integration testing
-
-## Working Branches
-
-### 4. Feature Branches
-- **Naming**: `feature/descriptive-name`
-- **Created from**: `development`
-- **Merges to**: `development`
-- **Lifecycle**:
-  1. Create from latest development
-  2. Develop feature
-  3. Test thoroughly
-  4. Create PR to development
-  5. Address review comments
-  6. Merge and delete branch
-
-### 5. Database Migration Branches
-- **Naming**: `migration/YYYYMMDD-description`
-- **Created from**: `development`
-- **Merges to**: `development`
-- **Special Rules**:
-  - Must include rollback scripts
-  - Test migrations in isolation
-  - Document all changes
-  - Extra review required
-
-### 6. Hotfix Branches
-- **Naming**: `hotfix/issue-description`
-- **Created from**: `staging`
-- **Merges to**: `staging` and `main`
-- **Purpose**: Emergency production fixes
-
-## Workflow Examples
-
-### New Feature Development
 ```bash
-# Start new feature
-git checkout development
-git pull origin development
-git checkout -b feature/user-authentication
+Development:
+- Linting
+- Unit tests
+- Integration tests
+- Build verification
 
-# Work on feature...
+Staging:
+- All development checks
+- End-to-end tests
+- Performance tests
+- Security scans
 
-# Keep up to date
-git fetch origin
-git rebase origin/development
-
-# Create PR when ready
-```
-
-### Database Migration
-```bash
-# Create migration branch
-git checkout development
-git checkout -b migration/20240315-add-user-profiles
-
-# Create migration files...
-
-# Test thoroughly
-# Create PR with extra reviewers
-```
-
-### Hotfix Process
-```bash
-# Create hotfix branch
-git checkout staging
-git checkout -b hotfix/fix-login-issue
-
-# Fix issue...
-
-# Create PR to staging
-# After merge, cherry-pick to main
+Production:
+- All staging checks
+- Load testing
+- Compliance checks
 ```
 
 ## Best Practices
@@ -182,46 +144,52 @@ git checkout -b hotfix/fix-login-issue
    - Delete merged feature branches
    - Keep branches up to date
    - Regular rebasing on development
+   - No direct commits to protected branches
+   - Keep branches focused and small
 
 2. **Commit Messages**
    - Clear, descriptive messages
    - Reference issue numbers
    - Use conventional commits
+   - Sign your commits
+   - Include context when needed
 
 3. **Pull Requests**
    - Include description of changes
    - Add relevant reviewers
    - Link to related issues
    - Include test results
+   - Add screenshots for UI changes
+   - Update documentation
 
 4. **Protection Rules**
    - Protect main and staging branches
    - Require PR reviews
    - Enforce status checks
    - No force pushes
+   - Require signed commits
+   - Linear history required
 
 5. **Regular Maintenance**
    - Clean up old branches
    - Regular merges to staging
    - Scheduled deployments
    - Document major changes
+   - Monitor branch age
+   - Archive old releases
 
-## Common Commands
+## Branch Lifecycle Management
 
 ```bash
-# Create feature branch
-./scripts/new-feature.sh feature-name
+# List old branches
+git branch --sort=-committerdate
 
-# Promote to staging
-./scripts/promote.sh dev staging
+# Clean up merged branches
+git branch --merged | grep -v "\*" | xargs -n 1 git branch -d
 
-# Promote to production
-./scripts/promote.sh staging prod
-
-# Update feature branch
-git checkout feature/my-feature
-git fetch origin
-git rebase origin/development
+# Archive old releases
+git tag archive/v1.0.0 release/v1.0.0
+git branch -D release/v1.0.0
 ```
 
 ## Emergency Procedures
@@ -233,11 +201,36 @@ git rebase origin/development
    - Quick review required
    - Deploy to production
    - Backport to development
+   - Document incident
+   - Update monitoring
 
 2. **Failed Deployment**
    - Automatic rollback
    - Investigate in staging
    - Fix in hotfix branch
    - Re-deploy when ready
+   - Post-mortem review
+   - Update deployment checks
+
+## Branch Protection Setup
+
+```bash
+# Main branch protection
+- Require pull request reviews
+- Require status checks to pass
+- Require signed commits
+- Include administrators
+- Allow force pushes: Never
+
+# Staging branch protection
+- Require pull request reviews
+- Require status checks to pass
+- Include administrators
+- Allow force pushes: With lease
+
+# Development branch protection
+- Require status checks to pass
+- Allow force pushes: With lease
+```
 
 Remember: The goal of branch management is to maintain a stable production environment while enabling efficient development and testing processes. 
