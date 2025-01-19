@@ -3,6 +3,9 @@ from app.core.apps import AppFeature
 from app.core.deps import get_current_app, require_feature
 from app.services.auth.service import AuthService
 from app.services.auth.schemas import SignUpRequest, SignInRequest
+from app.core.logger import get_logger
+
+logger = get_logger(__name__)
 
 router = APIRouter()
 
@@ -19,6 +22,7 @@ async def signup(
         user = await auth_service.signup_user(request)
         return {"status": "success", "message": "Signup successful!", "data": user}
     except Exception as e:
+        logger.error(f"Signup failed: {str(e)}")
         raise HTTPException(status_code=400, detail=str(e))
 
 
@@ -39,4 +43,5 @@ async def login(
             "session": result["session"],
         }
     except Exception as e:
+        logger.error(f"Login failed: {str(e)}")
         raise HTTPException(status_code=401, detail=str(e))

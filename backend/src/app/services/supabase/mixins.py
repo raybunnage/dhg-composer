@@ -1,10 +1,10 @@
 from typing import Dict, Any, Optional
 from app.core.mixins.base import BaseMixin
 from app.core.config import settings
+from app.core.logger import get_logger
 from supabase import create_client
-import logging
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 class SupabaseClientMixin(BaseMixin):

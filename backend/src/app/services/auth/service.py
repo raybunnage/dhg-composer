@@ -1,6 +1,9 @@
 from app.services.supabase.mixins import SupabaseAuthMixin
 from app.core.base.service import BaseService
+from app.core.logger import get_logger
 from .schemas import SignUpRequest, SignInRequest
+
+logger = get_logger(__name__)
 
 
 class AuthService(BaseService, SupabaseAuthMixin):
