@@ -8,8 +8,8 @@ BACKEND_DIR="$PROJECT_ROOT/backend"
 # Change to the backend directory
 cd "$BACKEND_DIR"
 
-# Run the Python verification script
-python "$SCRIPT_DIR/verify_structure.py"
+# Run the Python verification script from sys directory
+python "$PROJECT_ROOT/scripts/sys/verify_structure.py"
 
 # Get the exit code
 EXIT_CODE=$?
