@@ -222,6 +222,41 @@
         "errorHandling": {
           "matchFrontendErrors": true,
           "provideDetailedResponses": true
+        },
+        "rateLimiting": {
+          "implementation": {
+            "useSlowapi": true,
+            "defaultLimits": {
+              "ratePerSecond": 10,
+              "burstSize": 20,
+              "timeWindow": "1 minute"
+            },
+            "customLimits": {
+              "fastEndpoints": {
+                "ratePerSecond": 100,
+                "burstSize": 200,
+                "timeWindow": "1 minute"
+              },
+              "authEndpoints": {
+                "ratePerSecond": 3,
+                "burstSize": 5,
+                "timeWindow": "1 minute"
+              }
+            },
+            "configuration": {
+              "useRedis": true,
+              "keyGenerator": "ip_and_path",
+              "responseHeaders": true
+            }
+          },
+          "middleware": {
+            "location": "middleware/rate_limiter.py",
+            "dependencies": ["slowapi", "redis"],
+            "errorHandling": {
+              "statusCode": 429,
+              "message": "Too many requests. Please try again later."
+            }
+          }
         }
       },
       "modelStandardization": {
@@ -460,7 +495,70 @@
     },
     {
       "type": "Supabase",
-      "instructions": "Use Supabase for authentication and real-time capabilities. Securely handle JWTs for session management. Leverage Supabase's functions for complex queries when needed."
+      "description": "Supabase integration and authentication standards",
+      "versionControl": {
+        "supabaseJs": "^2.2.1",
+        "dependencies": {
+          "@supabase/supabase-js": "^2.2.1",
+          "@supabase/auth-helpers-nextjs": "^0.8.7",
+          "@supabase/gotrue-js": "^2.62.0"
+        }
+      },
+      "authentication": {
+        "setup": {
+          "useAuthHelpers": true,
+          "configureMiddleware": true,
+          "setupServerClient": true
+        },
+        "implementation": {
+          "authMethods": [
+            "email",
+            "oauth",
+            "magic_link"
+          ],
+          "sessionHandling": {
+            "useSupabaseSession": true,
+            "persistSession": true,
+            "handleRefresh": true
+          },
+          "typeDefinitions": {
+            "useSupabaseTypes": true,
+            "generateHelpers": true,
+            "matchDatabase": true
+          }
+        },
+        "security": {
+          "enforceSSL": true,
+          "secureSessionStorage": true,
+          "validateTokens": true
+        }
+      },
+      "databaseIntegration": {
+        "typeGeneration": {
+          "useSupabaseTypes": true,
+          "generateOnSchema": true,
+          "maintainConsistency": true
+        },
+        "queries": {
+          "useTypedQueries": true,
+          "validateResponses": true,
+          "handleErrors": true
+        }
+      },
+      "bestPractices": {
+        "authentication": [
+          "Use middleware for protected routes",
+          "Implement proper error handling",
+          "Validate session state",
+          "Handle token refresh"
+        ],
+        "development": [
+          "Keep dependencies in sync",
+          "Use type generation",
+          "Follow security guidelines",
+          "Test auth flows"
+        ]
+      }
     },
     {
       "type": "PostgreSQL",
