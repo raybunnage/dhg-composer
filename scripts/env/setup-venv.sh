@@ -19,7 +19,7 @@ ENV=${1:-development}
 
 case $ENV in
     development)
-        pip install -r backend/requirements/development.txt
+        uv pip sync backend/requirements/development.txt
         ;;
     staging)
         pip install -r backend/requirements/staging.txt

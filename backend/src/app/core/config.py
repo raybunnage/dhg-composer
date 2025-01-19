@@ -1,10 +1,18 @@
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Union
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import validator, AnyHttpUrl
 import secrets
+import json
 
 
 class Settings(BaseSettings):
+    # Database Settings
+    DATABASE_URL: str
+
+    # Server Settings
+    PORT: int = 8001
+    ENVIRONMENT: str = "development"
+
     # API Settings
     PROJECT_NAME: str = "DHG Backend"
     VERSION: str = "1.0.0"
@@ -32,16 +40,25 @@ class Settings(BaseSettings):
         return v
 
     # CORS Settings
-    BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = [
-        "http://localhost:3000",  # React default
-        "http://localhost:8000",  # Backend default
+    BACKEND_CORS_ORIGINS: List[str] = [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:8001",
+        "http://127.0.0.1:5173",
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:8001",
     ]
 
     @validator("BACKEND_CORS_ORIGINS", pre=True)
-    def assemble_cors_origins(cls, v: str | List[str]) -> List[str] | str:
+    def assemble_cors_origins(cls, v: Union[str, List[str]]) -> List[str]:
         if isinstance(v, str):
-            return [i.strip() for i in v.split(",")]
-        return v
+            try:
+                # Try to parse as JSON first
+                return json.loads(v)
+            except json.JSONDecodeError:
+                # If not JSON, treat as comma-separated
+                return [x.strip() for x in v.split(",") if x.strip()]
+        return v if isinstance(v, list) else []
 
     # App Settings
     APPS_ENABLED: Dict[str, bool] = {"app1": True, "app2": True}

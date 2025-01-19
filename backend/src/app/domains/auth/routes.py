@@ -1,9 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException
 from app.core.apps import AppFeature
-from app.core.deps import get_current_app, require_feature
+from app.core.deps import get_current_app
 from app.services.auth.service import AuthService
 from app.services.auth.schemas import SignUpRequest, SignInRequest
 from app.core.logger import get_logger
+from app.core.dependencies import require_feature
 
 logger = get_logger(__name__)
 
@@ -14,7 +15,7 @@ router = APIRouter()
 async def signup(
     request: SignUpRequest,
     app=Depends(get_current_app),
-    _=Depends(require_feature(AppFeature.AUTH)),
+    feature_enabled: bool = Depends(require_feature("auth")),
 ):
     """User signup endpoint"""
     try:
@@ -30,7 +31,7 @@ async def signup(
 async def login(
     request: SignInRequest,
     app=Depends(get_current_app),
-    _=Depends(require_feature(AppFeature.AUTH)),
+    feature_enabled: bool = Depends(require_feature("auth")),
 ):
     """User login endpoint"""
     try:
