@@ -63,7 +63,7 @@ def create_app() -> FastAPI:
     app.add_middleware(AppContextMiddleware)
 
     # Include routers
-    app.include_router(api_router)
+    app.include_router(api_router, prefix=settings.API_V1_STR)
 
     return app
 
