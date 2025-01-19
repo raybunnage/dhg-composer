@@ -28,6 +28,87 @@
           "infrastructure": ["monitoring", "deployment", "security"]
         }
       }
+    },
+    {
+      "type": "ImportPathManagement",
+      "description": "Standards for managing import paths in a multi-app structure",
+      "configuration": {
+        "importStyle": {
+          "preferAbsolute": true,
+          "baseImportPaths": [
+            "backend/src",
+            "frontend/src"
+          ],
+          "importRules": {
+            "backend": {
+              "baseModule": "app",
+              "importFormat": "from app.{domain}.{module} import {name}",
+              "examples": [
+                "from app.core.config import settings",
+                "from app.domains.auth.routes import router"
+              ]
+            },
+            "frontend": {
+              "baseModule": "@",
+              "importFormat": "import { Component } from '@/components/{path}'",
+              "examples": [
+                "import { ProductList } from '@/components/app1/ProductList'",
+                "import { useAuth } from '@/hooks/auth'"
+              ]
+            }
+          }
+        },
+        "folderStructure": {
+          "backend": {
+            "src": {
+              "app": {
+                "core": ["config", "deps", "auth", "apps"],
+                "domains": {
+                  "app1": ["routes", "models", "services"],
+                  "app2": ["routes", "models", "services"],
+                  "shared": ["auth", "users", "common"]
+                },
+                "middleware": ["app_context", "auth", "error_handling"],
+                "services": ["supabase", "cache", "email"]
+              }
+            }
+          },
+          "frontend": {
+            "src": {
+              "components": {
+                "app1": ["products", "checkout"],
+                "app2": ["courses", "scheduling"],
+                "shared": ["auth", "layout", "common"]
+              },
+              "hooks": ["auth", "api", "state"],
+              "config": ["app1", "app2", "shared"]
+            }
+          }
+        },
+        "importResolution": {
+          "pythonPath": {
+            "development": "${workspaceFolder}/backend/src",
+            "testing": "${workspaceFolder}/backend/tests",
+            "production": "/app/backend/src"
+          },
+          "tsConfig": {
+            "baseUrl": "./src",
+            "paths": {
+              "@/*": ["*"],
+              "@app1/*": ["components/app1/*"],
+              "@app2/*": ["components/app2/*"],
+              "@shared/*": ["components/shared/*"]
+            }
+          }
+        }
+      },
+      "bestPractices": [
+        "Always use absolute imports from the base module",
+        "Maintain consistent import patterns within each app",
+        "Group related imports together",
+        "Use explicit imports over * imports",
+        "Keep import paths readable and maintainable"
+      ]
     }
   ]
 } 
