@@ -10,11 +10,16 @@ logger = logging.getLogger(__name__)
 class SupabaseClientMixin(BaseMixin):
     """Base mixin for Supabase client functionality"""
 
-    def __init__(self):
-        self.client = create_client(
-            supabase_url=settings.SUPABASE_URL,
-            supabase_key=settings.SUPABASE_KEY,
-        )
+    _client = None
+
+    @property
+    def client(self):
+        if self._client is None:
+            self._client = create_client(
+                supabase_url=settings.SUPABASE_URL,
+                supabase_key=settings.SUPABASE_KEY,
+            )
+        return self._client
 
 
 class SupabaseAuthMixin(SupabaseClientMixin):
