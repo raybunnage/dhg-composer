@@ -9,6 +9,7 @@ from app.core.apps import AppRegistry, AppConfig
 from app.middleware.app_context import AppContextMiddleware
 from app.core.app_settings import APP_SETTINGS
 import logging
+from app.core.env_validator import validate_environment
 
 # Load environment variables
 ENV = os.getenv("ENV", "development")
@@ -18,6 +19,14 @@ load_dotenv(Path(__file__).parent.parent.parent / env_file)
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+# Add after environment loading
+try:
+    env_config = validate_environment()
+    logger.info(f"Environment validated successfully: {env_config['ENV']}")
+except Exception as e:
+    logger.error(f"Environment validation failed: {str(e)}")
+    raise
 
 
 def create_app() -> FastAPI:
