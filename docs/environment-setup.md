@@ -1,126 +1,203 @@
 # Environment Setup Guide
 
 ## Overview
-This document describes how to set up environment configurations for different deployment scenarios.
+This document provides comprehensive instructions for setting up and managing environment configurations across different deployment scenarios.
 
-## Environment Files
-The application uses different environment files for different deployment scenarios:
+## Environment Files Structure
 
-- `.env` - Local development (gitignored)
-- `.env.development.template` - Template for development setup
-- `.env.staging.template` - Template for staging setup
-- `.env.production.template` - Template for production setup
+```
+backend/
+├── .env                    # Local development (gitignored)
+├── .env.example           # Template for local setup
+├── .env.development.template  # Development environment template
+├── .env.staging.template     # Staging environment template
+└── .env.production.template  # Production environment template
+```
 
 ## Required Environment Variables
 
 ### Core Variables
 ```env
 # Required
-SUPABASE_URL="your-supabase-url"
+SUPABASE_URL="https://<project>.supabase.co"
 SUPABASE_KEY="your-supabase-key"
 ENV="development|staging|production"
-SECRET_KEY="min-32-char-secret"
+SECRET_KEY="your-secure-secret-key"
 
-# Optional (with defaults)
-DEBUG=true|false  # defaults to false
-PORT=8000         # defaults to 8000
+# Optional with defaults
+DEBUG=true|false           # Default: false
+PORT=8000                 # Default: 8000
+LOG_LEVEL=info           # Default: info
+BACKEND_CORS_ORIGINS="http://localhost:3000,http://localhost:8000"
+DATABASE_URL="postgresql://user:pass@host:5432/db"
 ```
 
-### Variable Descriptions
+### Validation Rules
 
-- `SUPABASE_URL`: Your Supabase project URL
-  - Format: `https://<project>.supabase.co`
-  - Required for database and auth functionality
-  
-- `SUPABASE_KEY`: Your Supabase project API key
-  - Must be at least 20 characters
-  - Keep this secret!
-  
-- `ENV`: Deployment environment
-  - Valid values: "development", "staging", "production"
-  - Affects logging, debugging, and security settings
-  
-- `SECRET_KEY`: Application secret key
-  - Must be at least 32 characters
-  - Used for token signing and security
-  
-- `DEBUG`: Enable debug mode
-  - Set to "true" for development
-  - Always "false" in production
-  
-- `PORT`: Server port
-  - Defaults to 8000
-  - Can be changed for different environments
+#### SUPABASE_URL
+- Must be a valid HTTPS URL
+- Must contain "supabase.co" domain
+- Must include project identifier
 
-## Setup Instructions
+#### SUPABASE_KEY
+- Minimum 20 characters
+- Alphanumeric characters, dots, underscores, and hyphens only
+- Keep this secret and secure
 
-### Local Development Setup
+#### ENV
+- Valid values: "development", "staging", "production"
+- Affects:
+  - Logging verbosity
+  - Debug features
+  - Security measures
+  - Performance optimizations
 
-1. Copy the example environment file:
+#### SECRET_KEY
+- Minimum 32 characters
+- Must contain:
+  - At least one uppercase letter
+  - At least one lowercase letter
+  - At least one number
+- Used for:
+  - Token signing
+  - Cryptographic operations
+  - Security features
+
+#### PORT
+- Valid range: 1024-65535
+- Default: 8000
+- Must be available on host system
+
+#### LOG_LEVEL
+- Valid values: "debug", "info", "warning", "error", "critical"
+- Default: "info"
+- Affects logging verbosity
+
+#### BACKEND_CORS_ORIGINS
+- Comma-separated list of valid URLs
+- Must include protocol (http/https)
+- Must include domain
+- Default: "http://localhost:3000"
+
+#### DATABASE_URL (Optional)
+- Valid PostgreSQL connection string
+- Format: "postgresql://user:pass@host:5432/db"
+- Required for direct database access
+
+## Environment-Specific Setup
+
+### Development Setup
 ```bash
+# 1. Create local environment file
 cp backend/.env.example backend/.env
+
+# 2. Edit .env with your development credentials
+nano backend/.env
+
+# 3. Verify environment
+python -m app.core.env_validator
 ```
 
-2. Edit `.env` and add your credentials:
-```env
-SUPABASE_URL="https://your-project.supabase.co"
-SUPABASE_KEY="your-actual-key"
-ENV="development"
-SECRET_KEY="your-secret-key-min-32-chars"
-DEBUG=true
-```
-
-### Staging/Production Setup
-
-1. Use the appropriate template:
+### Staging Setup
 ```bash
-# For staging
+# 1. Create staging environment file
 cp backend/.env.staging.template backend/.env.staging
 
-# For production
-cp backend/.env.production.template backend/.env.production
+# 2. Edit with staging credentials
+nano backend/.env.staging
+
+# 3. Set environment variable
+export ENV=staging
 ```
 
-2. Update the environment variables according to your deployment.
+### Production Setup
+```bash
+# 1. Create production environment file
+cp backend/.env.production.template backend/.env.production
 
-## Environment Validation
+# 2. Edit with production credentials
+nano backend/.env.production
 
-The application validates environment variables on startup:
+# 3. Set environment variable
+export ENV=production
+```
 
-- Checks for required variables
-- Validates URL formats
-- Ensures minimum key lengths
-- Verifies environment names
+## Security Best Practices
 
-If validation fails, the application will log errors and refuse to start.
-
-## Security Notes
-
-1. Never commit `.env` files to version control
-2. Keep production credentials secure
+### Credential Management
+1. Never commit credentials to version control
+2. Use different credentials for each environment
 3. Rotate secrets regularly
-4. Use different credentials for each environment
-5. Monitor environment access
+4. Use secure secret storage in production
+5. Monitor access and usage
+
+### Secret Generation
+```bash
+# Generate secure SECRET_KEY
+openssl rand -base64 32
+
+# Generate secure password
+openssl rand -base64 24
+```
+
+### Access Control
+1. Limit environment file access
+2. Use role-based access control
+3. Audit access regularly
+4. Log configuration changes
 
 ## Troubleshooting
 
 ### Common Issues
 
-1. "SUPABASE_URL must be a valid URL"
-   - Ensure URL starts with https://
-   - Check for typos in the domain
+1. "SUPABASE_URL validation failed"
+   - Check URL format
+   - Verify project identifier
+   - Ensure HTTPS protocol
 
-2. "SUPABASE_KEY is too short"
-   - Verify you're using the correct API key
-   - Check for copying errors
+2. "SECRET_KEY requirements not met"
+   - Check length (min 32 chars)
+   - Verify character requirements
+   - Use secure generation method
 
-3. "Environment validation failed"
-   - Check the logs for specific validation errors
-   - Verify all required variables are set
-   - Check variable format and content
+3. "Invalid CORS origin"
+   - Check URL format
+   - Include protocol (http/https)
+   - Verify domain name
+
+### Validation Errors
+
+When you see validation errors:
+1. Check the specific error message
+2. Verify against validation rules
+3. Use provided examples
+4. Check for typos and formatting
 
 ### Getting Help
 
-- Check the error logs
-- Review this documentation
-- Contact the development team 
+1. Check application logs
+2. Review this documentation
+3. Verify against templates
+4. Contact DevOps team
+
+## Monitoring and Maintenance
+
+### Regular Tasks
+1. Rotate secrets monthly
+2. Review CORS origins
+3. Update documentation
+4. Audit environment access
+5. Verify backup procedures
+
+### Logging
+- Monitor environment loading
+- Track validation failures
+- Audit configuration changes
+- Review access patterns
+
+## Additional Resources
+
+- [FastAPI Documentation](https://fastapi.tiangolo.com/)
+- [Supabase Documentation](https://supabase.io/docs)
+- [Python dotenv](https://github.com/theskumar/python-dotenv)
+- [Pydantic Settings](https://pydantic-docs.helpmanual.io/) 
