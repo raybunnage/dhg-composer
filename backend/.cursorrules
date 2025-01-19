@@ -1,0 +1,33 @@
+{
+  "rules": [
+    {
+      "type": "MultiAppArchitecture",
+      "description": "Multi-application support within a monorepo structure",
+      "configuration": {
+        "apps": {
+          "app1": {
+            "name": "Primary Application",
+            "features": ["auth", "users", "payments"],
+            "routing": {
+              "prefix": "/app1",
+              "subdomain": "app1.yourdomain.com"
+            }
+          },
+          "app2": {
+            "name": "Secondary Application",
+            "features": ["auth", "courses", "scheduling"],
+            "routing": {
+              "prefix": "/app2",
+              "subdomain": "app2.yourdomain.com"
+            }
+          }
+        },
+        "shared": {
+          "components": ["auth", "ui", "utils"],
+          "services": ["database", "caching", "logging"],
+          "infrastructure": ["monitoring", "deployment", "security"]
+        }
+      }
+    }
+  ]
+} 

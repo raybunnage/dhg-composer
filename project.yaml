@@ -1,0 +1,21 @@
+# Example project configuration
+project:
+  name: multi-app-platform
+  apps:
+    - id: app1
+      name: "First Application"
+      domains:
+        - users
+        - products
+      features:
+        - auth
+        - payments
+    
+    - id: app2
+      name: "Second Application"
+      domains:
+        - courses
+        - lessons
+      features:
+        - auth
+        - scheduling 
