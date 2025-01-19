@@ -20,7 +20,7 @@ export default function Login() {
 
       if (error) throw error
       
-      // Optional: Call backend to sync user state
+      // Fixed URL to match backend route
       const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
         method: 'POST',
         headers: {
