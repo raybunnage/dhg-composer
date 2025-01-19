@@ -10,4 +10,4 @@ api_router.include_router(auth_router, prefix="/auth", tags=["auth"])
 
 # Include app-specific routes
 api_router.include_router(app1_router, tags=["app1"])
-api_router.include_router(app2_router, tags=["app2"]) 
+api_router.include_router(app2_router, tags=["app2"])

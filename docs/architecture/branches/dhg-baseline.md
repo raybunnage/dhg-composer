@@ -5,7 +5,7 @@
 ## DHG Baseline Branch
 
 This branch (`dhg-baseline`) represents our stable foundation with core functionality.
-It includes:
+It includes:bas
 
 - Basic authentication
 - Core data models

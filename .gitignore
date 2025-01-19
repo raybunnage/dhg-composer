@@ -20,25 +20,29 @@ Thumbs.db
 __pycache__/
 *.py[cod]
 *$py.class
-.pytest_cache/
-venv/
-.env
-.env.*
-!.env.example
-backend/.env*
-*.pyc
-.coverage
-htmlcov/
-
-# Node/Frontend
-node_modules/
-dist/
+*.so
+.Python
 build/
-.vercel
-frontend/.env*
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.env
 
 # IDE
 .idea/
@@ -63,3 +67,85 @@ backend/.env.*
 frontend/.env
 frontend/.env.*
 !frontend/.env.example
+
+# TypeScript/JavaScript
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+dist/
+coverage/
+.next/
+out/
+build/
+.DS_Store
+*.pem
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+.nox/
+.coverage.*
+coverage.xml
+*.cover
+.hypothesis/
+
+# Database
+*.sqlite3
+*.db
+
+# Logs
+logs/
+*.log
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build files
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.dylib
+*.dll
+*.class
+
+# Cache directories
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+
+# Supabase
+.supabase/
+
+# FastAPI
+__pycache__/
+.pytest_cache/
+
+# React/Vite
+dist
+dist-ssr
+*.local
+.vite/
+
+# Editor directories and files
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# File Types
+file_types/
+**/file_types/
