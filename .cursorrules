@@ -1,8 +1,233 @@
 {
   "rules": [
     {
+      "type": "FullStackFeature",
+      "description": "Comprehensive full-stack feature development system",
+      "featureImplementation": {
+        "workflow": {
+          "analysis": {
+            "evaluateRequirements": true,
+            "identifyComponents": [
+              "frontend_components",
+              "backend_services",
+              "database_changes",
+              "api_endpoints",
+              "authentication_requirements",
+              "testing_requirements"
+            ],
+            "determineDependencies": true
+          },
+          "implementation": {
+            "order": [
+              "database_migrations",
+              "backend_models",
+              "api_endpoints",
+              "middleware",
+              "frontend_components",
+              "tests",
+              "documentation"
+            ],
+            "strategy": "minimal_viable_first"
+          }
+        },
+        "componentCoordination": {
+          "database": {
+            "generateMigrations": true,
+            "updateModels": true,
+            "validateSchemas": true
+          },
+          "backend": {
+            "createModels": true,
+            "implementServices": true,
+            "defineEndpoints": true,
+            "addMiddleware": true,
+            "handleExceptions": true
+          },
+          "frontend": {
+            "createComponents": true,
+            "implementState": true,
+            "addStyling": true,
+            "integrateAPI": true,
+            "handleErrors": true
+          },
+          "testing": {
+            "unitTests": {
+              "frontend": true,
+              "backend": true
+            },
+            "integrationTests": true,
+            "e2eTests": true
+          }
+        },
+        "documentation": {
+          "generateDocs": {
+            "api": true,
+            "components": true,
+            "database": true,
+            "testing": true
+          },
+          "updateReadme": true,
+          "addExamples": true
+        },
+        "branchManagement": {
+          "naming": "feature/{feature-name}",
+          "structure": {
+            "commits": [
+              "database-changes",
+              "backend-implementation",
+              "frontend-implementation",
+              "tests-addition",
+              "documentation-update"
+            ],
+            "prTemplate": true
+          }
+        },
+        "bestPractices": {
+          "implementation": [
+            "Start with minimal working feature",
+            "Ensure cross-layer consistency",
+            "Maintain single responsibility",
+            "Include error handling at all levels",
+            "Add comprehensive tests",
+            "Document all components"
+          ],
+          "coordination": [
+            "Match types across layers",
+            "Consistent error handling",
+            "Unified validation rules",
+            "Coherent naming conventions"
+          ]
+        }
+      }
+    },
+    {
       "type": "React",
-      "instructions": "Use functional components with hooks (useState, useEffect, etc.). Prefer modular components with single responsibility and leverage TypeScript for type safety. Implement responsive design using Tailwind CSS. Optimize images using lazy loading techniques and WebP format. Use suspense for lazy-loaded components and handle global state with Context API or React Query for caching."
+      "instructions": "Use functional components with hooks (useState, useEffect, etc.). Prefer modular components with single responsibility and leverage TypeScript for type safety. Implement responsive design using Tailwind CSS. Optimize images using lazy loading techniques and WebP format. Use suspense for lazy-loaded components and handle global state with Context API or React Query for caching.",
+      "componentStructure": {
+        "featureIntegration": {
+          "apiIntegration": {
+            "useTypedEndpoints": true,
+            "matchBackendModels": true,
+            "errorHandlingAlignment": "matchBackendExceptions"
+          },
+          "stateCoordination": {
+            "matchBackendModels": true,
+            "validateAgainstPydantic": true
+          },
+          "featureIsolation": {
+            "useFeatureFolders": true,
+            "includeRelatedTests": true,
+            "bundleWithStyles": true
+          }
+        },
+        "namingConventions": {
+          "componentNames": "PascalCase",
+          "directoryNames": "lowercase-with-dashes"
+        },
+        "bestPractices": {
+          "componentDeclaration": "function",
+          "hooksUsage": ["useState", "useEffect", "useContext", "useReducer", "useMemo", "useCallback"],
+          "followHooksRules": true,
+          "preferFunctionalComponents": true,
+          "usePropTypes": true,
+          "memoization": {
+            "components": "React.memo()",
+            "functions": "useCallback"
+          },
+          "avoidInlineFunctions": true,
+          "compositionOverInheritance": true,
+          "conditionalRendering": ["short-circuit", "ternary"],
+          "errorBoundaries": true
+        },
+        "stateManagement": {
+          "library": "Zustand",
+          "contextForIntermediateState": true,
+          "liftStateWhenNeeded": true
+        },
+        "styling": {
+          "library": ["Shadcn UI", "Radix UI"],
+          "responsiveDesign": "Tailwind CSS",
+          "stylingApproach": {
+            "primary": "stylus-modules",
+            "utility": "tailwind",
+            "methodology": "BEM",
+            "conventions": [
+              "Keep specificity low by avoiding deep nesting",
+              "Avoid using @apply directive with Tailwind",
+              "Import Stylus modules using styles object",
+              "Combine Tailwind utilities with Stylus modules for hybrid approach"
+            ]
+          },
+          "moduleFiles": {
+            "structure": {
+              "location": "next to component files",
+              "example": {
+                "components": {
+                  "Button": ["Button.tsx", "Button.module.styl"],
+                  "Card": ["Card.tsx", "Card.module.styl"]
+                }
+              }
+            },
+            "stylusFeatures": {
+              "required": [
+                "Nesting with parent selector (&)",
+                "Variables for colors, fonts, and repeated values",
+                "Mixins for common style patterns"
+              ],
+              "bestPractices": [
+                "Keep nesting maximum 3 levels deep",
+                "Use variables for theme consistency",
+                "Create reusable mixins for repeated patterns",
+                "Leverage Stylus' built-in functions"
+              ]
+            }
+          }
+        },
+        "performanceOptimization": {
+          "reactServerComponents": true,
+          "imageOptimization": ["WebP", "lazyLoading"],
+          "codeSplitting": "dynamic imports",
+          "purgeCss": "production"
+        },
+        "architecturePatterns": {
+          "composition": {
+            "atomicDesign": {
+              "atoms": "Basic building blocks (buttons, inputs)",
+              "molecules": "Simple component combinations",
+              "organisms": "Complex component combinations",
+              "templates": "Page layouts",
+              "pages": "Complete views"
+            },
+            "propsDrilling": {
+              "avoidDeepDrilling": true,
+              "useContextForSharing": true,
+              "useComposition": true
+            },
+            "dataFlow": {
+              "unidirectional": true,
+              "propTypes": "strict",
+              "immutableData": true
+            }
+          },
+          "componentPatterns": {
+            "container": {
+              "separateLogic": true,
+              "handleDataFetching": true,
+              "manageState": true
+            },
+            "presentation": {
+              "pureFunctions": true,
+              "memoizeWhenNeeded": true,
+              "styleableAndExtensible": true
+            },
+            "hoc": {
+              "useComposition": true,
+              "documentEnhancement": true,
+              "keepSimple": true
+            }
+          }
+        }
+      }
     },
     {
       "type": "Vite",
@@ -10,7 +235,106 @@
     },
     {
       "type": "FastAPI",
-      "instructions": "Use async functions to handle I/O-bound tasks efficiently. Utilize Pydantic models for data validation and serialization. Optimize routes using FastAPI's dependency injection system. Ensure proper exception handling using custom exceptions or HTTPException. Employ middleware for logging and error monitoring."
+      "instructions": "Use async functions to handle I/O-bound tasks efficiently. Utilize Pydantic models for data validation and serialization. Optimize routes using FastAPI's dependency injection system. Ensure proper exception handling using custom exceptions or HTTPException. Employ middleware for logging and error monitoring.",
+      "featureCoordination": {
+        "apiContracts": {
+          "generateTypescriptTypes": true,
+          "maintainVersioning": true,
+          "documentEndpoints": true
+        },
+        "modelAlignment": {
+          "matchFrontendTypes": true,
+          "generateSchemas": true,
+          "validateConsistency": true
+        },
+        "errorHandling": {
+          "matchFrontendErrors": true,
+          "provideDetailedResponses": true
+        }
+      },
+      "modelStandardization": {
+        "use_pydantic": true,
+        "prefer_pydantic_over_dict": true,
+        "input_validation": {
+          "use_pydantic_basemodel": true,
+          "parse_validators": true
+        },
+        "error_handling": {
+          "use_early_return_pattern": true,
+          "implement_custom_errors": true
+        },
+        "dependencies": [
+          "fastapi",
+          "pydantic",
+          "sqlalchemy"
+        ]
+      },
+      "dependencyManagement": {
+        "versionCompatibility": {
+          "checkCompatibility": true,
+          "recommendVersions": true,
+          "coreDependencies": {
+            "fastapi": "^0.104.0",
+            "uvicorn": "^0.24.0",
+            "pydantic": "^2.4.2",
+            "python": "^3.9"
+          },
+          "requirementsFormat": {
+            "useExactVersions": true,
+            "example": "fastapi==0.104.0",
+            "avoidLooseVersions": true
+          },
+          "troubleshooting": {
+            "checkVersionConflicts": true,
+            "suggestCompatibleVersions": true,
+            "recommendUpgrades": true
+          }
+        }
+      },
+      "projectStructure": {
+        "file_structure": [
+          "exported_router",
+          "types",
+          "utilities"
+        ],
+        "route_definition": "declarative_with_annotations"
+      },
+      "exceptionHandling": {
+        "serviceExceptions": {
+          "pattern": "Create dedicated exception classes for each service",
+          "naming": "{ServiceName}Error",
+          "structure": {
+            "base": "CustomBaseException",
+            "categories": [
+              "ValidationError",
+              "NotFoundError",
+              "AuthenticationError",
+              "AuthorizationError",
+              "DatabaseError",
+              "ExternalServiceError",
+              "BusinessLogicError"
+            ]
+          },
+          "implementation": {
+            "includeErrorCodes": true,
+            "includeHttpStatus": true,
+            "requireMessageTemplate": true,
+            "example": {
+              "UserServiceError": {
+                "UserNotFoundError": "status_code=404, detail='User {user_id} not found'",
+                "UserValidationError": "status_code=422, detail='Invalid user data: {detail}'",
+                "UserAuthenticationError": "status_code=401, detail='Authentication failed: {reason}'"
+              }
+            }
+          }
+        },
+        "errorHandling": {
+          "useGlobalErrorHandler": true,
+          "logErrors": true,
+          "returnConsistentFormat": true,
+          "includeDebugInfo": "development_only"
+        }
+      }
     },
     {
       "type": "Python",
@@ -19,6 +343,132 @@
     {
       "type": "PythonBackendDevelopment",
       "description": "Instructions for handling Python backend development using well-organized classes and modern type hints",
+      "serviceStructure": {
+        "featureBasedModules": {
+          "pattern": "Create dedicated service modules for each feature",
+          "naming": "{feature_name}_service",
+          "structure": {
+            "base": "BaseService",
+            "categories": [
+              "DataService",
+              "BusinessService",
+              "IntegrationService",
+              "ValidationService",
+              "CacheService",
+              "EventService"
+            ]
+          },
+          "implementation": {
+            "useServicePattern": true,
+            "useRepositoryPattern": true,
+            "useUnitOfWork": true,
+            "useDependencyInjection": true
+          }
+        },
+        "serviceOrganization": {
+          "location": "src/services/{feature_name}/",
+          "files": {
+            "service": "service.py",
+            "repository": "repository.py",
+            "models": "models.py",
+            "schemas": "schemas.py",
+            "exceptions": "exceptions.py",
+            "constants": "constants.py",
+            "utils": "utils.py"
+          },
+          "testing": {
+            "location": "tests/services/{feature_name}/",
+            "files": [
+              "test_service.py",
+              "test_repository.py",
+              "test_models.py",
+              "conftest.py"
+            ]
+          }
+        },
+        "bestPractices": {
+          "serviceDesign": [
+            "Single Responsibility Principle",
+            "Interface Segregation",
+            "Dependency Inversion",
+            "Open/Closed Principle",
+            "Liskov Substitution"
+          ],
+          "codeOrganization": [
+            "Group related functionality",
+            "Maintain clear interfaces",
+            "Document public APIs",
+            "Use type hints consistently",
+            "Handle errors appropriately"
+          ],
+          "testing": [
+            "Unit test each service",
+            "Mock external dependencies",
+            "Test edge cases",
+            "Ensure test isolation",
+            "Use fixtures effectively"
+          ]
+        },
+        "crossCutting": {
+          "logging": {
+            "useStructuredLogging": true,
+            "includeContextualData": true,
+            "defineLogLevels": true
+          },
+          "configuration": {
+            "useEnvironmentVariables": true,
+            "useConfigurationObjects": true,
+            "validateSettings": true
+          },
+          "monitoring": {
+            "addMetrics": true,
+            "addTracing": true,
+            "addHealthChecks": true
+          }
+        }
+      },
+      "featureSupport": {
+        "serviceStructure": {
+          "featureBasedModules": true,
+          "isolatedFeatureLogic": true,
+          "coordinatedMigrations": true
+        },
+        "crossLayerConsistency": {
+          "typeAlignment": "matchFrontendTypes",
+          "validationRules": "sharedValidation",
+          "errorHandling": "coordinatedErrors"
+        },
+        "testingStrategy": {
+          "featureBasedTests": true,
+          "integrationCoverage": true,
+          "endToEndSupport": true
+        }
+      },
+      "exceptionHandling": {
+        "principles": [
+          "Create service-specific exception hierarchies",
+          "Use descriptive exception names",
+          "Include relevant error context",
+          "Implement proper exception chaining",
+          "Document all custom exceptions"
+        ],
+        "structure": {
+          "location": "service_name/exceptions.py",
+          "baseException": "ServiceBaseError",
+          "commonPatterns": {
+            "validation": "{ServiceName}ValidationError",
+            "notFound": "{ServiceName}NotFoundError",
+            "processing": "{ServiceName}ProcessingError"
+          }
+        },
+        "bestPractices": [
+          "Keep exception hierarchy shallow",
+          "Include error codes for tracking",
+          "Add contextual information",
+          "Ensure exceptions are testable",
+          "Handle exceptions at appropriate levels"
+        ]
+      },
       "instructions": [
         "Prioritize the use of classes to maintain a well-structured codebase",
         "Apply SOLID principles to ensure each class has a single responsibility",
@@ -47,7 +497,527 @@
     },
     {
       "type": "Documentation",
+      "featureDocumentation": {
+        "structure": {
+          "featureOverview": true,
+          "technicalDetails": {
+            "frontend": true,
+            "backend": true,
+            "database": true
+          },
+          "apiDocumentation": true,
+          "testingGuides": true
+        },
+        "templates": {
+          "featureSpec": true,
+          "implementationGuide": true,
+          "testingStrategy": true
+        },
+        "examples": {
+          "fullStackUsage": true,
+          "isolatedComponents": true,
+          "commonPatterns": true
+        }
+      },
       "instructions": "• All docs in markdown (.md) within the docs folder, which may contain nested folders by topic.\n• Focus on beginner-friendly writing, step-by-step guides, and examples.\n• Use consistent formatting, headings, bullet points, and code blocks.\n• Refer to best practices for each programming topic.\n• Consider including a table of contents and illustrative images or diagrams.\n• Update documentation regularly and encourage feedback from peers."
+    },
+    {
+      "type": "APIIntegration",
+      "description": "Cross-layer API integration and contract management",
+      "featureCoordination": {
+        "apiContracts": {
+          "definition": {
+            "useOpenAPI": true,
+            "versionControl": true,
+            "schemaValidation": true,
+            "typeGeneration": {
+              "typescript": true,
+              "pydantic": true
+            }
+          },
+          "endpoints": {
+            "restfulPrinciples": true,
+            "versionedRoutes": true,
+            "consistentNaming": true,
+            "errorFormats": {
+              "standardizeResponses": true,
+              "includeErrorCodes": true,
+              "provideDetails": true
+            }
+          }
+        },
+        "crossLayerConsistency": {
+          "types": {
+            "frontendToBackend": true,
+            "databaseToAPI": true,
+            "validateConsistency": true
+          },
+          "authentication": {
+            "jwtHandling": true,
+            "sessionManagement": true,
+            "roleBasedAccess": true
+          },
+          "errorHandling": {
+            "consistentFormats": true,
+            "statusCodeMapping": true,
+            "clientSideHandling": true
+          }
+        },
+        "testing": {
+          "contractTesting": true,
+          "integrationTests": true,
+          "loadTesting": true,
+          "documentation": {
+            "examples": true,
+            "postmanCollection": true,
+            "swaggerDocs": true
+          }
+        },
+        "security": {
+          "authentication": true,
+          "authorization": true,
+          "rateLimit": true,
+          "inputValidation": true,
+          "outputSanitization": true
+        }
+      }
+    },
+    {
+      "type": "DatabaseMigrations",
+      "description": "Database migration management and coordination",
+      "migrationManagement": {
+        "structure": {
+          "location": "migrations/",
+          "naming": {
+            "pattern": "{timestamp}_{feature_name}_{action}",
+            "example": "20240318_user_profile_add_columns"
+          },
+          "fileTypes": {
+            "up": "*.up.sql",
+            "down": "*.down.sql",
+            "schema": "schema.sql"
+          }
+        },
+        "versionControl": {
+          "trackMigrations": true,
+          "useVersionTable": true,
+          "enforceOrder": true,
+          "preventModification": true
+        },
+        "bestPractices": {
+          "migrationDesign": [
+            "Make migrations atomic",
+            "Include rollback logic",
+            "Use transactions",
+            "Test both up and down migrations",
+            "Document complex migrations"
+          ],
+          "dataHandling": [
+            "Preserve existing data",
+            "Handle large datasets",
+            "Consider performance impact",
+            "Validate data integrity"
+          ],
+          "coordination": [
+            "Match model changes",
+            "Update type definitions",
+            "Coordinate with API changes",
+            "Update documentation"
+          ]
+        },
+        "tooling": {
+          "primary": "Alembic",
+          "features": {
+            "autoGeneration": true,
+            "dependencies": true,
+            "branchSupport": true
+          },
+          "commands": {
+            "generate": "alembic revision --autogenerate -m",
+            "upgrade": "alembic upgrade head",
+            "downgrade": "alembic downgrade -1",
+            "history": "alembic history"
+          }
+        },
+        "testing": {
+          "requirements": [
+            "Test migrations in isolation",
+            "Verify data integrity",
+            "Check performance impact",
+            "Validate rollback procedures"
+          ],
+          "environment": {
+            "useTestDatabase": true,
+            "replicateProductionData": "sample",
+            "automatedTesting": true
+          }
+        },
+        "deployment": {
+          "strategy": {
+            "useTransactions": true,
+            "backupFirst": true,
+            "validateState": true,
+            "monitorPerformance": true
+          },
+          "rollback": {
+            "planRequired": true,
+            "testProcedure": true,
+            "documentSteps": true
+          },
+          "coordination": {
+            "matchDeploymentStage": true,
+            "synchronizeWithApp": true,
+            "notifyTeam": true
+          }
+        }
+      }
+    },
+    {
+      "type": "TestDrivenDevelopment",
+      "description": "Test-driven development workflow and pytest standards",
+      "tddWorkflow": {
+        "process": {
+          "steps": [
+            "Write failing test first",
+            "Implement minimal code to pass",
+            "Refactor while maintaining tests",
+            "Repeat for next feature"
+          ],
+          "emphasis": {
+            "startWithInterface": true,
+            "keepTestsFocused": true,
+            "maintainTestSuite": true
+          }
+        },
+        "testStructure": {
+          "location": "tests/{feature_name}/",
+          "naming": {
+            "files": "test_{module_name}.py",
+            "functions": "test_{behavior}_should_{expected_result}",
+            "classes": "Test{FeatureName}"
+          },
+          "organization": {
+            "grouping": "feature_based",
+            "categories": [
+              "unit",
+              "integration",
+              "functional"
+            ]
+          }
+        },
+        "pytestBasics": {
+          "fixtures": {
+            "scope": ["function", "class", "module", "session"],
+            "sharing": "conftest.py",
+            "naming": "descriptive_of_setup"
+          },
+          "assertions": {
+            "useBuiltIn": true,
+            "preferExplicit": true
+          },
+          "markers": {
+            "useCustom": true,
+            "registerInPytest": true
+          }
+        },
+        "bestPractices": {
+          "testCharacteristics": [
+            "Single responsibility",
+            "Independent/isolated",
+            "Repeatable results",
+            "Self-validating",
+            "Timely (written first)"
+          ],
+          "naming": [
+            "Clear intention",
+            "Describes behavior",
+            "States expected result"
+          ],
+          "maintenance": [
+            "Keep tests clean",
+            "Refactor test code",
+            "Update with changes",
+            "Remove obsolete tests"
+          ]
+        }
+      }
+    },
+    {
+      "type": "TestingPatterns",
+      "description": "Comprehensive testing patterns and strategies",
+      "testingStrategy": {
+        "patterns": {
+          "arrange_act_assert": {
+            "use": true,
+            "structure": [
+              "Set up test data and conditions",
+              "Execute the code under test",
+              "Verify the results"
+            ]
+          },
+          "given_when_then": {
+            "use": true,
+            "structure": [
+              "Given some precondition",
+              "When an action occurs",
+              "Then verify the outcome"
+            ]
+          },
+          "testDoubles": {
+            "mocks": "Verify behavior and interactions",
+            "stubs": "Provide canned answers",
+            "fakes": "Working implementations for tests",
+            "spies": "Record information about calls"
+          }
+        },
+        "dataStrategies": {
+          "factories": {
+            "use": "factory_boy",
+            "patterns": [
+              "Base factories for models",
+              "Trait factories for variations",
+              "Related factories for relationships"
+            ]
+          },
+          "fixtures": {
+            "use": "pytest fixtures",
+            "patterns": [
+              "Modular fixture composition",
+              "Parametrized test data",
+              "Reusable setup/teardown"
+            ]
+          }
+        },
+        "asyncTesting": {
+          "patterns": [
+            "Use async fixtures",
+            "Mock async calls",
+            "Test async workflows"
+          ],
+          "tools": [
+            "pytest-asyncio",
+            "async-asgi-testclient",
+            "httpx"
+          ]
+        },
+        "integrationPatterns": {
+          "database": {
+            "useTestDatabase": true,
+            "transactionRollback": true,
+            "isolatedTests": true
+          },
+          "api": {
+            "mockExternalServices": true,
+            "useTestClients": true,
+            "validateContracts": true
+          }
+        }
+      }
+    },
+    {
+      "type": "SecurityPractices",
+      "description": "Security standards and practices across all layers",
+      "securityFramework": {
+        "authentication": {
+          "implementation": {
+            "useJWT": true,
+            "secureTokenStorage": true,
+            "refreshTokenStrategy": true,
+            "sessionManagement": {
+              "httpOnly": true,
+              "secureCookies": true,
+              "csrfProtection": true
+            }
+          },
+          "passwordPolicies": {
+            "hashingAlgorithm": "bcrypt",
+            "minimumStrength": true,
+            "preventCommonPasswords": true,
+            "requireMFA": "recommended"
+          }
+        },
+        "authorization": {
+          "rbac": {
+            "useRoleBasedAccess": true,
+            "definePermissions": true,
+            "enforceAtAllLayers": true
+          },
+          "apiSecurity": {
+            "validateJWT": true,
+            "checkPermissions": true,
+            "rateLimit": true
+          }
+        },
+        "dataProtection": {
+          "encryption": {
+            "inTransit": "TLS 1.3",
+            "atRest": "AES-256",
+            "keyManagement": true
+          },
+          "sanitization": {
+            "inputValidation": true,
+            "outputEncoding": true,
+            "preventInjection": true,
+            "validateFileUploads": true
+          }
+        },
+        "secureConfiguration": {
+          "environment": {
+            "useSecretManagement": true,
+            "separateConfigs": true,
+            "auditSecrets": true
+          },
+          "logging": {
+            "securityEvents": true,
+            "auditTrail": true,
+            "sanitizeSensitiveData": true
+          }
+        },
+        "testing": {
+          "security": {
+            "penetrationTesting": true,
+            "vulnerabilityScanning": true,
+            "dependencyAudits": true
+          },
+          "compliance": {
+            "gdprReadiness": true,
+            "hipaaControls": "if-applicable",
+            "sox": "if-applicable"
+          }
+        },
+        "bestPractices": {
+          "development": [
+            "Never store secrets in code",
+            "Validate all inputs",
+            "Use prepared statements",
+            "Implement proper error handling",
+            "Keep dependencies updated"
+          ],
+          "deployment": [
+            "Use secure headers",
+            "Enable HTTPS only",
+            "Implement WAF rules",
+            "Regular security updates",
+            "Monitor for breaches"
+          ]
+        }
+      }
+    },
+    {
+      "type": "DeploymentWorkflow",
+      "description": "Comprehensive deployment and CI/CD workflow management",
+      "deploymentFramework": {
+        "environments": {
+          "development": {
+            "purpose": "Local development and testing",
+            "configuration": {
+              "useLocalServices": true,
+              "debugEnabled": true,
+              "mockExternalServices": true
+            }
+          },
+          "staging": {
+            "purpose": "Pre-production testing and validation",
+            "configuration": {
+              "mirrorProduction": true,
+              "featureFlags": true,
+              "sandboxedServices": true
+            }
+          },
+          "production": {
+            "purpose": "Live environment",
+            "configuration": {
+              "highAvailability": true,
+              "scalingRules": true,
+              "backupStrategy": true
+            }
+          }
+        },
+        "cicdPipeline": {
+          "stages": {
+            "build": {
+              "frontendBuild": true,
+              "backendBuild": true,
+              "containerization": true,
+              "artifactGeneration": true
+            },
+            "test": {
+              "unitTests": true,
+              "integrationTests": true,
+              "e2eTests": true,
+              "securityScans": true
+            },
+            "deploy": {
+              "automatedDeployment": true,
+              "blueGreenStrategy": true,
+              "rollbackCapability": true
+            }
+          },
+          "automation": {
+            "githubActions": true,
+            "environmentSecrets": true,
+            "deploymentApprovals": true
+          }
+        },
+        "monitoring": {
+          "metrics": {
+            "applicationMetrics": true,
+            "systemMetrics": true,
+            "businessMetrics": true,
+            "alerting": true
+          },
+          "logging": {
+            "structuredLogs": true,
+            "centralizedLogging": true,
+            "logRetention": true
+          },
+          "tracing": {
+            "distributedTracing": true,
+            "performanceMonitoring": true,
+            "errorTracking": true
+          }
+        },
+        "infrastructure": {
+          "provisioning": {
+            "infrastructureAsCode": true,
+            "containerOrchestration": true,
+            "serviceDiscovery": true
+          },
+          "scaling": {
+            "autoScaling": true,
+            "loadBalancing": true,
+            "resourceOptimization": true
+          }
+        },
+        "rollback": {
+          "strategy": {
+            "automatedRollback": true,
+            "dataBackups": true,
+            "stateManagement": true
+          },
+          "procedures": {
+            "rollbackSteps": true,
+            "dataRecovery": true,
+            "communicationPlan": true
+          }
+        },
+        "bestPractices": {
+          "deployment": [
+            "Use semantic versioning",
+            "Maintain deployment documentation",
+            "Implement feature flags",
+            "Monitor deployment health",
+            "Automate where possible"
+          ],
+          "operations": [
+            "Regular backup verification",
+            "Incident response plan",
+            "Performance benchmarking",
+            "Security compliance checks",
+            "Capacity planning"
+          ]
+        }
+      }
     }
   ]
 }
