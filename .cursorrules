@@ -145,42 +145,14 @@
           "liftStateWhenNeeded": true
         },
         "styling": {
-          "library": ["Shadcn UI", "Radix UI"],
-          "responsiveDesign": "Tailwind CSS",
-          "stylingApproach": {
-            "primary": "stylus-modules",
-            "utility": "tailwind",
-            "methodology": "BEM",
+          "approach": {
+            "primary": "Tailwind CSS with modules",
+            "components": "Shadcn UI",
             "conventions": [
-              "Keep specificity low by avoiding deep nesting",
-              "Avoid using @apply directive with Tailwind",
-              "Import Stylus modules using styles object",
-              "Combine Tailwind utilities with Stylus modules for hybrid approach"
+              "Keep styles close to components",
+              "Use utility classes first",
+              "Create modules for complex styles"
             ]
-          },
-          "moduleFiles": {
-            "structure": {
-              "location": "next to component files",
-              "example": {
-                "components": {
-                  "Button": ["Button.tsx", "Button.module.styl"],
-                  "Card": ["Card.tsx", "Card.module.styl"]
-                }
-              }
-            },
-            "stylusFeatures": {
-              "required": [
-                "Nesting with parent selector (&)",
-                "Variables for colors, fonts, and repeated values",
-                "Mixins for common style patterns"
-              ],
-              "bestPractices": [
-                "Keep nesting maximum 3 levels deep",
-                "Use variables for theme consistency",
-                "Create reusable mixins for repeated patterns",
-                "Leverage Stylus' built-in functions"
-              ]
-            }
           }
         },
         "performanceOptimization": {
@@ -254,10 +226,9 @@
       },
       "modelStandardization": {
         "use_pydantic": true,
-        "prefer_pydantic_over_dict": true,
-        "input_validation": {
-          "use_pydantic_basemodel": true,
-          "parse_validators": true
+        "validation": {
+          "useModels": true,
+          "validateInput": true
         },
         "error_handling": {
           "use_early_return_pattern": true,
@@ -584,97 +555,26 @@
     },
     {
       "type": "DatabaseMigrations",
-      "description": "Database migration management and coordination",
       "migrationManagement": {
         "structure": {
           "location": "migrations/",
-          "naming": {
-            "pattern": "{timestamp}_{feature_name}_{action}",
-            "example": "20240318_user_profile_add_columns"
-          },
-          "fileTypes": {
-            "up": "*.up.sql",
-            "down": "*.down.sql",
-            "schema": "schema.sql"
-          }
+          "naming": "{timestamp}_{feature_name}_{action}"
         },
-        "versionControl": {
-          "trackMigrations": true,
-          "useVersionTable": true,
-          "enforceOrder": true,
-          "preventModification": true
+        "core": {
+          "useAlembic": true,
+          "trackVersions": true,
+          "includeRollback": true
         },
-        "bestPractices": {
-          "migrationDesign": [
-            "Make migrations atomic",
-            "Include rollback logic",
-            "Use transactions",
-            "Test both up and down migrations",
-            "Document complex migrations"
-          ],
-          "dataHandling": [
-            "Preserve existing data",
-            "Handle large datasets",
-            "Consider performance impact",
-            "Validate data integrity"
-          ],
-          "coordination": [
-            "Match model changes",
-            "Update type definitions",
-            "Coordinate with API changes",
-            "Update documentation"
-          ]
-        },
-        "tooling": {
-          "primary": "Alembic",
-          "features": {
-            "autoGeneration": true,
-            "dependencies": true,
-            "branchSupport": true
-          },
-          "commands": {
-            "generate": "alembic revision --autogenerate -m",
-            "upgrade": "alembic upgrade head",
-            "downgrade": "alembic downgrade -1",
-            "history": "alembic history"
-          }
-        },
-        "testing": {
-          "requirements": [
-            "Test migrations in isolation",
-            "Verify data integrity",
-            "Check performance impact",
-            "Validate rollback procedures"
-          ],
-          "environment": {
-            "useTestDatabase": true,
-            "replicateProductionData": "sample",
-            "automatedTesting": true
-          }
-        },
-        "deployment": {
-          "strategy": {
-            "useTransactions": true,
-            "backupFirst": true,
-            "validateState": true,
-            "monitorPerformance": true
-          },
-          "rollback": {
-            "planRequired": true,
-            "testProcedure": true,
-            "documentSteps": true
-          },
-          "coordination": {
-            "matchDeploymentStage": true,
-            "synchronizeWithApp": true,
-            "notifyTeam": true
-          }
-        }
+        "bestPractices": [
+          "Make migrations atomic",
+          "Test both directions",
+          "Document complex changes"
+        ]
       }
     },
     {
       "type": "TestDrivenDevelopment",
-      "description": "Test-driven development workflow and pytest standards",
+      "description": "Unified testing approach with TDD focus",
       "tddWorkflow": {
         "process": {
           "steps": [
@@ -739,77 +639,20 @@
             "Update with changes",
             "Remove obsolete tests"
           ]
-        }
-      }
-    },
-    {
-      "type": "TestingPatterns",
-      "description": "Comprehensive testing patterns and strategies",
-      "testingStrategy": {
-        "patterns": {
-          "arrange_act_assert": {
-            "use": true,
-            "structure": [
-              "Set up test data and conditions",
-              "Execute the code under test",
-              "Verify the results"
-            ]
-          },
-          "given_when_then": {
-            "use": true,
-            "structure": [
-              "Given some precondition",
-              "When an action occurs",
-              "Then verify the outcome"
-            ]
-          },
-          "testDoubles": {
-            "mocks": "Verify behavior and interactions",
-            "stubs": "Provide canned answers",
-            "fakes": "Working implementations for tests",
-            "spies": "Record information about calls"
-          }
         },
-        "dataStrategies": {
-          "factories": {
-            "use": "factory_boy",
-            "patterns": [
-              "Base factories for models",
-              "Trait factories for variations",
-              "Related factories for relationships"
-            ]
+        "testingPatterns": {
+          "core": {
+            "arrange_act_assert": true,
+            "given_when_then": true,
+            "useTestDoubles": true
           },
-          "fixtures": {
-            "use": "pytest fixtures",
-            "patterns": [
-              "Modular fixture composition",
-              "Parametrized test data",
-              "Reusable setup/teardown"
-            ]
-          }
-        },
-        "asyncTesting": {
-          "patterns": [
-            "Use async fixtures",
-            "Mock async calls",
-            "Test async workflows"
-          ],
-          "tools": [
-            "pytest-asyncio",
-            "async-asgi-testclient",
-            "httpx"
-          ]
-        },
-        "integrationPatterns": {
-          "database": {
-            "useTestDatabase": true,
-            "transactionRollback": true,
-            "isolatedTests": true
+          "dataManagement": {
+            "useFactories": true,
+            "useFixtures": true
           },
-          "api": {
-            "mockExternalServices": true,
-            "useTestClients": true,
-            "validateContracts": true
+          "integration": {
+            "mockExternals": true,
+            "useTestDatabases": true
           }
         }
       }
@@ -1015,6 +858,126 @@
             "Performance benchmarking",
             "Security compliance checks",
             "Capacity planning"
+          ]
+        }
+      }
+    },
+    {
+      "type": "MonitoringAndObservability",
+      "description": "Comprehensive monitoring and observability standards",
+      "monitoringFramework": {
+        "metrics": {
+          "core": {
+            "responseTime": true,
+            "errorRates": true,
+            "throughput": true,
+            "resourceUsage": true
+          },
+          "business": {
+            "userActions": true,
+            "featureUsage": true,
+            "conversionRates": true
+          },
+          "infrastructure": {
+            "cpuUsage": true,
+            "memoryUsage": true,
+            "diskSpace": true,
+            "networkTraffic": true
+          }
+        },
+        "logging": {
+          "strategy": {
+            "useStructuredLogging": true,
+            "defineSeverityLevels": true,
+            "includeContextData": true
+          },
+          "implementation": {
+            "frontend": "browser-console + remote",
+            "backend": "application + system",
+            "infrastructure": "container + host"
+          }
+        },
+        "alerting": {
+          "thresholds": {
+            "defineBaselines": true,
+            "setTriggers": true,
+            "useAnomalyDetection": true
+          },
+          "notifications": {
+            "priorityLevels": true,
+            "routingRules": true,
+            "escalationPaths": true
+          }
+        }
+      }
+    },
+    {
+      "type": "PerformanceGuidelines",
+      "description": "Performance standards and optimization strategies",
+      "performanceFramework": {
+        "frontend": {
+          "metrics": {
+            "firstContentfulPaint": "< 1.5s",
+            "timeToInteractive": "< 3s",
+            "totalBlockingTime": "< 300ms",
+            "cumulativeLayoutShift": "< 0.1"
+          },
+          "optimization": {
+            "codeOptimization": [
+              "Tree shaking",
+              "Code splitting",
+              "Lazy loading"
+            ],
+            "assetOptimization": [
+              "Image optimization",
+              "Font optimization",
+              "Cache strategies"
+            ]
+          }
+        },
+        "backend": {
+          "metrics": {
+            "responseTime": "< 100ms",
+            "throughput": "> 1000 rps",
+            "errorRate": "< 0.1%"
+          },
+          "optimization": {
+            "database": [
+              "Query optimization",
+              "Connection pooling",
+              "Caching strategies"
+            ],
+            "api": [
+              "Response compression",
+              "Batch processing",
+              "Rate limiting"
+            ]
+          }
+        },
+        "testing": {
+          "loadTesting": {
+            "benchmarks": true,
+            "stressTests": true,
+            "enduranceTests": true
+          },
+          "profiling": {
+            "cpuProfiling": true,
+            "memoryProfiling": true,
+            "databaseProfiling": true
+          }
+        },
+        "bestPractices": {
+          "development": [
+            "Profile early and often",
+            "Set performance budgets",
+            "Monitor performance metrics",
+            "Optimize critical paths"
+          ],
+          "deployment": [
+            "Use CDN for static assets",
+            "Enable compression",
+            "Implement caching",
+            "Monitor resource usage"
           ]
         }
       }
