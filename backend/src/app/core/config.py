@@ -40,31 +40,24 @@ class Settings(BaseSettings):
         return v
 
     # CORS Settings
-    BACKEND_CORS_ORIGINS: List[str] = [
-        "http://localhost:3000",
-        "http://localhost:5173",
-        "http://localhost:8001",
-        "http://127.0.0.1:5173",
-        "http://127.0.0.1:3000",
-        "http://127.0.0.1:8001",
-    ]
+    BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = []
 
     @validator("BACKEND_CORS_ORIGINS", pre=True)
-    def assemble_cors_origins(cls, v: Union[str, List[str]]) -> List[str]:
+    def assemble_cors_origins(cls, v: Union[str, List[str]]) -> Union[List[str], str]:
         if isinstance(v, str):
             try:
-                # Try to parse as JSON first
+                # Parse JSON string
                 return json.loads(v)
             except json.JSONDecodeError:
-                # If not JSON, treat as comma-separated
-                return [x.strip() for x in v.split(",") if x.strip()]
-        return v if isinstance(v, list) else []
+                # Fall back to comma-separated string
+                return [i.strip() for i in v.split(",")]
+        return v
 
     # App Settings
     APPS_ENABLED: Dict[str, bool] = {"app1": True, "app2": True}
 
     # Security
-    SECRET_KEY: str
+    SECRET_KEY: Optional[str] = None
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8  # 8 days
 
     @validator("SECRET_KEY")

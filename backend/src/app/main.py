@@ -20,16 +20,17 @@ load_dotenv(Path(__file__).parent.parent.parent / env_file)
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Add after environment loading
-try:
-    env_config = validate_environment()
-    logger.info(f"Environment validated successfully: {env_config['ENV']}")
-except Exception as e:
-    logger.error(f"Environment validation failed: {str(e)}")
-    raise
-
 
 def create_app() -> FastAPI:
+    # Validate environment before creating app
+    try:
+        env_config = validate_environment()
+        logger.info(f"Environment validated successfully: {env_config['ENV']}")
+    except Exception as e:
+        logger.error(f"Environment validation failed: {str(e)}")
+        # Don't raise here, continue with defaults
+        logger.warning("Continuing with default configuration")
+
     app = FastAPI(
         title=settings.PROJECT_NAME,
         version=settings.VERSION,

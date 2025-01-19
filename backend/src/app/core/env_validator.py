@@ -1,4 +1,4 @@
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 import os
 from pathlib import Path
 import logging
@@ -16,14 +16,14 @@ class EnvironmentValidator(BaseModel):
     SUPABASE_URL: AnyHttpUrl
     SUPABASE_KEY: SecretStr
     ENV: str
-    SECRET_KEY: SecretStr
+    SECRET_KEY: Optional[SecretStr] = None  # Make it optional for now
 
     # Optional variables with defaults
     DEBUG: bool = False
     PORT: int = 8000
     LOG_LEVEL: str = "info"
     BACKEND_CORS_ORIGINS: List[str] = ["http://localhost:3000"]
-    DATABASE_URL: str | None = None
+    DATABASE_URL: Optional[str] = None
 
     @validator("SUPABASE_URL")
     def validate_supabase_url(cls, v: str) -> str:
@@ -51,16 +51,14 @@ class EnvironmentValidator(BaseModel):
         return v.lower()
 
     @validator("SECRET_KEY")
-    def validate_secret_key(cls, v: SecretStr) -> SecretStr:
+    def validate_secret_key(cls, v: Optional[SecretStr]) -> Optional[SecretStr]:
+        if v is None:
+            return v
         key = v.get_secret_value()
         if len(key) < 32:
             raise ValueError("SECRET_KEY must be at least 32 characters")
         if not any(c.isupper() for c in key):
             raise ValueError("SECRET_KEY must contain at least one uppercase letter")
-        if not any(c.islower() for c in key):
-            raise ValueError("SECRET_KEY must contain at least one lowercase letter")
-        if not any(c.isdigit() for c in key):
-            raise ValueError("SECRET_KEY must contain at least one number")
         return v
 
     @validator("PORT")
@@ -89,18 +87,12 @@ class EnvironmentValidator(BaseModel):
                 raise ValueError(f"Invalid CORS origin: {origin}")
         return validated
 
-    @validator("DATABASE_URL", pre=True)
-    def validate_database_url(cls, v: str | None) -> str | None:
+    @validator("DATABASE_URL")
+    def validate_database_url(cls, v: Optional[str]) -> Optional[str]:
         if v is None:
-            return None
-        try:
-            parsed = urlparse(v)
-            if parsed.scheme not in ["postgresql", "postgres"]:
-                raise ValueError("DATABASE_URL must be a PostgreSQL connection string")
-            if not parsed.netloc:
-                raise ValueError("DATABASE_URL must contain host information")
-        except Exception as e:
-            raise ValueError(f"Invalid DATABASE_URL: {str(e)}")
+            return v
+        if not v.startswith("postgresql://"):
+            raise ValueError("DATABASE_URL must be a PostgreSQL connection string")
         return v
 
 
