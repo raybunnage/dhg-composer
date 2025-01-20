@@ -19,9 +19,18 @@ kill_port() {
 kill_port 8001  # Backend port
 kill_port 5173  # Frontend port
 
-# Load environment variables
-echo "Loading environment from backend/.env.dev"
-source "$BACKEND_DIR/.env.dev"
+# Load environment variables - with better error checking
+ENV_FILE="$BACKEND_DIR/.env.dev"
+if [ ! -f "$ENV_FILE" ]; then
+    echo "Error: $ENV_FILE not found!"
+    echo "Please create this file with your Supabase credentials."
+    exit 1
+fi
+
+echo "Loading environment from $ENV_FILE"
+set -a  # automatically export all variables
+source "$ENV_FILE"
+set +a
 
 # Add backend/src to PYTHONPATH
 export PYTHONPATH="$BACKEND_DIR/src:$PYTHONPATH"
@@ -50,11 +59,6 @@ echo "- Auto-reload (watchfiles)"
 echo "- Debug support (debugpy)"
 echo "- Basic testing (pytest)"
 echo "- Better console output (rich)"
-echo ""
-echo "To install additional tools:"
-echo "- Code formatting: uv pip install black flake8 isort"
-echo "- Advanced testing: uv pip install pytest-cov pytest-mock faker"
-echo "- Documentation: uv pip install mkdocs mkdocs-material"
 
 # Wait for both processes
 wait 

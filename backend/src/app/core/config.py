@@ -1,8 +1,23 @@
 from typing import List, Dict, Optional, Union
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from pydantic import validator, AnyHttpUrl, HttpUrl
+from pydantic import validator, AnyHttpUrl, HttpUrl, Field
 import secrets
 import json
+import os
+from pathlib import Path
+
+# At the top of the file
+current_dir = Path(__file__).parent
+env_file = current_dir.parent.parent.parent / ".env.dev"
+print(f"Looking for env file at: {env_file}")
+print(f"File exists: {env_file.exists()}")
+
+if env_file.exists():
+    print("Environment variables in file:")
+    with open(env_file) as f:
+        for line in f:
+            if line.strip() and not line.startswith("#"):
+                print(f"  {line.strip()}")
 
 
 class Settings(BaseSettings):
@@ -23,9 +38,12 @@ class Settings(BaseSettings):
     ENV: str = "development"
     DEBUG: bool = True
 
-    # Supabase
-    SUPABASE_URL: str
-    SUPABASE_KEY: str
+    # Supabase - with better error messages
+    SUPABASE_URL: str = Field(
+        ...,  # ... means required
+        description="Your Supabase project URL (e.g., https://your-project.supabase.co)",
+    )
+    SUPABASE_KEY: str = Field(..., description="Your Supabase anon/public key")
 
     @validator("SUPABASE_URL")
     def validate_supabase_url(cls, v: str) -> str:
@@ -67,9 +85,10 @@ class Settings(BaseSettings):
         return v
 
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=".env.dev",
         env_file_encoding="utf-8",
         case_sensitive=True,
+        validate_default=True,
     )
 
 
