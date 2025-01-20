@@ -10,16 +10,32 @@ authors = [
     { name = "Your Name", email = "your.email@example.com" },
 ]
 dependencies = [
-    "fastapi>=0.104.0",
-    "uvicorn>=0.24.0",
-    "pydantic>=2.4.2",
-    "pydantic-settings>=2.0.3",
-    "supabase>=2.0.3",
-    "python-jose[cryptography]>=3.3.0",
-    "passlib[bcrypt]>=1.7.4",
-    "python-multipart>=0.0.6",
-    "asyncpg>=0.29.0",
-    "alembic>=1.12.0",
+    # FastAPI and core dependencies
+    "fastapi==0.95.2",          # DOWNGRADED - Compatible with pydantic v1
+    "pydantic==1.10.12",        # DOWNGRADED - Required by postgrest 0.10.6
+    "email-validator==2.1.1",   # Required for pydantic email validation
+    "python-dotenv==1.0.0",     # Environment management
+
+    # API and HTTP
+    "httpx==0.23.3",           # DOWNGRADED - Required by supabase 1.0.3
+    "httpcore==0.16.3",        # DOWNGRADED - Compatible with httpx 0.23.3
+    "aiohttp==3.7.4",          # DOWNGRADED - Known to work on M1/M2 Macs
+    "uvicorn==0.23.2",         # ASGI server
+
+    # Supabase and dependencies
+    "supabase==1.0.3",         # Base version known to work
+    "postgrest==0.10.6",       # Compatible with supabase 1.0.3
+    "gotrue==1.0.1",           # Compatible with supabase 1.0.3
+
+    # Authentication
+    "python-jose[cryptography]==3.3.0",  # JWT handling
+    "passlib[bcrypt]==1.7.4",           # Password hashing
+    "python-multipart==0.0.20",         # Form data parsing
+
+    # Utilities
+    "orjson==3.10.15",        # Fast JSON parsing
+    "tenacity==8.2.3",        # Retry logic for API calls
+    "structlog==23.2.0",      # Structured logging
 ]
 requires-python = ">=3.9"
 readme = "README.md"
