@@ -73,8 +73,15 @@ def create_app() -> FastAPI:
         path = request.url.path
         method = request.method
 
-        logger.info(f"Request started: {method} {path}")
-        logger.debug(f"Request headers: {dict(request.headers)}")
+        # Add more detailed path logging with proper formatting
+        logger.info(
+            f"Request Details:\n"
+            f"- Method: {method}\n"
+            f"- Full Path: {path}\n"
+            f"- API Prefix Check: {path.startswith(settings.API_V1_STR)}\n"
+            f"- Expected Prefix: {settings.API_V1_STR}\n"
+            f"- Headers: {dict(request.headers)}"
+        )
 
         response = await call_next(request)
 

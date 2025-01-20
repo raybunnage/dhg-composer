@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { supabase } from '@/lib/supabaseClient'
 
 export default function Login() {
@@ -8,6 +8,16 @@ export default function Login() {
   const [error, setError] = useState<string | null>(null)
   const [isSignUp, setIsSignUp] = useState(false)  // Toggle between signin/signup
 
+  // Add URL construction logging
+  useEffect(() => {
+    const baseUrl = import.meta.env.VITE_API_URL
+    console.log('API Configuration:', {
+      baseUrl,
+      fullAuthPath: `${baseUrl}/api/v1/auth/signin`,
+      apiV1Str: '/api/v1'
+    })
+  }, [])
+
   async function handleAuth(e: React.FormEvent) {
     e.preventDefault()
     setError(null)
@@ -15,13 +25,18 @@ export default function Login() {
 
     try {
       const endpoint = isSignUp ? 'signup' : 'signin'
-      const apiUrl = `${import.meta.env.VITE_API_URL}/api/v1/auth/${endpoint}`  // Correct prefix for both
+      const baseUrl = import.meta.env.VITE_API_URL
+      const apiPath = '/api/v1'
+      const fullUrl = `${baseUrl}${apiPath}/auth/${endpoint}`
       
-      console.log('Auth Request:', {
-        url: apiUrl,
-        method: 'POST',
-        action: isSignUp ? 'signup' : 'signin',
-        body: { email, password }
+      // Debug URL construction
+      console.log('DEBUG URL:', {
+        VITE_API_URL: import.meta.env.VITE_API_URL,
+        baseUrl,
+        apiPath,
+        endpoint,
+        fullUrl,
+        constructedUrl: fullUrl
       })
 
       // Call appropriate Supabase method
@@ -34,11 +49,11 @@ export default function Login() {
       if (error) throw error
       
       // Sync with backend
-      const response = await fetch(apiUrl, {
+      const response = await fetch(fullUrl, {  // Use fullUrl here
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',  // Add explicit Accept header
+          'Accept': 'application/json',
         },
         body: JSON.stringify({ email, password }),
       })
