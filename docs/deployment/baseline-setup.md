@@ -2,9 +2,9 @@
 
 ## 1. Backup Current Branches
 ```bash
-# Backup current main branch state
+# Backup current main branch state (production)
 git checkout main
-git tag main-backup-$(date +%Y%m%d)
+git tag production-backup-$(date +%Y%m%d)
 
 # Backup development branch
 git checkout development
@@ -20,8 +20,12 @@ git push origin --tags
 
 ## 2. Clean Up Old Branches
 ```bash
+# Delete production/main branch (local and remote)
+git checkout manage-branches  # switch to our new source of truth
+git branch -d main  # delete local main
+git push origin :main  # delete remote main
+
 # Delete development branch (local and remote)
-git checkout main
 git branch -d development
 git push origin :development
 
