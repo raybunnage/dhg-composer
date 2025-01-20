@@ -10,14 +10,26 @@ NC='\033[0m' # No Color
 set -e
 trap 'echo -e "${RED}Error on line $LINENO${NC}"; exit 1' ERR
 
-# Help message
-show_help() {
-    echo "Usage: $0 <feature-name> [base-branch]"
-    echo
-    echo "Parameters:"
-    echo "  feature-name   Name of the feature (required)"
-    echo "  base-branch    Branch to base feature on (default: main)"
-}
+# Check if feature name was provided
+if [ -z "$1" ]; then
+    echo "Error: Please provide a feature name"
+    echo "Usage: ./new-feature.sh <feature-name>"
+    echo "Example: ./new-feature.sh add-user-auth"
+    exit 1
+fi
+
+FEATURE_NAME=$1
+BRANCH_NAME="feature/$FEATURE_NAME"
+
+# Ensure we're on development and it's up to date
+git checkout development
+git pull origin development
+
+# Create new feature branch
+git checkout -b "$BRANCH_NAME"
+
+echo "Created new feature branch: $BRANCH_NAME"
+echo "Make your changes and then use merge-branch.sh to merge back to development"
 
 # Create feature branch
 create_feature_branch() {
