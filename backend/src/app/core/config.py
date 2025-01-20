@@ -1,13 +1,13 @@
 from typing import List, Dict, Optional, Union
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from pydantic import validator, AnyHttpUrl
+from pydantic import validator, AnyHttpUrl, HttpUrl
 import secrets
 import json
 
 
 class Settings(BaseSettings):
     # Database Settings
-    DATABASE_URL: str
+    DATABASE_URL: Optional[str] = None  # Make it optional
 
     # Server Settings
     PORT: int = 8001
@@ -31,6 +31,8 @@ class Settings(BaseSettings):
     def validate_supabase_url(cls, v: str) -> str:
         if not v.startswith(("http://", "https://")):
             raise ValueError("SUPABASE_URL must be a valid URL")
+        if not "supabase.co" in v:
+            raise ValueError("SUPABASE_URL must be a Supabase URL")
         return v
 
     @validator("SUPABASE_KEY")

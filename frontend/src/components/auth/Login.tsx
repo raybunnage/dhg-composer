@@ -6,34 +6,60 @@ export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
+  const [isSignUp, setIsSignUp] = useState(false)  // Toggle between signin/signup
 
-  async function handleLogin(e: React.FormEvent) {
+  async function handleAuth(e: React.FormEvent) {
     e.preventDefault()
     setError(null)
     setLoading(true)
 
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
+      const endpoint = isSignUp ? 'signup' : 'signin'
+      const apiUrl = `${import.meta.env.VITE_API_URL}/api/v1/auth/${endpoint}`  // Correct prefix for both
+      
+      console.log('Auth Request:', {
+        url: apiUrl,
+        method: 'POST',
+        action: isSignUp ? 'signup' : 'signin',
+        body: { email, password }
       })
+
+      // Call appropriate Supabase method
+      const { data, error } = isSignUp 
+        ? await supabase.auth.signUp({ email, password })
+        : await supabase.auth.signInWithPassword({ email, password })
+      
+      console.log('Supabase Auth Response:', { data, error })
 
       if (error) throw error
       
-      // Fixed URL to match backend route
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
+      // Sync with backend
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',  // Add explicit Accept header
         },
         body: JSON.stringify({ email, password }),
       })
+      
+      // Log the full response details
+      console.log('Response status:', response.status);
+      console.log('Response headers:', Object.fromEntries(response.headers));
+
+      const responseData = await response.json().catch(() => ({}))
+      console.log('Backend Response:', {
+        status: response.status,
+        ok: response.ok,
+        data: responseData
+      })
 
       if (!response.ok) {
-        throw new Error('Failed to sync with backend')
+        throw new Error(responseData.detail || 'Failed to sync with backend')
       }
 
     } catch (error) {
+      console.error('Auth error:', error)
       setError(error instanceof Error ? error.message : 'An error occurred')
     } finally {
       setLoading(false)
@@ -42,7 +68,7 @@ export default function Login() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4">
-      <form onSubmit={handleLogin} className="w-full max-w-sm space-y-4">
+      <form onSubmit={handleAuth} className="w-full max-w-sm space-y-4">
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-gray-700">
             Email
@@ -80,7 +106,15 @@ export default function Login() {
           disabled={loading}
           className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
         >
-          {loading ? 'Loading...' : 'Sign In'}
+          {loading ? 'Loading...' : (isSignUp ? 'Sign Up' : 'Sign In')}
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setIsSignUp(!isSignUp)}
+          className="w-full text-sm text-gray-600 hover:text-gray-900"
+        >
+          {isSignUp ? 'Already have an account? Sign In' : 'Need an account? Sign Up'}
         </button>
       </form>
     </div>

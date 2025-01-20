@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, Request
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
 from app.api.routes import api_router
@@ -10,6 +10,7 @@ from app.middleware.app_context import AppContextMiddleware
 from app.core.app_settings import APP_SETTINGS
 import logging
 from app.core.env_validator import validate_environment
+import time
 
 # Load environment variables
 ENV = os.getenv("ENV", "development")
@@ -65,6 +66,24 @@ def create_app() -> FastAPI:
 
     # Include routers
     app.include_router(api_router, prefix=settings.API_V1_STR)
+
+    @app.middleware("http")
+    async def log_requests(request: Request, call_next):
+        start_time = time.time()
+        path = request.url.path
+        method = request.method
+
+        logger.info(f"Request started: {method} {path}")
+        logger.debug(f"Request headers: {dict(request.headers)}")
+
+        response = await call_next(request)
+
+        process_time = time.time() - start_time
+        logger.info(
+            f"Request completed: {method} {path} - Status: {response.status_code} - Time: {process_time:.2f}s"
+        )
+
+        return response
 
     return app
 
