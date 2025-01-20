@@ -1,6 +1,5 @@
 from typing import List, Dict, Optional, Union
-from pydantic_settings import BaseSettings, SettingsConfigDict
-from pydantic import validator, AnyHttpUrl, HttpUrl, Field
+from pydantic import BaseSettings, validator, AnyHttpUrl, HttpUrl, Field
 import secrets
 import json
 import os
@@ -29,21 +28,17 @@ class Settings(BaseSettings):
     ENVIRONMENT: str = "development"
 
     # API Settings
-    PROJECT_NAME: str = "DHG Backend"
-    VERSION: str = "1.0.0"
+    PROJECT_NAME: str = "DHG Composer"
+    VERSION: str = "0.1.0"
     DESCRIPTION: str = "Multi-app FastAPI backend with Supabase integration"
-    API_V1_STR: str = "/api/v1"
 
     # Environment
     ENV: str = "development"
     DEBUG: bool = True
 
     # Supabase - with better error messages
-    SUPABASE_URL: str = Field(
-        ...,  # ... means required
-        description="Your Supabase project URL (e.g., https://your-project.supabase.co)",
-    )
-    SUPABASE_KEY: str = Field(..., description="Your Supabase anon/public key")
+    SUPABASE_URL: str
+    SUPABASE_KEY: str
 
     @validator("SUPABASE_URL")
     def validate_supabase_url(cls, v: str) -> str:
@@ -84,12 +79,9 @@ class Settings(BaseSettings):
             raise ValueError("SECRET_KEY must be at least 32 characters long")
         return v
 
-    model_config = SettingsConfigDict(
-        env_file=".env.dev",
-        env_file_encoding="utf-8",
-        case_sensitive=True,
-        validate_default=True,
-    )
+    class Config:
+        env_file = ".env.dev"
+        case_sensitive = True
 
 
 settings = Settings()

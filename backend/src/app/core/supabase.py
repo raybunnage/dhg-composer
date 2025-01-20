@@ -5,11 +5,10 @@ import logging
 logger = logging.getLogger(__name__)
 
 try:
-    # Simple initialization like in the working version
+    # Initialize without any extra options
     supabase: Client = create_client(
-        supabase_url=settings.SUPABASE_URL,
-        supabase_key=settings.SUPABASE_KEY,
-    )  # No options parameter at all
+        supabase_url=settings.SUPABASE_URL, supabase_key=settings.SUPABASE_KEY
+    )
     logger.info("Supabase client initialized successfully")
 except Exception as e:
     logger.error(f"Failed to initialize Supabase client: {str(e)}")

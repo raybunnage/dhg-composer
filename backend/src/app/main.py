@@ -11,6 +11,7 @@ from app.core.app_settings import APP_SETTINGS
 import logging
 from app.core.env_validator import validate_environment
 import time
+from app.domains.auth.routes import router as auth_router
 
 # Load environment variables
 ENV = os.getenv("ENV", "development")
@@ -34,9 +35,8 @@ def create_app() -> FastAPI:
 
     app = FastAPI(
         title=settings.PROJECT_NAME,
-        version=settings.VERSION,
         description=settings.DESCRIPTION,
-        openapi_url=f"{settings.API_V1_STR}/openapi.json",
+        version=settings.VERSION,
     )
 
     # Register apps
@@ -64,8 +64,9 @@ def create_app() -> FastAPI:
     # Add middleware
     app.add_middleware(AppContextMiddleware)
 
-    # Include routers
-    app.include_router(api_router, prefix=settings.API_V1_STR)
+    # Mount routers directly without v1 prefix
+    app.include_router(auth_router, prefix="/auth", tags=["auth"])
+    app.include_router(api_router, prefix="/api")
 
     @app.middleware("http")
     async def log_requests(request: Request, call_next):
@@ -78,8 +79,8 @@ def create_app() -> FastAPI:
             f"Request Details:\n"
             f"- Method: {method}\n"
             f"- Full Path: {path}\n"
-            f"- API Prefix Check: {path.startswith(settings.API_V1_STR)}\n"
-            f"- Expected Prefix: {settings.API_V1_STR}\n"
+            f"- API Prefix Check: {path.startswith('/api')}\n"
+            f"- Expected Prefix: /api\n"
             f"- Headers: {dict(request.headers)}"
         )
 
