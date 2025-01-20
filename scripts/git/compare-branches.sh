@@ -3,17 +3,28 @@
 # compare-branches.sh
 # Shows differences between branches with focus on critical files
 
-# Default branches to compare
-SOURCE_BRANCH=${1:-"development"}
-TARGET_BRANCH=${2:-"main"}
-
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-echo "Comparing $SOURCE_BRANCH with $TARGET_BRANCH..."
+# Help message
+show_help() {
+    echo "Usage: $0 [source-branch] [target-branch]"
+    echo "Default: Compares development with main"
+    echo
+    echo "Examples:"
+    echo "  $0                     # Compare development with main"
+    echo "  $0 feature/auth main   # Compare feature/auth with main"
+    echo "  $0 development main    # Compare development with main"
+}
+
+# Default branches to compare
+SOURCE_BRANCH=${1:-"development"}
+TARGET_BRANCH=${2:-"main"}
+
+echo -e "${YELLOW}Comparing $SOURCE_BRANCH with $TARGET_BRANCH...${NC}"
 
 # Function to check if branch exists
 check_branch() {
@@ -49,4 +60,11 @@ git diff --stat "$SOURCE_BRANCH..$TARGET_BRANCH"
 
 # Check for merge conflicts
 echo -e "\n${YELLOW}Potential Merge Conflicts:${NC}"
-git merge-tree $(git merge-base "$SOURCE_BRANCH" "$TARGET_BRANCH") "$SOURCE_BRANCH" "$TARGET_BRANCH" | grep -A3 "changed in both" 
+git merge-tree $(git merge-base "$SOURCE_BRANCH" "$TARGET_BRANCH") "$SOURCE_BRANCH" "$TARGET_BRANCH" | grep -A3 "changed in both"
+
+# Show recommendation
+echo -e "\n${GREEN}Recommendation:${NC}"
+if [ "$TARGET_BRANCH" = "main" ]; then
+    echo "Remember to merge into development first and ensure all tests pass"
+    echo "Use: ./scripts/dev/run-tests.sh"
+fi 
