@@ -100,4 +100,14 @@ echo "🔗 Latest symlink: $LATEST_LINK"
 
 # Provide restore hint
 echo -e "\n💡 To restore this backup, use:"
-echo "  ./scripts/utils/restore_config_env.sh $BRANCH $TIMESTAMP" 
+echo "  ./scripts/utils/restore_config_env.sh $BRANCH $TIMESTAMP"
+
+# Modify to only handle production and development backups
+ENVIRONMENTS=("development" "production")  # Remove staging
+BACKUP_ROOT=".config_backups"
+
+for ENV in "${ENVIRONMENTS[@]}"; do
+    BACKUP_DIR="${BACKUP_ROOT}/$(date +%Y%m%d_%H%M%S)/${ENV}"
+    mkdir -p "$BACKUP_DIR"
+    cp "backend/.env.${ENV}" "${BACKUP_DIR}/.env"
+done 
