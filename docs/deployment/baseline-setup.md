@@ -1,14 +1,36 @@
 # Setting manage-branches as Production Baseline
 
-## 1. Backup Current State
+## 1. Backup Current Branches
 ```bash
 # Backup current main branch state
 git checkout main
 git tag main-backup-$(date +%Y%m%d)
+
+# Backup development branch
+git checkout development
+git tag development-backup-$(date +%Y%m%d)
+
+# Backup staging branch
+git checkout staging
+git tag staging-backup-$(date +%Y%m%d)
+
+# Push all backup tags
 git push origin --tags
 ```
 
-## 2. Update manage-branches
+## 2. Clean Up Old Branches
+```bash
+# Delete development branch (local and remote)
+git checkout main
+git branch -d development
+git push origin :development
+
+# Delete staging branch (local and remote)
+git branch -d staging
+git push origin :staging
+```
+
+## 3. Update manage-branches
 ```bash
 # Ensure manage-branches is up to date
 git checkout manage-branches
@@ -18,7 +40,7 @@ git pull origin manage-branches
 npm run test  # or your test command
 ```
 
-## 3. Replace Main Branch
+## 4. Replace Main Branch
 ```bash
 # Option 1: Force push manage-branches to main (simple but less traceable)
 git checkout manage-branches
@@ -30,7 +52,7 @@ git merge manage-branches --strategy-option theirs
 git push origin main
 ```
 
-## 4. Update Development Branch
+## 5. Create New Development Branch
 ```bash
 # Create new development branch from new main
 git checkout main
@@ -38,13 +60,13 @@ git checkout -b development
 git push -u origin development
 ```
 
-## 5. Cleanup (Optional)
+## 6. Cleanup (Optional)
 ```bash
 # Remove old manage-branches branch if desired
 git push origin :manage-branches  # only after confirming main is correct
 ```
 
-## 6. Verify Setup
+## 7. Verify Setup
 1. Check GitHub repository
    - Verify main branch contains manage-branches code
    - Confirm development branch is created
@@ -58,12 +80,12 @@ git push origin :manage-branches  # only after confirming main is correct
    git checkout development
    ```
 
-## 7. Update Documentation
+## 8. Update Documentation
 1. Update README to reflect new baseline
 2. Document current version/state
 3. Update any branch-specific documentation
 
-## 8. Next Steps
+## 9. Next Steps
 1. Set up branch protections for main and development
 2. Create first feature branch from development
 3. Begin implementing new features using the new workflow
@@ -75,4 +97,32 @@ If anything goes wrong:
 git checkout main-backup-[date]
 git checkout -b main-restore
 git push origin main-restore:main -f
-``` 
+
+# Restore development if needed
+git checkout development-backup-[date]
+git checkout -b development-restore
+git push origin development-restore:development -f
+
+# Restore staging if needed (for future use)
+git checkout staging-backup-[date]
+git checkout -b staging-restore
+git push origin staging-restore:staging -f
+```
+
+## Future Staging Recreation
+When needed, staging can be recreated using:
+```bash
+# Create staging from main when ready
+git checkout main
+git checkout -b staging
+git push -u origin staging
+
+# Or restore from backup if needed
+git checkout staging-backup-[date]
+git checkout -b staging
+git push -u origin staging
+```
+
+---
+
+**Note**: Make sure to have all necessary backups before proceeding with branch deletions and modifications. 
