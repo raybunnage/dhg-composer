@@ -153,3 +153,4 @@ file_types/
 .config_backups/
 backups/
 .backup/
+.vercel
