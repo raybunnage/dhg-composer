@@ -1,0 +1,11 @@
+# Lightweight development requirements
+-r requirements.base.txt
+
+# Essential development tools
+watchfiles==1.0.4  # Required for auto-reload
+rich==13.9.4      # Required for better debug output
+debugpy==1.6.0    # Required for VS Code debugging
+
+# Basic testing (essential)
+pytest==7.4.0     # Required for running tests
+pytest-asyncio==0.21.1  # Required for async tests 

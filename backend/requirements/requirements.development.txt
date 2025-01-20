@@ -1,35 +1,27 @@
-# Development requirements
+# Full development requirements
 -r requirements.base.txt
 
-# Development tools
-black>=23.11.0
-isort>=5.12.0
-flake8>=6.1.0
-mypy>=1.7.0
-pre-commit>=3.5.0
+# Essential development tools
+watchfiles==1.0.4  # Required for auto-reload
+rich==13.9.4      # Required for better debug output
+debugpy==1.6.0    # Required for VS Code debugging
 
-# Testing
-pytest>=7.0.0
-pytest-cov>=3.0.0
-pytest-asyncio>=0.18.0
-pytest-mock>=3.6.0
+# Testing tools (optional - install if you're writing/running tests)
+pytest==7.4.0              # Base testing framework
+pytest-asyncio==0.21.1     # Async test support
+pytest-cov==4.1.0         # Optional - for test coverage reports
+pytest-mock==3.6.0        # Optional - for mocking in tests
+pytest-watch==4.2.0       # Optional - for test auto-running
+pytest-sugar==0.9.7       # Optional - for better test output
+faker==20.1.0             # Optional - for generating test data
 
-# Testing extras
-pytest-watch>=4.2.0
-pytest-sugar>=0.9.7
-faker>=20.1.0
+# Code quality tools (optional - install if you're doing code quality checks)
+black==23.3.0             # Optional - code formatting
+flake8==6.0.0            # Optional - code linting
+isort==5.12.0            # Optional - import sorting
+mypy==1.7.0              # Optional - type checking
+pre-commit==3.5.0        # Optional - git hooks for code quality
 
-# Linting and formatting
-black>=22.3.0
-flake8>=4.0.0
-isort>=5.10.0
-mypy>=0.950
-
-# Debugging
-ipython>=8.0.0
-debugpy>=1.6.0
-watchfiles>=0.18.0  # For development auto-reload
-
-# Documentation
-mkdocs>=1.3.0
-mkdocs-material>=8.2.0
+# Documentation tools (optional - install if you're working on docs)
+mkdocs==1.3.0            # Optional - documentation generation
+mkdocs-material==8.2.0   # Optional - documentation theme

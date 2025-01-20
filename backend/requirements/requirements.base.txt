@@ -1,40 +1,28 @@
-# Core dependencies needed in all environments
--r requirements.txt
+# Core dependencies for all environments - ALL REQUIRED
 
-# Additional base dependencies
-httpx>=0.23.0  # For HTTP client functionality
-markdown-it-py>=2.0.0  # For markdown processing
-email-validator>=1.1.0  # For email validation
+# FastAPI and core dependencies
+fastapi==0.115.6          # Main web framework
+pydantic==2.10.5          # Data validation and settings management
+pydantic-settings==2.0.3  # Settings management (split from pydantic v2)
+pydantic-core==2.27.2     # Required by pydantic
+pydantic-extra-types==2.10.2  # Additional pydantic types
 
-# FastAPI and dependencies
-fastapi>=0.104.0
-uvicorn>=0.24.0
-pydantic-core>=2.10.1     # Required by pydantic v2 - must be first
-pydantic>=2.4.2           # Core validation
-pydantic-settings>=2.0.3  # Settings management (previously part of pydantic)
-python-dotenv>=1.0.0      # For .env file handling
+# API and HTTP - ALL REQUIRED
+httpx==0.28.1        # HTTP client for API calls
+aiohttp==3.11.11     # Async HTTP client (required by Supabase)
+uvicorn==0.34.0      # ASGI server for running the application
 
-# Database
-sqlalchemy>=2.0.23
-asyncpg>=0.29.0          # For async PostgreSQL support
-alembic>=1.12.1          # For database migrations
+# Supabase - ALL REQUIRED
+supabase==2.2.1      # Supabase client
+postgrest==0.19.1    # PostgREST client for Supabase
 
-# Supabase
-supabase>=2.0.3
-postgrest>=0.13.0
+# Authentication - ALL REQUIRED
+python-jose[cryptography]==3.3.0  # JWT handling
+passlib[bcrypt]==1.7.4           # Password hashing
+python-multipart==0.0.20         # Form data parsing
 
-# Authentication
-python-jose>=3.3.0       # For JWT handling
-passlib>=1.7.4           # For password hashing
-bcrypt>=4.0.1           # For password hashing
-python-multipart>=0.0.6  # For form data parsing
-
-# Utilities
-httpx>=0.25.1           # For async HTTP requests
-tenacity>=8.2.3         # For retrying operations
-structlog>=23.2.0       # For structured logging
-
-# Testing
-pytest>=7.4.3
-pytest-asyncio>=0.21.1
-pytest-cov>=4.1.0
+# Utilities - ALL REQUIRED
+python-dotenv==1.0.1   # Environment variable management
+orjson==3.10.15        # Fast JSON parsing
+tenacity==8.2.3        # Retry logic for API calls
+structlog==23.2.0      # Structured logging

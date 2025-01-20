@@ -9,19 +9,40 @@ kill -9 $(lsof -t -i:5173) 2>/dev/null || true
 
 # Backend setup
 echo "Setting up backend..."
-cd backend
-echo "Removing existing virtual environment..."
-rm -rf venv
 echo "Creating virtual environment..."
 python -m venv venv
-source venv/bin/activate
-echo "Upgrading pip..."
-uv pip install --upgrade pip
-echo "Installing requirements with uv..."
-uv pip install "fastapi[all]" "uvicorn[standard]" "python-dotenv" "supabase>=2.2.1" --deps
-uv pip freeze > requirements.txt
 
-cd ..
+echo "Upgrading pip..."
+source venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install uv
+
+# Install requirements based on environment
+ENV=${ENV:-development}
+DEV_MODE=${DEV_MODE:-full}  # New variable for development mode
+echo "Installing $ENV requirements..."
+
+case $ENV in
+  development)
+    if [ "$DEV_MODE" = "light" ]; then
+      echo "Installing lightweight development requirements..."
+      uv pip install -r backend/requirements/requirements.development.light.txt
+    else
+      echo "Installing full development requirements..."
+      uv pip install -r backend/requirements/requirements.development.txt
+    fi
+    ;;
+  staging)
+    uv pip install -r backend/requirements/requirements.staging.txt
+    ;;
+  production)
+    uv pip install -r backend/requirements/requirements.production.txt
+    ;;
+  *)
+    echo "Unknown environment: $ENV"
+    exit 1
+    ;;
+esac
 
 # Frontend setup
 echo "Setting up frontend..."
@@ -34,5 +55,5 @@ npm install
 cd ..
 
 echo "Rebuild complete! To start the servers:"
-echo "1. Backend: cd backend && source venv/bin/activate && uvicorn main:app --reload --port 8001"
+echo "1. Backend: cd backend && source venv/bin/activate && uvicorn src.app.main:app --reload --port 8001"
 echo "2. Frontend: cd frontend && npm run dev"

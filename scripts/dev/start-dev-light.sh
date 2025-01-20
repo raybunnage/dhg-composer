@@ -1,5 +1,5 @@
 #!/bin/bash
-# start-dev.sh - Start the development environment
+# start-dev-light.sh - Start the development environment with minimal dependencies
 
 # Get the project root directory
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -26,11 +26,11 @@ source "$BACKEND_DIR/.env.dev"
 # Add backend/src to PYTHONPATH
 export PYTHONPATH="$BACKEND_DIR/src:$PYTHONPATH"
 
-# Install development requirements
-echo "Installing development requirements..."
+# Install lightweight development requirements
+echo "Installing lightweight development requirements..."
 cd backend
 source venv/bin/activate
-uv pip install -r requirements/requirements.development.txt
+uv pip install -r requirements/requirements.development.light.txt
 
 # Start backend server in background
 cd "$BACKEND_DIR"
@@ -40,9 +40,21 @@ python -m uvicorn src.app.main:app --reload --port 8001 &
 cd "$PROJECT_ROOT/frontend"
 npm run dev &
 
-echo "Development servers started!"
+echo "Lightweight development servers started!"
 echo "Backend running on http://localhost:8001"
 echo "Frontend running on http://localhost:5173"
+echo ""
+echo "Note: This is a lightweight setup with minimal dependencies."
+echo "Available tools:"
+echo "- Auto-reload (watchfiles)"
+echo "- Debug support (debugpy)"
+echo "- Basic testing (pytest)"
+echo "- Better console output (rich)"
+echo ""
+echo "To install additional tools:"
+echo "- Code formatting: uv pip install black flake8 isort"
+echo "- Advanced testing: uv pip install pytest-cov pytest-mock faker"
+echo "- Documentation: uv pip install mkdocs mkdocs-material"
 
 # Wait for both processes
-wait
+wait 
