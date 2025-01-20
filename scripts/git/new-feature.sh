@@ -12,7 +12,7 @@ trap 'echo -e "${RED}Error on line $LINENO${NC}"; exit 1' ERR
 
 # Check if feature name was provided
 if [ -z "$1" ]; then
-    echo -e "${RED}Error: Please provide a feature name${NC}"
+    echo "Error: Please provide a feature name"
     echo "Usage: ./new-feature.sh <feature-name>"
     echo "Example: ./new-feature.sh add-user-auth"
     exit 1
@@ -21,26 +21,14 @@ fi
 FEATURE_NAME=$1
 BRANCH_NAME="feature/$FEATURE_NAME"
 
-# Check if branch already exists
-if git show-ref --verify --quiet "refs/heads/$BRANCH_NAME"; then
-    echo -e "${RED}Error: Branch '$BRANCH_NAME' already exists${NC}"
-    echo -e "${YELLOW}Options:${NC}"
-    echo "1. Choose a different feature name"
-    echo "2. Delete existing branch: git branch -D $BRANCH_NAME"
-    echo "3. Switch to existing branch: git checkout $BRANCH_NAME"
-    exit 1
-fi
-
 # Ensure we're on development and it's up to date
-echo -e "${YELLOW}Switching to development branch...${NC}"
 git checkout development
 git pull origin development
 
 # Create new feature branch
-echo -e "${YELLOW}Creating new feature branch: $BRANCH_NAME${NC}"
 git checkout -b "$BRANCH_NAME"
 
-echo -e "${GREEN}Created new feature branch: $BRANCH_NAME${NC}"
+echo "Created new feature branch: $BRANCH_NAME"
 echo "Make your changes and then use merge-branch.sh to merge back to development"
 
 # Create feature branch
