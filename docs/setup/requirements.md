@@ -82,10 +82,28 @@ Current working versions tested for compatibility:
   - Enhanced log formatting
 
 ## Version Compatibility Notes
-- The Supabase ecosystem requires specific version alignment:
-  - FastAPI must be 0.95.2 or lower due to pydantic v1 requirement
-  - Pydantic must be v1 series (1.10.12) for postgrest compatibility
-  - HTTP clients must be aligned with Supabase 1.0.3 requirements
+
+### Supabase and PostgREST Integration
+PostgREST is a core component of Supabase that:
+- Automatically creates RESTful APIs from your PostgreSQL database
+- Translates HTTP requests into SQL queries
+- Handles database permissions and authentication
+- Provides real-time capabilities through PostgreSQL's LISTEN/NOTIFY
+
+The version constraints exist because:
+1. Supabase 1.0.3 requires PostgREST 0.10.6
+2. PostgREST 0.10.6 requires Pydantic v1 series
+3. Pydantic v1 requires FastAPI 0.95.2 or lower
+
+This creates a dependency chain:
+```
+Supabase 1.0.3 → PostgREST 0.10.6 → Pydantic v1 → FastAPI ≤ 0.95.2
+```
+
+### Version Alignment Requirements
+- FastAPI must be 0.95.2 or lower due to pydantic v1 requirement
+- Pydantic must be v1 series (1.10.12) for postgrest compatibility
+- HTTP clients must be aligned with Supabase 1.0.3 requirements
 
 ## Future State Dependencies
 These are planned additions not yet implemented:
