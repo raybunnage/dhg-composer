@@ -229,3 +229,53 @@ Our hybrid approach provides:
 - Room for growth
 
 This structure supports our current needs while allowing for future scaling and additional features. 
+
+
+
+
+
+
+/
+├── apps/
+│   ├── dhg-baseline/           # Your existing Supabase auth app
+│   │   ├── frontend/
+│   │   │   ├── src/
+│   │   │   │   ├── components/
+│   │   │   │   ├── pages/
+│   │   │   │   └── App.tsx
+│   │   │   ├── package.json
+│   │   │   └── vite.config.ts
+│   │   └── backend/
+│   │       ├── src/
+│   │       │   ├── api/
+│   │       │   └── main.py
+│   │       └── requirements.txt
+│   │
+│   └── dhg-docs/              # New documentation viewer app
+│       ├── frontend/
+│       │   ├── src/
+│   │   │   ├── components/
+│   │   │   │   ├── FileViewer/
+│   │   │   │   └── Navigation/
+│   │   │   ├── pages/
+│   │   │   └── App.tsx
+│   │   ├── package.json
+│   │   └── vite.config.ts
+│   │
+│   └── backend/
+│       ├── src/
+│       │   ├── api/
+│       │   └── main.py
+│       └── requirements.txt
+│
+├── packages/
+│   ├── ui-components/        # Shared UI components
+│   │   └── package.json
+│   ├── supabase-config/     # Shared Supabase configuration
+│   │   └── package.json
+│   └── types/               # Shared TypeScript types
+│       └── package.json
+│
+├── docs/                    # Your documentation files
+├── package.json            # Root workspace config
+└── turbo.json             # Turborepo config

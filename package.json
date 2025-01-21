@@ -1,0 +1,28 @@
+{
+  "private": true,
+  "name": "dhg-monorepo",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    
+    "baseline:frontend": "yarn workspace @dhg/baseline-frontend",
+    "baseline:backend": "yarn workspace @dhg/baseline-backend",
+    
+    "docs:frontend": "yarn workspace @dhg/docs-frontend",
+    "docs:backend": "yarn workspace @dhg/docs-backend",
+    
+    "clean": "turbo run clean && rm -rf node_modules",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "devDependencies": {
+    "turbo": "^1.10.0",
+    "prettier": "^2.8.0",
+    "typescript": "^5.0.0"
+  }
+} 
