@@ -48,6 +48,9 @@ mv scripts/rebuild_project.sh scripts/sys/
 mv scripts/backup-config.sh scripts/sys/
 mv scripts/restore-config.sh scripts/sys/
 
+# Move this script itself
+mv scripts/reorganize-scripts.sh scripts/sys/
+
 # Update README
 cat > scripts/README.md << 'END_README'
 # Project Scripts

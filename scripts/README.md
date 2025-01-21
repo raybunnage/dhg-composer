@@ -1,4 +1,3 @@
-
 ## Directory Structure
 
 - `env/` - Environment and requirements management
@@ -38,6 +37,7 @@
   - `rebuild_project.sh` - Project rebuild
   - `backup-config.sh` - Configuration backup
   - `restore-config.sh` - Configuration restore
+  - `reorganize-scripts.sh` - Script organization utility
 
 ## Usage
 
