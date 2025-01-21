@@ -48,6 +48,61 @@ Think of a monorepo like a single big house with many rooms:
 - Requires good organization
 - Needs team coordination
 
+## Understanding Atomic Commits
+
+### What Are Atomic Commits?
+An atomic commit is a commit that represents a single, complete change across all affected parts of the system. In a monorepo, this means you can update multiple apps or packages in a single commit when they're related.
+
+### Example of Atomic Commits
+Consider changing a user interface across your system:
+
+```bash
+# In a monorepo, one commit can include:
+- frontend/components/UserCard.tsx    # Updated component
+- backend/schemas/user.py            # Updated user schema
+- packages/types/user.ts             # Updated shared types
+- apps/admin/views/UserView.tsx      # Updated admin view
+
+# Commit message:
+"feat: update user card to include email verification status"
+```
+
+### Benefits of Atomic Commits in Monorepo
+1. **Consistency**
+   - All related changes stay together
+   - No partial updates
+   - Everything updates at once
+
+2. **Traceability**
+   - Easy to track feature implementation
+   - Clear history of system-wide changes
+   - Simple rollback if needed
+
+3. **Code Review**
+   - See all related changes together
+   - Understand full impact of changes
+   - Review complete features
+
+### Without Atomic Commits (Multi-App)
+In a multi-app setup, the same change might require multiple commits:
+
+```bash
+# Repository 1: Frontend
+commit: "Update user card component"
+
+# Repository 2: Backend
+commit: "Update user schema"
+
+# Repository 3: Shared Types
+commit: "Update user types"
+```
+
+This can lead to:
+- Synchronization issues
+- Harder to track changes
+- More complex deployments
+- Risk of partial updates
+
 ## Our Current Multi-App Approach
 Our project uses a more separated approach:
 
