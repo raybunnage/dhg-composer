@@ -154,3 +154,13 @@ file_types/
 backups/
 .backup/
 .vercel
+
+# Backups
+backups/
+scripts/backup/backups/
+*.zip
+*.backup
+*.bak
+*.gz
+*.tar
+*.archive
