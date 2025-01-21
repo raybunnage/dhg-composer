@@ -2,7 +2,8 @@
   "name": "dhg-baseline",
   "private": true,
   "workspaces": [
-    "apps/dhg-baseline/*"
+    "apps/dhg-baseline/*",
+    "packages/*"
   ],
   "scripts": {
     "dev:frontend": "npm run dev --workspace=@dhg/baseline-frontend",
