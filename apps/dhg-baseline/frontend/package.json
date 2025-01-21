@@ -10,7 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.39.3",
+    "@dhg/ui": "workspace:*",
+    "@dhg/supabase-client": "workspace:*",
+    "@dhg/types": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
