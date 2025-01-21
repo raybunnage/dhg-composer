@@ -10,6 +10,7 @@ This guide focuses on configuring and using Cursor AI rules effectively in your 
 5. [Best Practices](#best-practices)
 6. [Testing Rules](#testing-rules)
 7. [Examples](#examples)
+8. [Monorepo Pattern Rules](#monorepo-pattern-rules)
 
 ## Introduction
 
@@ -235,8 +236,38 @@ touch src/test-rule.ts
 
 For shell scripting guidelines, see [Shell Scripting Guide](../development/shell/shell-scripting-guide.md)
 
+## Monorepo Pattern Rules
 
+1. Project Structure
+- All applications live in `apps/` directory
+- Shared code goes in `packages/` directory
+- Each app follows internal structure:
+  ```
+  apps/{app-name}/
+    ├── frontend/
+    ├── backend/
+    └── README.md
+  ```
 
+2. Package Management
+- Use workspace management (yarn/pnpm)
+- Shared dependencies in root package.json
+- App-specific dependencies in app's package.json
+
+3. Code Organization
+- No cross-app imports (use shared packages instead)
+- Shared code must be in `packages/`
+- Each package must have its own package.json and tests
+
+4. Development Workflow
+- Start scripts should handle monorepo context
+- Tests run from root or specific app/package
+- Environment variables scoped to apps
+
+5. Documentation
+- Main README at root explains monorepo structure
+- Each app and package has its own README
+- Architecture decisions document monorepo choices
 
 Recommendations:
 Move Middleware and Routes

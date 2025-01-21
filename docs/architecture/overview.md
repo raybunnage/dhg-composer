@@ -1,4 +1,21 @@
-# Architecture Overview
+# Project Architecture Overview
+
+> **Note**: This project uses a monorepo pattern for code organization. Previous documentation referring to a multi-app approach has been archived and is no longer relevant.
+
+## Monorepo Structure
+
+Our monorepo organizes code into:
+
+- `apps/` - Individual applications
+- `packages/` - Shared code and utilities
+- `scripts/` - Development and deployment tools
+- `docs/` - Project documentation
+
+This structure allows us to:
+- Share code efficiently between applications
+- Maintain consistent tooling and configurations
+- Simplify dependency management
+- Coordinate changes across multiple packages
 
 ## System Architecture
 

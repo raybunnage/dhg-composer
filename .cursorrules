@@ -348,10 +348,10 @@
     },
     {
       "type": "PythonBackendDevelopment",
-      "description": "Instructions for handling Python backend development using well-organized classes and modern type hints",
+      "description": "Instructions for handling Python backend development in a monorepo structure using well-organized classes and modern type hints",
       "serviceStructure": {
         "featureBasedModules": {
-          "pattern": "Create dedicated service modules for each feature",
+          "pattern": "Create dedicated service modules for each feature within apps/{app-name}/backend/",
           "naming": "{feature_name}_service",
           "structure": {
             "base": "BaseService",
@@ -372,7 +372,7 @@
           }
         },
         "serviceOrganization": {
-          "location": "src/services/{feature_name}/",
+          "location": "apps/{app-name}/backend/src/services/{feature_name}/",
           "files": {
             "service": "service.py",
             "repository": "repository.py",
@@ -383,7 +383,7 @@
             "utils": "utils.py"
           },
           "testing": {
-            "location": "tests/services/{feature_name}/",
+            "location": "apps/{app-name}/backend/tests/services/{feature_name}/",
             "files": [
               "test_service.py",
               "test_repository.py",
@@ -850,27 +850,30 @@
       "deploymentFramework": {
         "environments": {
           "development": {
-            "purpose": "Local development and testing",
+            "purpose": "Development and feature testing",
             "configuration": {
               "useLocalServices": true,
               "debugEnabled": true,
               "mockExternalServices": true
-            }
-          },
-          "staging": {
-            "purpose": "Pre-production testing and validation",
-            "configuration": {
-              "mirrorProduction": true,
-              "featureFlags": true,
-              "sandboxedServices": true
+            },
+            "branchStrategy": {
+              "baseBranch": "development",
+              "featureBranches": true,
+              "migrationBranches": true
             }
           },
           "production": {
-            "purpose": "Live environment",
+            "purpose": "Live environment (main branch)",
             "configuration": {
               "highAvailability": true,
               "scalingRules": true,
-              "backupStrategy": true
+              "backupStrategy": true,
+              "monitoring": true
+            },
+            "branchStrategy": {
+              "baseBranch": "main",
+              "protectedBranch": true,
+              "requiresApproval": true
             }
           }
         },
@@ -890,14 +893,24 @@
             },
             "deploy": {
               "automatedDeployment": true,
-              "blueGreenStrategy": true,
               "rollbackCapability": true
             }
           },
-          "automation": {
-            "githubActions": true,
-            "environmentSecrets": true,
-            "deploymentApprovals": true
+          "branchWorkflow": {
+            "featureBranches": {
+              "createFrom": "development",
+              "mergeTo": "development",
+              "requiresTests": true
+            },
+            "development": {
+              "continuousDeployment": true,
+              "environmentTarget": "development"
+            },
+            "main": {
+              "promotionFrom": "development",
+              "requiresApproval": true,
+              "environmentTarget": "production"
+            }
           }
         },
         "monitoring": {
@@ -911,23 +924,6 @@
             "structuredLogs": true,
             "centralizedLogging": true,
             "logRetention": true
-          },
-          "tracing": {
-            "distributedTracing": true,
-            "performanceMonitoring": true,
-            "errorTracking": true
-          }
-        },
-        "infrastructure": {
-          "provisioning": {
-            "infrastructureAsCode": true,
-            "containerOrchestration": true,
-            "serviceDiscovery": true
-          },
-          "scaling": {
-            "autoScaling": true,
-            "loadBalancing": true,
-            "resourceOptimization": true
           }
         },
         "rollback": {
@@ -946,7 +942,6 @@
           "deployment": [
             "Use semantic versioning",
             "Maintain deployment documentation",
-            "Implement feature flags",
             "Monitor deployment health",
             "Automate where possible"
           ],
@@ -954,8 +949,7 @@
             "Regular backup verification",
             "Incident response plan",
             "Performance benchmarking",
-            "Security compliance checks",
-            "Capacity planning"
+            "Security compliance checks"
           ]
         }
       }
@@ -1078,6 +1072,103 @@
             "Monitor resource usage"
           ]
         }
+      }
+    },
+    {
+      "type": "Monorepo",
+      "description": "Monorepo structure and development standards",
+      "referenceImplementation": {
+        "app": "dhg-baseline",
+        "purpose": "Working example and reference implementation for all future apps",
+        "usage": {
+          "patternReference": true,
+          "structureTemplate": true,
+          "implementationGuide": true
+        },
+        "keyFeatures": [
+          "Complete frontend/backend setup",
+          "Proper package organization",
+          "Testing structure",
+          "Documentation patterns",
+          "Script organization"
+        ]
+      },
+      "projectStructure": {
+        "directories": {
+          "apps": {
+            "description": "Individual applications",
+            "referenceApp": "dhg-baseline",
+            "structure": {
+              "appName": {
+                "frontend": {
+                  "required": true,
+                  "framework": "React/Vite",
+                  "referenceLocation": "apps/dhg-baseline/frontend"
+                },
+                "backend": {
+                  "required": true,
+                  "framework": "FastAPI",
+                  "referenceLocation": "apps/dhg-baseline/backend"
+                },
+                "README.md": "Required documentation"
+              }
+            }
+          },
+          "packages": {
+            "description": "Shared code and utilities",
+            "requirements": {
+              "individualPackaging": true,
+              "separateTests": true,
+              "ownReadme": true
+            }
+          }
+        },
+        "packageManagement": {
+          "workspaces": true,
+          "dependencyStrategy": {
+            "rootDependencies": "shared",
+            "appDependencies": "app-specific",
+            "hoisting": true
+          }
+        }
+      },
+      "developmentWorkflow": {
+        "codeOrganization": {
+          "noDirectCrossImports": true,
+          "useSharedPackages": true,
+          "scopedEnvironments": true
+        },
+        "testing": {
+          "runLocations": ["root", "app", "package"],
+          "scopedConfigs": true
+        },
+        "scripts": {
+          "standardization": true,
+          "monorepoContext": true
+        }
+      },
+      "documentation": {
+        "requirements": {
+          "rootReadme": "Monorepo overview",
+          "appReadme": "App-specific details",
+          "packageReadme": "Package documentation",
+          "architectureDoc": "Monorepo decisions"
+        }
+      },
+      "bestPractices": {
+        "development": [
+          "Use shared packages for common code",
+          "Maintain package independence",
+          "Follow consistent structure",
+          "Keep dependencies clean",
+          "Document architecture decisions"
+        ],
+        "workflow": [
+          "Test at appropriate levels",
+          "Use workspace scripts",
+          "Maintain clean dependencies",
+          "Version packages appropriately"
+        ]
       }
     }
   ]
