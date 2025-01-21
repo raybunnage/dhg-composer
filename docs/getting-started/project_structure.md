@@ -115,3 +115,138 @@ Each script is designed to be:
 - Safe to run with confirmation prompts
 - Consistent in style and usage
 - Helpful for both beginners and experienced developers
+
+## Documentation Structure
+- `docs/` - Project documentation root
+  - `ai-processing/` - AI integration guides
+    - `cursor-rules.md` - Guidelines for implementing AI cursor rules and patterns
+    - `evaluating-cursor-rules.md` - How to test and validate cursor rule effectiveness
+    - `using_cursor_composer.md` - Guide for using the Cursor AI composition tools
+    - `using_cursor_to_setup.md` - Initial setup instructions for Cursor AI integration
+
+  - `api/` - API documentation
+    - `endpoints/`
+      - `auth.md` - Authentication endpoint specifications and usage
+      - `users.md` - User management API endpoints and examples
+    - `examples/`
+      - `authentication.md` - Real-world examples of API authentication flows
+    - `models/` - API data model documentation
+
+  - `architecture/` - System design documentation
+    - `branches/`
+      - `branch_reset.md` - How to safely reset and clean up branches
+      - `dhg-baseline.md` - Understanding the baseline branch structure
+      - `golden_branch_setup.md` - Setting up and maintaining the golden branch
+      - `managing_branches.md` - Branch management strategies and workflows
+      - `vercel.md` - Vercel deployment branch configuration
+    - `components/`
+      - `auth-flow.md` - Authentication flow architecture and implementation
+      - `data-access.md` - Data access patterns and best practices
+    - `data-flow.md` - System-wide data flow patterns
+    - `deployment.md` - Deployment architecture and strategies
+    - `domains.md` - Domain-driven design implementation
+    - `overview.md` - High-level system architecture overview
+    - `project-structure.md` - Detailed project organization guide
+    - `requirements.md` - System requirements and dependencies
+
+  - `backend/` - Backend development guides
+    - `authentication/`
+      - `supabase-auth-guide.md` - Implementing Supabase authentication
+    - `db-migrations/`
+      - `db-migrate-guide.md` - Database migration procedures
+      - `migrations.md` - Migration patterns and best practices
+
+  - `deployment/` - Deployment guides
+    - `baseline-setup.md` - Initial deployment setup instructions
+    - `environments.md` - Environment configuration guide
+    - `promote-guide.md` - Code promotion between environments
+    - `staging_implementation_guide.md` - Staging environment setup
+
+  - `development/`
+    - `shell/`
+      - `shell-scripting-guide.md` - Writing and maintaining shell scripts
+
+  - `environment/` - Environment management
+    - `backup_management.md` - Environment backup procedures
+    - `environment-setup.md` - Initial environment configuration
+    - `gitignore_management.md` - Managing Git ignore patterns
+    - `manage-env-guide.md` - Day-to-day environment management
+
+  - `frontend/` - Frontend development
+    - `typescript/`
+      - `tsx-guide.md` - TypeScript with React implementation guide
+      - `typescript-guide.md` - TypeScript best practices and patterns
+
+  - `getting-started/` - Onboarding documentation
+    - `best-practices.md` - Project-wide best practices
+    - `getting-started-guide.md` - New developer onboarding guide
+    - `git-commands.md` - Essential Git commands and workflows
+    - `scripts.md` - Available utility scripts and their usage
+
+  - `reference/` - Reference documentation
+    - `git-glossary.md` - Git terminology and concepts
+    - `glossary.md` - Project-wide terminology
+    - `merge-guide.md` - Git merge procedures and conflict resolution
+    - `scripts-index.md` - Complete index of available scripts
+
+  - `security/` - Security documentation
+    - `authentication.md` - Authentication implementation details
+    - `authorization.md` - Authorization patterns and roles
+    - `data-protection.md` - Data security measures
+    - `secret-keys.md` - Secret key management procedures
+    - `signed-commits-guide.md` - Setting up and using signed commits
+
+  - `services/` - External service integration
+    - `anthropic/` - Anthropic AI integration guides
+    - `pdfs/` - PDF processing service documentation
+    - `supabase/` - Supabase service integration guides
+
+  - `testing/` - Testing documentation
+    - `README.md` - Testing overview and strategy
+    - `using-run-tests.md` - Guide to running and maintaining tests
+
+Each documentation file is designed to be:
+- Self-contained with clear examples
+- Beginner-friendly with step-by-step instructions
+- Cross-referenced with related documentation
+- Regularly updated with current best practices
+
+## Documentation Emojis
+Common emojis used throughout the documentation:
+
+### Quick Access
+- 🚀 - Getting started, launches
+- 📚 - Documentation, guides
+- 🔧 - Tools, utilities, configuration
+- 🏗️ - Architecture, structure
+- 🔒 - Security, authentication
+- 🧪 - Testing
+- 🔌 - Integrations, plugins
+- 📝 - Notes, documentation
+- ⚠️ - Warnings, important notes
+- 💡 - Tips, ideas
+
+### How to Use Emojis
+1. **System Shortcuts**:
+   - Windows: `Windows key + .` (period)
+   - Mac: `Command + Control + Space`
+   - Linux: Varies by distribution, often `Ctrl + .` or `Super + .`
+
+2. **Direct Copy/Paste**:
+   - Copy from this reference
+   - Use system emoji picker
+   - Copy from emoji websites
+
+3. **Markdown Emoji Codes** (platform dependent):
+   ```markdown
+   :rocket: = 🚀
+   :books: = 📚
+   :wrench: = 🔧
+   :lock: = 🔒
+   ```
+
+### Best Practices
+- Use emojis consistently across documentation
+- Don't overuse - one emoji per heading is sufficient
+- Ensure emojis add meaning rather than decoration
+- Consider accessibility - always pair emojis with clear text
