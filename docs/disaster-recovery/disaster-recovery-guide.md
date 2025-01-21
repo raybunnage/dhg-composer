@@ -280,3 +280,18 @@ System Admin:
 5. Keep contact information updated
 6. Review and update procedures quarterly
 7. Maintain detailed recovery logs 
+
+
+
+
+# Create backup
+./scripts/backup/backup-full-project.sh
+
+# Restore from backup
+./scripts/backup/restore-full-project.sh latest
+# or
+./scripts/backup/restore-full-project.sh 20240315_123456
+
+# restore from backup
+./scripts/backup/restore-full-project.sh 20240315_123456
+
