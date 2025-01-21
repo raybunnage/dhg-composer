@@ -1,177 +1,144 @@
 # Python Requirements Management
 
-This document describes how we manage Python dependencies across different environments.
+This document describes our current Python dependencies and future plans.
 
-## Requirements Structure
+## Current Dependencies
 
-```
-requirements/
-├── requirements.txt          # Base requirements for all environments
-├── requirements.dev.txt      # Development-specific requirements
-├── requirements.staging.txt  # Staging-specific requirements
-└── requirements.prod.txt     # Production-specific requirements
-```
+### FastAPI and Core Dependencies
+- `fastapi==0.95.2`
+  - Deliberately downgraded for compatibility with pydantic v1
+  - Required for Supabase 1.0.3 compatibility
+  
+- `pydantic==1.10.12`
+  - Downgraded version required by postgrest 0.10.6
+  - Used for data validation and serialization
+  
+- `email-validator==2.1.1`
+  - Required for pydantic email validation
+  - Provides robust email format checking
 
-## File Purposes
+- `python-dotenv==1.0.0`
+  - Environment management
+  - Loads environment variables from .env files
 
-### Base Requirements (requirements.txt)
-- Core dependencies needed in all environments
-- Framework dependencies (FastAPI, SQLAlchemy, etc.)
-- Authentication libraries
-- Database connectors
+### API and HTTP Dependencies
+All specifically downgraded for Supabase 1.0.3 compatibility:
 
-### Development Requirements (requirements.dev.txt)
-- Includes all base requirements
-- Testing frameworks (pytest)
+- `httpx==0.23.3`
+  - Downgraded for Supabase 1.0.3
+  - Modern HTTP client with async support
+
+- `httpcore==0.16.3`
+  - Compatible with httpx 0.23.3
+  - Low-level HTTP transport library
+
+- `aiohttp==3.7.4`
+  - Known to work on M1/M2 Macs
+  - Async HTTP client/server framework
+
+- `uvicorn==0.23.2`
+  - ASGI server implementation
+  - Handles async web traffic
+
+### Supabase and Related Dependencies
+Current working versions tested for compatibility:
+
+- `supabase==1.0.3`
+  - Base version known to work
+  - Python client for Supabase
+
+- `postgrest==0.10.6`
+  - Compatible with supabase 1.0.3
+  - RESTful API for PostgreSQL
+
+- `gotrue==1.0.1`
+  - Compatible with supabase 1.0.3
+  - Authentication client
+
+### Authentication
+- `python-jose[cryptography]==3.3.0`
+  - JWT handling capabilities
+  - Includes cryptography extensions
+
+- `passlib[bcrypt]==1.7.4`
+  - Password hashing functionality
+  - Includes bcrypt algorithm support
+
+- `python-multipart==0.0.20`
+  - Form data parsing
+  - Required for file uploads
+
+### Utilities
+- `orjson==3.10.15`
+  - Fast JSON parsing
+  - High-performance JSON operations
+
+- `tenacity==8.2.3`
+  - Retry logic for API calls
+  - Handles transient failures
+
+- `structlog==23.2.0`
+  - Structured logging
+  - Enhanced log formatting
+
+## Version Compatibility Notes
+- The Supabase ecosystem requires specific version alignment:
+  - FastAPI must be 0.95.2 or lower due to pydantic v1 requirement
+  - Pydantic must be v1 series (1.10.12) for postgrest compatibility
+  - HTTP clients must be aligned with Supabase 1.0.3 requirements
+
+## Future State Dependencies
+These are planned additions not yet implemented:
+
+### Production Server
+- Gunicorn with uvicorn workers
+- Performance monitoring tools
+- Enhanced error tracking
+
+### Development Tools
+- Additional testing frameworks
 - Linting and formatting tools
-- Debugging tools
 - Documentation generators
-- Development server
 
-### Staging Requirements (requirements.staging.txt)
-- Includes all base requirements
-- Monitoring tools
-- Testing frameworks
-- Logging enhancements
-
-### Production Requirements (requirements.prod.txt)
-- Includes all base requirements
-- Production server (Gunicorn)
-- Performance monitoring
-- Error tracking
+### Monitoring and Logging
+- Advanced monitoring tools
 - Production-grade logging
+- APM solutions
 
-## Usage
+## Best Practices
 
-### Initial Setup
+### Version Management
 ```bash
-# Create all requirements files
-./scripts/manage-requirements.sh
-```
-
-### Installing Dependencies
-
-Development:
-```bash
-pip install -r requirements/requirements.dev.txt
-```
-
-Staging:
-```bash
-pip install -r requirements/requirements.staging.txt
-```
-
-Production:
-```bash
-pip install -r requirements/requirements.prod.txt
-```
-
-### Adding New Dependencies
-
-1. Determine which environment needs the dependency
-2. Add to appropriate requirements file
-3. If needed in all environments, add to `requirements.txt`
-4. Document version constraints
-
-### Version Pinning
-
-We use these version specifiers:
-- `>=x.y.z`: Minimum version required
-- `==x.y.z`: Exact version required
-- `~=x.y.z`: Compatible release
-
-### Best Practices
-
-1. **Keep Base Requirements Minimal**
-   - Only include truly shared dependencies
-   - Move environment-specific packages to appropriate files
-
-2. **Version Control**
-   - All requirements files should be in version control
-   - Generated `pip freeze` outputs should not be committed
-
-3. **Regular Updates**
-   ```bash
-   # Check for outdated packages
-   pip list --outdated
-   
-   # Update after testing
-   pip install --upgrade -r requirements/requirements.dev.txt
-   ```
-
-4. **Security**
-   ```bash
-   # Run security check
-   pip-audit
-   
-   # Update vulnerable packages
-   pip-audit --fix
-   ```
-
-5. **Virtual Environments**
-   ```bash
-   # Create new environment
-   python -m venv venv
-   
-   # Activate environment
-   source venv/bin/activate  # Unix
-   venv\Scripts\activate     # Windows
-   ```
-
-## Dependency Management Commands
-
-### Check Dependencies
-```bash
-# List installed packages
-pip list
-
-# Show dependency tree
-pip install pipdeptree
-pipdeptree
-
-# Find outdated packages
+# Check for outdated packages
 pip list --outdated
+
+# Security audit
+pip-audit
 ```
 
-### Update Dependencies
+### Virtual Environments
 ```bash
-# Update single package
-pip install --upgrade package-name
+# Create new environment
+python -m venv venv
 
-# Update all packages in requirements
-pip install --upgrade -r requirements/requirements.dev.txt
+# Activate environment
+source venv/bin/activate  # Unix
+venv\Scripts\activate     # Windows
 ```
 
-### Generate Requirements
+### Installation
 ```bash
-# Create requirements from current environment
-pip freeze > requirements/requirements.new.txt
+# Install current dependencies
+pip install -r requirements/requirements.base.txt
 ```
 
-## Troubleshooting
+## Troubleshooting Common Issues
+1. **Supabase Version Conflicts**
+   - Ensure FastAPI and pydantic versions match requirements
+   - Check HTTP client compatibility
+   - Verify postgrest version alignment
 
-### Common Issues
-
-1. **Dependency Conflicts**
-   ```bash
-   # Show detailed dependency information
-   pip install --verbose package-name
-   ```
-
-2. **Version Mismatch**
-   ```bash
-   # Check specific package version
-   pip show package-name
-   ```
-
-3. **Missing Dependencies**
-   ```bash
-   # Install with verbose output
-   pip install -v -r requirements/requirements.txt
-   ```
-
-Remember to:
-- Regularly update dependencies for security
-- Test thoroughly after updates
-- Document any special dependency requirements
-- Use virtual environments for isolation 
+2. **M1/M2 Mac Compatibility**
+   - Use specified aiohttp version
+   - Test in local environment first
+   - Monitor for ARM-specific issues 
