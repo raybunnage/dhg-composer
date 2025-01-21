@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import HTTPBearer
-from ..core.supabase import get_current_user
-from packages.supabase_py.src.types import User, Profile
+from src.core.supabase import get_current_user
+from src.types import User, Profile
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 security = HTTPBearer()
