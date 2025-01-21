@@ -61,12 +61,21 @@ tmp/
 
 # Environment Files
 .env
-backend/.env
-backend/.env.*
-!backend/.env.example
-frontend/.env
-frontend/.env.*
-!frontend/.env.example
+.env.local
+.env.development
+.env.production
+.env.*
+
+# Allow example files
+!**/.env.example
+
+# Protect app-specific env files
+/apps/**/.env
+/apps/**/.env.*
+!/apps/**/.env.example
+
+# Protect backup env files
+.config_backups/**/.env*
 
 # TypeScript/JavaScript
 node_modules/
@@ -164,3 +173,12 @@ scripts/backup/backups/
 *.gz
 *.tar
 *.archive
+
+# Add these if not present
+!.npmrc
+!.nvmrc
+
+# Vercel
+.vercel
+.vercel/
+.env*.local

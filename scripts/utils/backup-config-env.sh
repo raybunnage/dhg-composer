@@ -12,6 +12,15 @@ BACKUP_ROOT="$PROJECT_ROOT/.config_backups"
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 
+# Determine environment based on branch
+if [[ "$BRANCH" == "main" ]]; then
+    ENV="production"
+elif [[ "$BRANCH" == "development" ]]; then
+    ENV="development"
+else
+    ENV="preview"
+fi
+
 # Create backup directory structure
 BACKUP_DIR="$BACKUP_ROOT/${BRANCH}/${TIMESTAMP}"
 mkdir -p "$BACKUP_DIR"
@@ -30,41 +39,80 @@ backup_file() {
     fi
 }
 
-# Define files to backup
-ENV_FILES=(
-    ".env"
-    ".env.dev"
-    ".env.prod"
-    ".env.test"
-    "backend/.env"
-    "backend/.env.dev"
-    "backend/.env.prod"
-    "backend/.env.test"
+# Define monorepo apps
+APPS=(
+    "dhg-baseline"
+    # Add other apps here as needed
 )
 
-CONFIG_FILES=(
-    "backend/src/app/core/config.py"
-    "backend/src/app/core/app_settings.py"
-    "frontend/src/config/config.ts"
-    "frontend/src/config/environment.ts"
+# Define files to backup for each app
+backup_app_files() {
+    local app=$1
+    local env=$2
+    
+    # App-specific environment files
+    ENV_FILES=(
+        "apps/${app}/frontend/.env"
+        "apps/${app}/frontend/.env.${env}"
+        "apps/${app}/frontend/.env.local"
+        "apps/${app}/frontend/.env.production"
+        "apps/${app}/frontend/.env.development"
+        "apps/${app}/backend/.env"
+        "apps/${app}/backend/.env.${env}"
+        "apps/${app}/backend/.env.production"
+        "apps/${app}/backend/.env.development"
+    )
+
+    # App-specific config files
+    CONFIG_FILES=(
+        "apps/${app}/frontend/vite.config.ts"
+        "apps/${app}/frontend/tsconfig.json"
+        "apps/${app}/frontend/package.json"
+        "apps/${app}/backend/src/core/config.py"
+        "apps/${app}/backend/src/core/settings.py"
+        "apps/${app}/frontend/.env.example"
+        "apps/${app}/backend/.env.example"
+    )
+
+    # Backup app files
+    echo "📝 Backing up ${app} environment files..."
+    for file in "${ENV_FILES[@]}"; do
+        backup_file "$file" "$PROJECT_ROOT"
+    done
+
+    echo "📝 Backing up ${app} configuration files..."
+    for file in "${CONFIG_FILES[@]}"; do
+        backup_file "$file" "$PROJECT_ROOT"
+    done
+}
+
+# Root level configuration files
+ROOT_CONFIG_FILES=(
+    "vercel.json"
+    ".npmrc"
+    ".nvmrc"
+    "package.json"
+    "turbo.json"
+    ".vercelignore"
 )
 
 echo "🔄 Starting configuration backup..."
 echo "📁 Branch: $BRANCH"
+echo "🌍 Environment: $ENV"
 echo "⏰ Timestamp: $TIMESTAMP"
 echo "💾 Backup location: $BACKUP_DIR"
 echo ""
 
-# Backup env files
-echo "📝 Backing up environment files..."
-for file in "${ENV_FILES[@]}"; do
+# Backup root level files
+echo "📝 Backing up root configuration files..."
+for file in "${ROOT_CONFIG_FILES[@]}"; do
     backup_file "$file" "$PROJECT_ROOT"
 done
 
-# Backup config files
-echo -e "\n📝 Backing up configuration files..."
-for file in "${CONFIG_FILES[@]}"; do
-    backup_file "$file" "$PROJECT_ROOT"
+# Backup each app's files
+for app in "${APPS[@]}"; do
+    echo -e "\n🔹 Processing ${app}..."
+    backup_app_files "$app" "$ENV"
 done
 
 # Create metadata file
@@ -73,9 +121,13 @@ cat > "$BACKUP_DIR/backup_metadata.json" << EOF
 {
     "timestamp": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
     "branch": "$BRANCH",
+    "environment": "$ENV",
     "git_commit": "$(git rev-parse HEAD)",
     "user": "$(whoami)",
-    "hostname": "$(hostname)"
+    "hostname": "$(hostname)",
+    "apps": [
+        $(printf '"%s",' "${APPS[@]}" | sed 's/,$//')
+    ]
 }
 EOF
 
@@ -83,19 +135,6 @@ EOF
 LATEST_LINK="$BACKUP_ROOT/${BRANCH}/latest"
 rm -f "$LATEST_LINK"
 ln -s "$BACKUP_DIR" "$LATEST_LINK"
-
-# Backup specific environments
-ENVIRONMENTS=("development" "production")
-for ENV in "${ENVIRONMENTS[@]}"; do
-    ENV_BACKUP_DIR="$BACKUP_DIR/$ENV"
-    mkdir -p "$ENV_BACKUP_DIR"
-    if [ -f "backend/.env.${ENV}" ]; then
-        cp -p "backend/.env.${ENV}" "${ENV_BACKUP_DIR}/.env"
-        echo "✅ Backed up ${ENV} environment"
-    else
-        echo "⚠️  Missing ${ENV} environment file"
-    fi
-done
 
 # Cleanup old backups (keep last 5)
 echo -e "\n🧹 Cleaning up old backups..."
@@ -109,9 +148,10 @@ ls -lt "$BACKUP_ROOT/$BRANCH" | grep -v '^total' | head -n 5 | sed 's/^/  /'
 echo -e "\n✨ Backup complete!"
 echo "📂 Latest backup: $BACKUP_DIR"
 echo "🔗 Latest symlink: $LATEST_LINK"
+echo "🌍 Environment: $ENV"
 
 # Show restore command
 echo -e "\n💡 To restore this backup, use:"
-echo "  ./scripts/utils/restore_config_env.sh $BRANCH $TIMESTAMP"
+echo "  ./scripts/utils/restore-config-env.sh $BRANCH $TIMESTAMP"
 echo "  or"
-echo "  ./scripts/utils/restore_config_env.sh $BRANCH latest" 
+echo "  ./scripts/utils/restore-config-env.sh $BRANCH latest" 

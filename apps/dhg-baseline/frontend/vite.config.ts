@@ -8,5 +8,9 @@ export default defineConfig({
     port: 5173,
     host: true, // This allows accessing from other devices
     strictPort: true, // This ensures it only uses port 5173
+  },
+  build: {
+    outDir: 'dist',
+    sourcemap: true
   }
 }) 

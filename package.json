@@ -1,15 +1,21 @@
 {
   "name": "dhg-composer",
   "private": true,
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
   "workspaces": [
-    "apps/dhg-baseline/*",
+    "apps/*",
     "packages/*"
   ],
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
     "dev:frontend": "npm run dev -w dhg-baseline-frontend",
-    "dev:backend": "npm run dev -w dhg-baseline-backend"
+    "dev:backend": "npm run dev -w dhg-baseline-backend",
+    "vercel-build": "turbo run build --filter=dhg-baseline-frontend^...",
+    "vercel-install": "npm install --no-workspaces"
   },
   "devDependencies": {
     "turbo": "^1.11.2"

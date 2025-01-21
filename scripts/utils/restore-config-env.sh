@@ -47,27 +47,63 @@ restore_file() {
     fi
 }
 
-# Define files to restore (same as backup)
-ENV_FILES=(
-    ".env"
-    ".env.dev"
-    ".env.prod"
-    ".env.test"
-    "backend/.env"
-    "backend/.env.dev"
-    "backend/.env.prod"
-    "backend/.env.test"
-)
+# Load metadata to get environment and apps
+if [ -f "$BACKUP_DIR/backup_metadata.json" ]; then
+    ENV=$(jq -r '.environment' "$BACKUP_DIR/backup_metadata.json")
+    APPS=($(jq -r '.apps[]' "$BACKUP_DIR/backup_metadata.json"))
+else
+    echo "❌ Error: No backup metadata found"
+    exit 1
+fi
 
-CONFIG_FILES=(
-    "backend/src/app/core/config.py"
-    "backend/src/app/core/app_settings.py"
-    "frontend/src/config/config.ts"
-    "frontend/src/config/environment.ts"
+# Define files to restore for each app
+restore_app_files() {
+    local app=$1
+    local env=$2
+    
+    # App-specific environment files
+    ENV_FILES=(
+        "apps/${app}/frontend/.env"
+        "apps/${app}/frontend/.env.${env}"
+        "apps/${app}/frontend/.env.local"
+        "apps/${app}/backend/.env"
+        "apps/${app}/backend/.env.${env}"
+    )
+
+    # App-specific config files
+    CONFIG_FILES=(
+        "apps/${app}/frontend/vite.config.ts"
+        "apps/${app}/frontend/tsconfig.json"
+        "apps/${app}/frontend/package.json"
+        "apps/${app}/backend/src/core/config.py"
+        "apps/${app}/backend/src/core/settings.py"
+    )
+
+    # Restore app files
+    echo "📝 Restoring ${app} environment files..."
+    for file in "${ENV_FILES[@]}"; do
+        restore_file "$file" "$PROJECT_ROOT"
+    done
+
+    echo "📝 Restoring ${app} configuration files..."
+    for file in "${CONFIG_FILES[@]}"; do
+        restore_file "$file" "$PROJECT_ROOT"
+    done
+}
+
+# Root level configuration files
+ROOT_CONFIG_FILES=(
+    "vercel.json"
+    ".npmrc"
+    ".nvmrc"
+    "package.json"
+    "turbo.json"
+    ".vercelignore"
 )
 
 echo "🔄 Starting configuration restore..."
 echo "📁 Branch: $BRANCH"
+echo "🌍 Environment: $ENV"
 echo "📂 Restore from: $BACKUP_DIR"
 echo ""
 
@@ -88,29 +124,16 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-# Restore env files
-echo "📝 Restoring environment files..."
-for file in "${ENV_FILES[@]}"; do
+# Restore root level files
+echo "📝 Restoring root configuration files..."
+for file in "${ROOT_CONFIG_FILES[@]}"; do
     restore_file "$file" "$PROJECT_ROOT"
 done
 
-# Restore config files
-echo -e "\n📝 Restoring configuration files..."
-for file in "${CONFIG_FILES[@]}"; do
-    restore_file "$file" "$PROJECT_ROOT"
-done
-
-# Restore specific environments
-ENVIRONMENTS=("development" "production")
-for ENV in "${ENVIRONMENTS[@]}"; do
-    ENV_BACKUP_DIR="$BACKUP_DIR/$ENV"
-    if [ -f "${ENV_BACKUP_DIR}/.env" ]; then
-        mkdir -p "backend"
-        cp -p "${ENV_BACKUP_DIR}/.env" "backend/.env.${ENV}"
-        echo "✅ Restored ${ENV} environment"
-    else
-        echo "⚠️  Missing ${ENV} environment in backup"
-    fi
+# Restore each app's files
+for app in "${APPS[@]}"; do
+    echo -e "\n🔹 Processing ${app}..."
+    restore_app_files "$app" "$ENV"
 done
 
 # Show available backups
@@ -118,7 +141,8 @@ echo -e "\n📚 Available backups for branch '$BRANCH':"
 ls -lt "$BACKUP_ROOT/$BRANCH" | grep -v '^total' | head -n 5 | sed 's/^/  /'
 
 echo -e "\n✨ Restore complete!"
+echo "🌍 Environment: $ENV"
 
 # Show backup command
 echo -e "\n💡 To create a new backup, use:"
-echo "  ./scripts/utils/backup_config_env.sh" 
+echo "  ./scripts/utils/backup-config-env.sh" 

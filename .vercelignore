@@ -1,0 +1,16 @@
+# Ignore everything by default
+*
+
+# Frontend files to include
+!apps/dhg-baseline/frontend/
+!apps/dhg-baseline/frontend/src/
+!apps/dhg-baseline/frontend/public/
+!apps/dhg-baseline/frontend/index.html
+!apps/dhg-baseline/frontend/package.json
+!apps/dhg-baseline/frontend/tsconfig.json
+!apps/dhg-baseline/frontend/vite.config.ts
+
+# Root config files
+!package.json
+!.npmrc
+!.nvmrc 
