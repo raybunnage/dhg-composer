@@ -38,11 +38,15 @@
   - `backup-config.sh` - Configuration backup
   - `restore-config.sh` - Configuration restore
   - `reorganize-scripts.sh` - Script organization utility
+  - `template.sh` - Template for creating new scripts
 
 ## Usage
 
 Scripts can be run using their path:
 ```bash
+# Set up Python virtual environment
+./scripts/env/setup-venv.sh
+
 # Environment scripts
 ./scripts/env/setup-env.sh
 
