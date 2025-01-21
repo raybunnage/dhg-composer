@@ -1,19 +1,17 @@
 {
-  "name": "dhg-baseline",
+  "name": "dhg-composer",
   "private": true,
   "workspaces": [
     "apps/dhg-baseline/*",
     "packages/*"
   ],
   "scripts": {
-    "dev:frontend": "npm run dev --workspace=@dhg/baseline-frontend",
-    "dev:backend": "cd apps/dhg-baseline/backend && ./start.sh"
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "dev:frontend": "npm run dev -w dhg-baseline-frontend",
+    "dev:backend": "npm run dev -w dhg-baseline-backend"
   },
-  "dependencies": {
-    "@types/react": "^19.0.7",
-    "@types/react-dom": "^19.0.3",
-    "@vitejs/plugin-react": "^4.3.4",
-    "typescript": "^5.7.3",
-    "vite": "^6.0.10"
+  "devDependencies": {
+    "turbo": "^1.11.2"
   }
 }

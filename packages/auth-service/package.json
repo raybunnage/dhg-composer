@@ -2,25 +2,27 @@
   "name": "@dhg/auth-service",
   "version": "0.0.1",
   "private": true,
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch",
-    "test": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.39.0",
-    "react": "^18.2.0"
+    "@supabase/supabase-js": "^2.39.0"
   },
   "devDependencies": {
     "@testing-library/react": "^14.1.2",
     "@testing-library/react-hooks": "^7.0.2",
     "@types/react": "^18.2.0",
-    "@vitest/coverage-v8": "^1.0.4",
+    "tsup": "^8.3.5",
     "typescript": "^5.0.0",
-    "vitest": "^1.0.4",
-    "jsdom": "^22.1.0"
+    "vitest": "^1.0.4"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
   }
-} 
+}
