@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 5173,
-    // Add any other server configurations you need
+    host: true, // This allows accessing from other devices
+    strictPort: true, // This ensures it only uses port 5173
   }
 }) 
