@@ -1170,6 +1170,177 @@
           "Version packages appropriately"
         ]
       }
+    },
+    {
+      "type": "CodeReview",
+      "description": "Comprehensive code review and documentation generator",
+      "reviewStructure": {
+        "outputLocation": "docs/monorepo/project-structure.md",
+        "sections": {
+          "overview": {
+            "purpose": "High-level explanation of the file",
+            "audience": "beginners",
+            "required": true
+          },
+          "imports": {
+            "explanation": true,
+            "purpose": "Explain each import's role",
+            "format": "bullet-points"
+          },
+          "codeAnalysis": {
+            "breakdown": {
+              "classes": {
+                "purpose": true,
+                "methods": true,
+                "attributes": true
+              },
+              "functions": {
+                "purpose": true,
+                "parameters": true,
+                "returnValues": true
+              },
+              "variables": {
+                "purpose": true,
+                "usage": true
+              }
+            },
+            "flowExplanation": {
+              "logicalSteps": true,
+              "businessLogic": true,
+              "errorHandling": true
+            }
+          },
+          "examples": {
+            "usage": true,
+            "commonPatterns": true,
+            "bestPractices": true
+          }
+        },
+        "documentation": {
+          "format": "markdown",
+          "structure": {
+            "fileName": "## {filename}",
+            "purpose": "### Purpose",
+            "imports": "### Imports",
+            "codeBreakdown": "### Code Breakdown",
+            "examples": "### Examples"
+          },
+          "style": {
+            "language": "beginner-friendly",
+            "includeComments": true,
+            "useExamples": true
+          }
+        }
+      },
+      "outputExample": {
+        "template": [
+          "## filename.py",
+          "",
+          "### Purpose",
+          "This file handles... (beginner-friendly explanation)",
+          "",
+          "### Imports",
+          "- `import x`: Used for... (explain why it's needed)",
+          "",
+          "### Code Breakdown",
+          "1. First, the code...",
+          "2. Then it...",
+          "",
+          "### Examples",
+          "Here's how this code is used:",
+          "```python",
+          "example_code()",
+          "```"
+        ]
+      }
+    },
+    {
+      "type": "TestReview",
+      "description": "Comprehensive test review and documentation generator",
+      "reviewStructure": {
+        "outputLocation": "docs/monorepo/testing/backend-tests.md",
+        "sections": {
+          "overview": {
+            "purpose": "High-level explanation of the test file",
+            "audience": "beginners",
+            "required": true
+          },
+          "imports": {
+            "explanation": true,
+            "purpose": "Explain each test dependency",
+            "format": "bullet-points"
+          },
+          "testAnalysis": {
+            "breakdown": {
+              "fixtures": {
+                "purpose": true,
+                "scope": true,
+                "usage": true
+              },
+              "testCases": {
+                "purpose": true,
+                "inputs": true,
+                "assertions": true,
+                "edgeCases": true
+              },
+              "mocks": {
+                "purpose": true,
+                "setup": true,
+                "usage": true
+              }
+            },
+            "flowExplanation": {
+              "setup": true,
+              "execution": true,
+              "verification": true,
+              "cleanup": true
+            }
+          },
+          "examples": {
+            "usage": true,
+            "patterns": true,
+            "bestPractices": true
+          }
+        },
+        "documentation": {
+          "format": "markdown",
+          "structure": {
+            "fileName": "## {filename}",
+            "purpose": "### Purpose",
+            "fixtures": "### Fixtures",
+            "tests": "### Test Cases",
+            "examples": "### Examples"
+          },
+          "style": {
+            "language": "beginner-friendly",
+            "includeComments": true,
+            "useExamples": true
+          }
+        }
+      },
+      "outputExample": {
+        "template": [
+          "## test_example.py",
+          "",
+          "### Purpose",
+          "This test file verifies... (beginner-friendly explanation)",
+          "",
+          "### Fixtures",
+          "- `fixture_name`: Used for... (explain why it's needed)",
+          "",
+          "### Test Cases",
+          "1. `test_something`:",
+          "   - What: Tests the something function",
+          "   - How: Sets up test data, calls function, verifies result",
+          "   - Why: Ensures correct behavior for normal input",
+          "",
+          "### Examples",
+          "Running these tests:",
+          "```bash",
+          "pytest test_example.py -v",
+          "```"
+        ]
+      }
     }
   ]
 }
