@@ -3,16 +3,19 @@ from functools import lru_cache
 import structlog
 from supabase import create_client, Client
 from tenacity import retry, stop_after_attempt, wait_exponential
+from packages.supabase_client import BaseSupabaseClient
 
 from ..core.config import settings
 
 logger = structlog.get_logger()
 
 
-class SupabaseService:
+class SupabaseService(BaseSupabaseClient):
+    """DHG Baseline specific Supabase service implementation"""
+
     def __init__(self):
-        self.client: Optional[Client] = None
-        self.initialize_client()
+        super().__init__()
+        # App-specific initialization
 
     def initialize_client(self) -> None:
         """Initialize the Supabase client."""

@@ -9,4 +9,11 @@ export const createSupabaseClient = (
 }
 
 export * from './auth'
-export * from './queries' 
+export * from './queries'
+
+// Base client setup, types, and common utilities
+export class BaseSupabaseClient {
+  // Common initialization
+  // Shared utilities
+  // Base error handling
+} 
