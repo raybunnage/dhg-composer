@@ -1079,6 +1079,45 @@
           ]
         }
       }
+    },
+    {
+      "type": "DocumentationManagement",
+      "description": "Rules for managing and writing documentation",
+      "documentationHandling": {
+        "targetLocation": "docs/monorepo",
+        "fileNaming": {
+          "pattern": "{topic}-{subtopic}.md",
+          "examples": [
+            "git-workflow.md",
+            "vercel-deployment.md",
+            "environment-setup.md"
+          ]
+        },
+        "contentStructure": {
+          "required": [
+            "Title",
+            "Overview",
+            "Prerequisites",
+            "Step-by-step Instructions",
+            "Troubleshooting",
+            "References"
+          ],
+          "formatting": {
+            "useMarkdown": true,
+            "codeBlocks": {
+              "includeLanguage": true,
+              "includeFilePath": true
+            }
+          }
+        },
+        "bestPractices": [
+          "Use clear headings and subheadings",
+          "Include code examples where relevant",
+          "Add troubleshooting sections for common issues",
+          "Keep instructions up to date",
+          "Cross-reference related documentation"
+        ]
+      }
     }
   ]
 }
