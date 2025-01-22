@@ -6,8 +6,11 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 5173,
-    host: true, // This allows accessing from other devices
-    strictPort: true, // This ensures it only uses port 5173
+    host: '0.0.0.0', // This ensures it binds to all network interfaces
+    strictPort: true,
+    watch: {
+      usePolling: true // This helps with some file system issues
+    }
   },
   build: {
     outDir: 'dist',

@@ -6,16 +6,17 @@
     "npm": ">=9.0.0"
   },
   "workspaces": [
-    "apps/*",
+    "apps/dhg-baseline/*",
     "packages/*"
   ],
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "dev:frontend": "npm run dev -w dhg-baseline-frontend",
+    "dev:frontend": "cd apps/dhg-baseline/frontend && npm run dev",
     "dev:backend": "npm run dev -w dhg-baseline-backend",
     "vercel-build": "turbo run build --filter=dhg-baseline-frontend^...",
-    "vercel-install": "npm install --no-workspaces"
+    "vercel-install": "npm install --no-workspaces",
+    "kill-port": "./scripts/utils/kill-port.sh"
   },
   "devDependencies": {
     "turbo": "^1.11.2"

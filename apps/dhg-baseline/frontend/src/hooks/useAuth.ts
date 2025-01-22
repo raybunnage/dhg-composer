@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { createSupabaseClient, getUser } from '@dhg/supabase-client'
-import type { User } from '../types/user'
+import type { User } from '../types'
 
 const supabase = createSupabaseClient(
   import.meta.env.VITE_SUPABASE_URL,

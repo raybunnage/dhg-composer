@@ -1,0 +1,110 @@
+2025-01-22T00:21:41.834585Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/.turbo-cookie"), AnchoredSystemPathBuf(".turbo/cookies/1.cookie")}
+2025-01-22T00:21:41.834604Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-22T00:21:42.338091Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/supabase-client/tsup.config.bundled_38ti9z3tkcb.mjs"), AnchoredSystemPathBuf("packages/ui/tsup.config.bundled_yggdl42zvao.mjs"), AnchoredSystemPathBuf("packages/auth-service/tsup.config.bundled_jfrkjs8sva.mjs"), AnchoredSystemPathBuf("packages/types/tsup.config.bundled_gmurl6r8o8o.mjs")}
+2025-01-22T00:21:42.338113Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@dhg/auth-service"), path: AnchoredSystemPathBuf("packages/auth-service") }, WorkspacePackage { name: Other("@dhg/types"), path: AnchoredSystemPathBuf("packages/types") }, WorkspacePackage { name: Other("@dhg/ui"), path: AnchoredSystemPathBuf("packages/ui") }, WorkspacePackage { name: Other("@dhg/supabase-client"), path: AnchoredSystemPathBuf("packages/supabase-client") }}))
+2025-01-22T00:22:31.627978Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/ui/tsconfig.json")}
+2025-01-22T00:22:31.628037Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@dhg/ui"), path: AnchoredSystemPathBuf("packages/ui") }}))
+2025-01-22T00:23:16.099217Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/dhg-baseline/frontend/package-lock.json")}
+2025-01-22T00:23:16.099226Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-22T00:23:22.198306Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/dhg-baseline/frontend/vite.config.ts.timestamp-1737505402167-ce258a3c37154.mjs")}
+2025-01-22T00:23:22.198315Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-22T00:24:06.097082Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("scripts/utils/kill-port.sh")}
+2025-01-22T00:24:06.097090Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-22T00:24:13.297112Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("scripts/utils/kill-port.sh")}
+2025-01-22T00:24:13.297125Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-22T00:24:14.796783Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("package.json")}
+2025-01-22T00:24:14.796798Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(All)
+2025-01-22T00:24:27.296944Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("scripts/utils/kill-port.sh"), AnchoredSystemPathBuf("packages/ui/tsconfig.json"), AnchoredSystemPathBuf("package.json")}
+2025-01-22T00:24:27.296951Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(All)
+2025-01-22T00:24:53.196715Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("scripts/utils/kill-port.sh")}
+2025-01-22T00:24:53.196723Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-22T00:25:42.196495Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/dhg-baseline/frontend/package-lock.json")}
+2025-01-22T00:25:42.196509Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-22T00:25:47.295478Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/dhg-baseline/frontend/vite.config.ts.timestamp-1737505547232-637fdf29a5ce2.mjs")}
+2025-01-22T00:25:47.295486Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-22T00:26:06.095331Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/ui/node_modules"), AnchoredSystemPathBuf("packages/auth-service/node_modules"), AnchoredSystemPathBuf("node_modules")}
+2025-01-22T00:26:06.095340Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@dhg/ui"), path: AnchoredSystemPathBuf("packages/ui") }, WorkspacePackage { name: Other("@dhg/auth-service"), path: AnchoredSystemPathBuf("packages/auth-service") }, WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-22T00:26:06.095353Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-01-22T00:26:06.095361Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-01-22T00:26:16.595849Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("package-lock.json")}
+2025-01-22T00:26:16.595857Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-22T00:26:37.996286Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("node_modules")}
+2025-01-22T00:26:37.996323Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-22T00:26:38.299416Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("")}
+2025-01-22T00:26:38.299613Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({}))
+2025-01-22T00:26:39.395719Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("package-lock.json")}
+2025-01-22T00:26:39.395729Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-22T00:27:17.494579Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/ui/tsconfig.json")}
+2025-01-22T00:27:17.494590Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@dhg/ui"), path: AnchoredSystemPathBuf("packages/ui") }}))
+2025-01-22T00:27:28.794940Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/ui/tsup.config.bundled_zdjy768tsu.mjs")}
+2025-01-22T00:27:28.794954Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@dhg/ui"), path: AnchoredSystemPathBuf("packages/ui") }}))
+2025-01-22T00:27:28.831326Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-01-22T00:27:56.894449Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("package.json")}
+2025-01-22T00:27:56.894461Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(All)
+2025-01-22T00:28:02.103140Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("package.json")}
+2025-01-22T00:28:02.103151Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(All)
+2025-01-22T00:28:27.095022Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("package-lock.json")}
+2025-01-22T00:28:27.095036Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-22T00:28:36.895017Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/ui/tsconfig.json")}
+2025-01-22T00:28:36.895035Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@dhg/ui"), path: AnchoredSystemPathBuf("packages/ui") }}))
+2025-01-22T00:28:36.895061Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-01-22T00:28:43.094344Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("package-lock.json")}
+2025-01-22T00:28:43.094351Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-22T00:29:14.194532Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("package.json")}
+2025-01-22T00:29:14.194539Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(All)
+2025-01-22T00:29:14.199663Z  WARN build:build_inner: turborepo_repository::package_graph::builder: Unable to calculate transitive closures: Workspace 'apps/dhg-baseline/frontend' not found in lockfile
+2025-01-22T00:29:21.495312Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("package.json")}
+2025-01-22T00:29:21.495321Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(All)
+2025-01-22T00:29:21.507045Z  WARN build:build_inner: turborepo_repository::package_graph::builder: Unable to calculate transitive closures: Workspace 'apps/dhg-baseline/frontend' not found in lockfile
+2025-01-22T00:29:35.195334Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(""), AnchoredSystemPathBuf("package-lock.json"), AnchoredSystemPathBuf("node_modules")}
+2025-01-22T00:29:35.195344Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-22T00:29:36.494057Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("node_modules")}
+2025-01-22T00:29:36.494065Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-22T00:29:36.798074Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("")}
+2025-01-22T00:29:36.798082Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({}))
+2025-01-22T00:29:36.900846Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("")}
+2025-01-22T00:29:36.900854Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({}))
+2025-01-22T00:29:38.096420Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("")}
+2025-01-22T00:29:38.096428Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({}))
+2025-01-22T00:29:38.194071Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("package-lock.json")}
+2025-01-22T00:29:38.194080Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-22T00:29:46.494246Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/dhg-baseline/frontend/vite.config.ts.timestamp-1737505786401-2c6a5702bcf75.mjs")}
+2025-01-22T00:29:46.494254Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("dhg-baseline-frontend"), path: AnchoredSystemPathBuf("apps/dhg-baseline/frontend") }}))
+2025-01-22T00:31:23.993549Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/dhg-baseline/frontend/vite.config.ts")}
+2025-01-22T00:31:23.993569Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("dhg-baseline-frontend"), path: AnchoredSystemPathBuf("apps/dhg-baseline/frontend") }}))
+2025-01-22T00:31:24.092710Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/dhg-baseline/frontend/vite.config.ts.timestamp-1737505884014-133e1adc5890b.mjs")}
+2025-01-22T00:31:24.092722Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("dhg-baseline-frontend"), path: AnchoredSystemPathBuf("apps/dhg-baseline/frontend") }}))
+2025-01-22T00:31:24.092743Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-01-22T00:31:28.293228Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/dhg-baseline/frontend/vite.config.ts"), AnchoredSystemPathBuf("apps/dhg-baseline/frontend/vite.config.ts.timestamp-1737505888265-6d3a9dd4d7e3d.mjs")}
+2025-01-22T00:31:28.293337Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("dhg-baseline-frontend"), path: AnchoredSystemPathBuf("apps/dhg-baseline/frontend") }}))
+2025-01-22T00:31:28.338732Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-01-22T00:31:52.993069Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("")}
+2025-01-22T00:31:52.993076Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({}))
+2025-01-22T00:31:53.094464Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("")}
+2025-01-22T00:31:53.094471Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({}))
+2025-01-22T00:31:53.194587Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("")}
+2025-01-22T00:31:53.194593Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({}))
+2025-01-22T00:31:53.392952Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/dhg-baseline/frontend/node_modules"), AnchoredSystemPathBuf("apps/dhg-baseline/frontend/package-lock.json")}
+2025-01-22T00:31:53.392960Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("dhg-baseline-frontend"), path: AnchoredSystemPathBuf("apps/dhg-baseline/frontend") }}))
+2025-01-22T00:31:53.793479Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/dhg-baseline/frontend/node_modules")}
+2025-01-22T00:31:53.793493Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("dhg-baseline-frontend"), path: AnchoredSystemPathBuf("apps/dhg-baseline/frontend") }}))
+2025-01-22T00:31:53.793520Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-01-22T00:32:00.992523Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("package-lock.json")}
+2025-01-22T00:32:00.992530Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-22T00:32:41.791912Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/dhg-baseline/frontend/vite.config.ts.timestamp-1737505961732-16c920cd0ce0b.mjs")}
+2025-01-22T00:32:41.791919Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("dhg-baseline-frontend"), path: AnchoredSystemPathBuf("apps/dhg-baseline/frontend") }}))
+2025-01-22T00:32:41.791933Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-01-22T00:34:04.592347Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/dhg-baseline/frontend/src/main.tsx")}
+2025-01-22T00:34:04.592383Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("dhg-baseline-frontend"), path: AnchoredSystemPathBuf("apps/dhg-baseline/frontend") }}))
+2025-01-22T00:34:12.991667Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/dhg-baseline/frontend/src/main.tsx")}
+2025-01-22T00:34:12.991676Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("dhg-baseline-frontend"), path: AnchoredSystemPathBuf("apps/dhg-baseline/frontend") }}))
+2025-01-22T00:34:12.991692Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-01-22T00:34:17.791384Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/dhg-baseline/frontend/index.html")}
+2025-01-22T00:34:17.791399Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("dhg-baseline-frontend"), path: AnchoredSystemPathBuf("apps/dhg-baseline/frontend") }}))
+2025-01-22T00:34:20.791527Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/dhg-baseline/frontend/src/main.tsx")}
+2025-01-22T00:34:20.791534Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("dhg-baseline-frontend"), path: AnchoredSystemPathBuf("apps/dhg-baseline/frontend") }}))
+2025-01-22T00:34:21.590917Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/dhg-baseline/frontend/src/App.tsx")}
+2025-01-22T00:34:21.590926Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("dhg-baseline-frontend"), path: AnchoredSystemPathBuf("apps/dhg-baseline/frontend") }}))
+2025-01-22T00:34:25.691424Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/dhg-baseline/frontend/index.html"), AnchoredSystemPathBuf("apps/dhg-baseline/frontend/src/App.tsx"), AnchoredSystemPathBuf("apps/dhg-baseline/frontend/src/main.tsx")}
+2025-01-22T00:34:25.691432Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("dhg-baseline-frontend"), path: AnchoredSystemPathBuf("apps/dhg-baseline/frontend") }}))
+2025-01-22T00:34:25.691447Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
