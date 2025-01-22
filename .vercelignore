@@ -1,0 +1,18 @@
+# Ignore everything
+*
+
+# Include frontend files
+!apps/dhg-baseline/frontend/
+!apps/dhg-baseline/frontend/src/
+!apps/dhg-baseline/frontend/public/
+!apps/dhg-baseline/frontend/index.html
+!apps/dhg-baseline/frontend/package.json
+!apps/dhg-baseline/frontend/tsconfig.json
+!apps/dhg-baseline/frontend/vite.config.ts
+!apps/dhg-baseline/frontend/tailwind.config.js
+!apps/dhg-baseline/frontend/postcss.config.js
+
+# Include root config files
+!package.json
+!turbo.json
+!.npmrc
