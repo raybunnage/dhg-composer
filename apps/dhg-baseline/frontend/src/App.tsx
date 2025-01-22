@@ -12,7 +12,7 @@ const authService = new AuthService(
 );
 
 const App: React.FC = () => {
-  console.log('App component rendering');
+  console.log('App rendering');
   const { user, loading } = useAuth(authService);
   
   console.log('Auth state:', { user, loading });

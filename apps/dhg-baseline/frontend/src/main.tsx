@@ -5,13 +5,7 @@ import './index.css'
 
 console.log('Main.tsx initializing');
 
-const rootElement = document.getElementById('root');
-console.log('Root element:', rootElement);
-
-const root = ReactDOM.createRoot(rootElement!);
-console.log('Root created');
-
-root.render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
